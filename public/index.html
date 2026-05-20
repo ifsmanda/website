@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPMB 2026 SMAN 2 Bandung — Unggul, Berkarakter, Berbudaya</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Penerimaan Peserta Didik Baru (PPDB / SPMB) SMAN 2 Bandung Tahun Ajaran 2026. Bergabunglah dengan salah satu sekolah unggulan nasional yang berkarakter, berbudaya, dan berdaya saing global.">
+  <meta name="keywords" content="SPMB SMAN 2 Bandung, PPDB SMAN 2 Bandung 2026, SMA Negeri 2 Bandung, Sekolah Unggulan Bandung, PPDB Jawa Barat">
+  <meta name="author" content="SMAN 2 Bandung">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 1. SCROLL PROGRESS INDICATOR -->
+  <div class="scroll-progress-container" aria-hidden="true">
+    <div class="scroll-progress-bar"></div>
+  </div>
+
+  <!-- 2. ANNOUNCEMENT BANNER -->
+  <div class="announcement-banner" id="announcement-banner">
+    <div class="announcement-content">
+      <span class="announcement-badge">Info Terbaru</span>
+      <span>Pra-Pendaftaran SPMB SMAN 2 Bandung 2026 Resmi Dibuka! Segera lengkapi berkas persyaratan Anda.</span>
+    </div>
+    <button class="announcement-close" id="close-announcement" aria-label="Tutup pengumuman">
+      <i data-lucide="x"></i>
+    </button>
+  </div>
+
+  <!-- 3. HEADER & NAVBAR -->
+  <header>
+    <nav class="navbar" id="main-navbar">
+      <div class="container">
+        <!-- Brand Identity -->
+        <a href="#beranda" class="brand" aria-label="Kembali ke Beranda">
+          <img src="assets/logo_smanda.png" alt="Logo SMAN 2 Bandung" class="brand-logo">
+          <div class="brand-text">
+            <span class="brand-name">SMAN 2 BANDUNG</span>
+            <span class="brand-tagline">Unggul, Berkarakter, Berbudaya</span>
+          </div>
+        </a>
+
+        <!-- Center Navigation -->
+        <ul class="nav-menu" id="nav-menu">
+          <li class="nav-item active"><a href="#beranda" class="nav-link">Beranda</a></li>
+          <li class="nav-item">
+            <a href="#profil" class="nav-link">
+              Profil <i data-lucide="chevron-down" style="width: 14px; height: 14px;"></i>
+            </a>
+            <div class="dropdown-menu">
+              <a href="#profil" class="dropdown-item" id="nav-sejarah">Sejarah Singkat</a>
+              <a href="#profil" class="dropdown-item" id="nav-visimisi">Visi & Misi</a>
+              <a href="#profil" class="dropdown-item" id="nav-prestasi">Prestasi Utama</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a href="#informasi" class="nav-link">
+              Informasi <i data-lucide="chevron-down" style="width: 14px; height: 14px;"></i>
+            </a>
+            <div class="dropdown-menu">
+              <a href="#informasi" class="dropdown-item">Jadwal Seleksi</a>
+              <a href="#informasi" class="dropdown-item">Persyaratan Berkas</a>
+              <a href="#faq" class="dropdown-item">FAQ Pendaftar</a>
+            </div>
+          </li>
+          <li class="nav-item"><a href="#spmb-timeline" class="nav-link">SPMB 2026</a></li>
+          <li class="nav-item"><a href="#berita" class="nav-link">Berita</a></li>
+          <li class="nav-item"><a href="#galeri" class="nav-link">Galeri</a></li>
+          <li class="nav-item"><a href="#kontak" class="nav-link">Kontak</a></li>
+        </ul>
+
+        <!-- Right Action Button & Dark Mode Toggle -->
+        <div class="navbar-actions">
+          <button class="theme-toggle-btn" aria-label="Ganti Tema">
+            <i data-lucide="moon" class="moon-icon"></i>
+            <i data-lucide="sun" class="sun-icon"></i>
+          </button>
+          <button class="btn btn-gold" id="btn-open-daftar-ulang" style="padding: 10px 22px; font-size: 13px; margin-right: 8px;">Daftar Ulang</button>
+          <a href="#kontak" class="btn btn-primary" style="padding: 10px 22px; font-size: 13px;">Login Pendaftar</a>
+          <button class="hamburger" id="hamburger-btn" aria-label="Buka Menu Navigasi" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- 4. HERO SECTION -->
+  <section class="hero-section" id="beranda">
+    <div class="hero-bg-overlay"></div>
+    <div class="container">
+      <!-- Left Content -->
+      <div class="hero-content">
+        <div class="hero-badge-top">
+          <i data-lucide="award" style="width: 14px; height: 14px;"></i> SPMB TA 2026/2027
+        </div>
+        <h1 class="hero-title">
+          Selamat Datang di Portal<br><span>SPMB SMAN 2 BANDUNG</span>
+        </h1>
+        <p class="hero-subtitle">
+          Membentuk Generasi Unggul, Berkarakter, dan Berdaya Saing Global. Daftarkan diri Anda di salah satu sekolah terbaik bangsa.
+        </p>
+        <div class="hero-actions">
+          <a href="#spmb-timeline" class="btn btn-gold">
+            Daftar Sekarang <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
+          </a>
+          <a href="#informasi" class="btn btn-outline-white">Informasi Lengkap</a>
+        </div>
+      </div>
+      
+      <!-- Right Media (Image Frame) -->
+      <div class="hero-media-wrapper">
+        <div class="hero-image-frame">
+          <img src="assets/hero_school.png" alt="Gedung Utama SMAN 2 Bandung">
+        </div>
+        
+        <!-- Floating Badges -->
+        <div class="floating-badge badge-accreditation">
+          <div class="badge-icon">A</div>
+          <div class="badge-info">
+            <span class="badge-title">Terakreditasi A</span>
+            <span class="badge-desc">Predikat Unggul Nasional</span>
+          </div>
+        </div>
+        
+        <div class="floating-badge badge-students">
+          <div class="badge-icon"><i data-lucide="users" style="width: 20px; height: 20px;"></i></div>
+          <div class="badge-info">
+            <span class="badge-title">1.250+ Siswa</span>
+            <span class="badge-desc">Aktif Berprestasi</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. QUICK ACCESS SECTION -->
+  <section class="quick-access-section" id="quick-access">
+    <div class="container">
+      <div class="quick-access-grid">
+        
+        <!-- Menu 1 -->
+        <div class="quick-card glow-effect">
+          <div class="quick-icon-wrapper">
+            <i data-lucide="calendar"></i>
+          </div>
+          <h3 class="quick-card-title">Jadwal Penting</h3>
+          <p class="quick-card-desc">Simak tanggal penting registrasi, seleksi berkas, dan pengumuman kelulusan.</p>
+          <a href="#spmb-timeline" class="quick-card-cta">
+            Lihat Jadwal <i data-lucide="chevron-right" style="width: 14px; height: 14px;"></i>
+          </a>
+        </div>
+
+        <!-- Menu 2 -->
+        <div class="quick-card glow-effect">
+          <div class="quick-icon-wrapper">
+            <i data-lucide="file-text"></i>
+          </div>
+          <h3 class="quick-card-title">Persyaratan</h3>
+          <p class="quick-card-desc">Cek seluruh dokumen administrasi wajib untuk semua jalur pendaftaran.</p>
+          <a href="#informasi" class="quick-card-cta">
+            Cek Berkas <i data-lucide="chevron-right" style="width: 14px; height: 14px;"></i>
+          </a>
+        </div>
+
+        <!-- Menu 3 -->
+        <div class="quick-card glow-effect">
+          <div class="quick-icon-wrapper">
+            <i data-lucide="book-open"></i>
+          </div>
+          <h3 class="quick-card-title">Panduan</h3>
+          <p class="quick-card-desc">Unduh buku petunjuk pendaftaran alur SPMB 2026 langkah demi langkah.</p>
+          <a href="#informasi" class="quick-card-cta">
+            Unduh PDF <i data-lucide="chevron-right" style="width: 14px; height: 14px;"></i>
+          </a>
+        </div>
+
+        <!-- Menu 4 -->
+        <div class="quick-card glow-effect">
+          <div class="quick-icon-wrapper">
+            <i data-lucide="info"></i>
+          </div>
+          <h3 class="quick-card-title">Informasi Jalur</h3>
+          <p class="quick-card-desc">Pelajari kuota pendaftaran jalur zonasi, prestasi, afirmasi, dan tugas orang tua.</p>
+          <a href="#informasi" class="quick-card-cta">
+            Pelajari Jalur <i data-lucide="chevron-right" style="width: 14px; height: 14px;"></i>
+          </a>
+        </div>
+
+        <!-- Menu 5 -->
+        <div class="quick-card glow-effect">
+          <div class="quick-icon-wrapper">
+            <i data-lucide="phone"></i>
+          </div>
+          <h3 class="quick-card-title">Hubungi Kami</h3>
+          <p class="quick-card-desc">Hubungi helpdesk kami jika Anda menemui kendala selama pengisian berkas.</p>
+          <a href="#kontak" class="quick-card-cta">
+            Hubungi Admin <i data-lucide="chevron-right" style="width: 14px; height: 14px;"></i>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. STATISTICS SECTION -->
+  <section class="statistics-section" id="stats">
+    <div class="container">
+      <!-- Left side: Stats Counters -->
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-number" data-target="1250" data-suffix="+">0</span>
+          <span class="stat-label">Siswa Aktif</span>
+          <span class="stat-desc">Belajar di bawah bimbingan kurikulum nasional unggulan.</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="120" data-suffix="+">0</span>
+          <span class="stat-label">Guru Profesional</span>
+          <span class="stat-desc">Tenaga pendidik tersertifikasi dengan komitmen mendidik tinggi.</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="300" data-suffix="+">0</span>
+          <span class="stat-label">Prestasi Diraih</span>
+          <span class="stat-desc">Penghargaan akademik & non-akademik tingkat kota hingga global.</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="69" data-suffix="+">0</span>
+          <span class="stat-label">Tahun Berprestasi</span>
+          <span class="stat-desc">Dedikasi mencerdaskan kehidupan bangsa sejak tahun 1957.</span>
+        </div>
+      </div>
+      
+      <!-- Right side: Quote Vision -->
+      <div class="stats-quote-wrapper">
+        <i data-lucide="quote" class="quote-icon" aria-hidden="true"></i>
+        <p class="quote-text">
+          "Menjadi sekolah unggul yang menghasilkan insan bertaqwa, berakhlak mulia, cerdas, berkarakter kuat, berbudaya lingkungan, dan mampu bersaing secara global."
+        </p>
+        <div class="quote-author">
+          <span class="quote-author-name">Visi Utama Sekolah</span>
+          <span class="quote-author-role">SMAN 2 Bandung — Jawa Barat</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. ABOUT SECTION -->
+  <section class="section" id="profil">
+    <div class="container">
+      <div class="about-grid reveal">
+        <!-- Left: Image Collage -->
+        <div class="about-collage">
+          <div class="collage-item collage-1">
+            <img src="assets/about_classroom.png" alt="Siswa belajar berkelompok di kelas">
+          </div>
+          <div class="collage-item collage-2">
+            <img src="assets/about_laboratory.png" alt="Siswa praktik di Laboratorium Kimia">
+          </div>
+          <div class="collage-badge">
+            <span class="badge-val">No. 1</span>
+            <span class="badge-lbl">SMA Terfavorit</span>
+          </div>
+        </div>
+        
+        <!-- Right: Description & Timeline -->
+        <div class="about-content">
+          <span class="section-tag">Profil Sekolah</span>
+          <h2 class="section-title">Melangkah Bersama Mengukir Sejarah</h2>
+          <p class="about-desc-lead">
+            SMA Negeri 2 Bandung berdiri kokoh sebagai mercusuar pendidikan berkualitas di Jawa Barat, mendidik pemimpin masa depan berakhlak mulia.
+          </p>
+          <p class="section-desc">
+            Kami memadukan pengajaran kurikulum modern berbasis sains dan teknologi dengan penanaman nilai moral luhur Sunda. Fasilitas belajar yang premium, lingkungan asri, serta guru berdedikasi tinggi siap mendampingi putra-putri Anda.
+          </p>
+          
+          <!-- History Timeline Summary -->
+          <div class="about-history-timeline">
+            <div class="history-item">
+              <span class="history-year">1957</span>
+              <p class="history-text">Didirikan resmi sebagai bagian dari pilar sekolah menengah negeri di Bandung.</p>
+            </div>
+            <div class="history-item">
+              <span class="history-year">2007</span>
+              <p class="history-text">Meraih predikat Rintisan Sekolah Bertaraf Internasional (RSBI) unggulan.</p>
+            </div>
+            <div class="history-item">
+              <span class="history-year">2026</span>
+              <p class="history-text">Mengimplementasikan digitalisasi ekosistem sekolah mandiri berdaya saing global.</p>
+            </div>
+          </div>
+          
+          <button class="btn btn-primary" id="btn-about-modal" style="align-self: flex-start;">
+            Pelajari Lebih Lanjut <i data-lucide="help-circle"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. SPMB INFORMATION SECTION -->
+  <section class="section" id="informasi" style="background-color: var(--bg-body);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">SPMB Info</span>
+        <h2 class="section-title">Informasi Jalur & Berkas</h2>
+        <p class="section-desc">Pahami alur penerimaan, jalur kuota, dokumen prasyarat, dan jawaban atas pertanyaan umum sebelum Anda memulai pendaftaran.</p>
+      </div>
+      
+      <!-- Card Grid -->
+      <div class="spmb-grid reveal">
+        
+        <!-- Card 1: Jalur Seleksi -->
+        <div class="spmb-card">
+          <div class="spmb-card-header">
+            <div class="spmb-card-icon"><i data-lucide="split"></i></div>
+            <h3 class="spmb-card-title">Jalur Seleksi</h3>
+          </div>
+          <div class="spmb-card-content">
+            <p style="margin-bottom: 12px;">Pendaftaran dibagi menjadi 4 jalur resmi dengan persentase kuota khusus:</p>
+            <ul class="spmb-card-list">
+              <li><strong>Zonasi (50%):</strong> Domisili radius terdekat sekolah.</li>
+              <li><strong>Prestasi (25%):</strong> Nilai rapor & piagam kejuaraan.</li>
+              <li><strong>Afirmasi (20%):</strong> Keluarga ekonomi tidak mampu.</li>
+              <li><strong>Tugas Ortu (5%):</strong> Mutasi dinas atau anak guru.</li>
+            </ul>
+          </div>
+          <a href="#faq" class="spmb-card-action">Detail Jalur <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i></a>
+        </div>
+
+        <!-- Card 2: Dokumen Persyaratan -->
+        <div class="spmb-card">
+          <div class="spmb-card-header">
+            <div class="spmb-card-icon"><i data-lucide="folder-open"></i></div>
+            <h3 class="spmb-card-title">Persyaratan Berkas</h3>
+          </div>
+          <div class="spmb-card-content">
+            <p style="margin-bottom: 12px;">Persiapkan dokumen dalam format PDF/JPG berukuran maks 1MB:</p>
+            <ul class="spmb-card-list">
+              <li>Ijazah SMP / Surat Keterangan Lulus (SKL) asli.</li>
+              <li>Akta Kelahiran & Kartu Keluarga (terbit min. 1 tahun).</li>
+              <li>Buku Rapor Semester 1-5 SMP terlegalisir.</li>
+              <li>Surat Pertanggungjawaban Mutlak (SPTJM) Orang Tua.</li>
+            </ul>
+          </div>
+          <a href="#faq" class="spmb-card-action">Unduh Format SPTJM <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i></a>
+        </div>
+
+        <!-- Card 3: Pengumuman Seleksi -->
+        <div class="spmb-card">
+          <div class="spmb-card-header">
+            <div class="spmb-card-icon"><i data-lucide="bell"></i></div>
+            <h3 class="spmb-card-title">Pengumuman Resmi</h3>
+          </div>
+          <div class="spmb-card-content">
+            <p>Hasil kelulusan seleksi administrasi dan kelulusan final akan diumumkan secara transparan melalui portal resmi ini pada akun masing-masing peserta sesuai kalender PPDB Jawa Barat.</p>
+            <div style="margin-top: 16px; padding: 12px; background-color: rgba(18,63,156,0.05); border-radius: var(--radius-md); font-size: 12px;" class="dark:bg-slate-800">
+              <strong style="color: var(--secondary);" class="dark:text-gold-accent">Kontak Pengaduan:</strong><br>
+              WhatsApp Helpdesk: +62 812-3456-7890
+            </div>
+          </div>
+          <a href="#kontak" class="spmb-card-action">Hubungi Kami <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i></a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. TIMELINE SECTION -->
+  <section class="section" id="spmb-timeline">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Roadmap</span>
+        <h2 class="section-title">Timeline Pelaksanaan SPMB</h2>
+        <p class="section-desc">Ikuti tahapan seleksi penerimaan murid baru sesuai urutan jadwal agar pendaftaran Anda berjalan lancar tanpa kendala administrasi.</p>
+      </div>
+
+      <!-- Horizontal Timeline Component -->
+      <div class="timeline-outer reveal">
+        <div class="timeline-line-background"></div>
+        <div class="timeline-line-progress"></div>
+        
+        <div class="timeline-steps">
+          <!-- Step 1 -->
+          <div class="timeline-step active" data-step="0">
+            <div class="step-node">1</div>
+            <div class="step-info">
+              <span class="step-title">Registrasi Akun</span>
+              <span class="step-date">1 - 15 Juni 2026</span>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="timeline-step" data-step="1">
+            <div class="step-node">2</div>
+            <div class="step-info">
+              <span class="step-title">Verifikasi Berkas</span>
+              <span class="step-date">16 - 20 Juni 2026</span>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="timeline-step" data-step="2">
+            <div class="step-node">3</div>
+            <div class="step-info">
+              <span class="step-title">Pengumuman</span>
+              <span class="step-date">25 Juni 2026</span>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="timeline-step" data-step="3">
+            <div class="step-node">4</div>
+            <div class="step-info">
+              <span class="step-title">Daftar Ulang</span>
+              <span class="step-date">26 - 30 Juni 2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detail Box relating to active step -->
+      <div class="timeline-details-box active" id="details-step-0">
+        <h3 class="timeline-details-title">Tahap 1: Registrasi Akun Mandiri (Online)</h3>
+        <p class="timeline-details-text">
+          Calon peserta didik membuat akun pendaftaran secara mandiri di portal resmi PPDB Provinsi Jawa Barat / SMAN 2 Bandung. Pada tahap ini, peserta wajib mengisi biodata diri lengkap, koordinat domisili tempat tinggal berdasarkan GPS, nilai rapor semester 1 sampai 5, serta mengunggah dokumen administrasi scan berkas persyaratan asli.
+        </p>
+      </div>
+      
+      <div class="timeline-details-box" id="details-step-1">
+        <h3 class="timeline-details-title">Tahap 2: Verifikasi & Uji Kompetensi Dokumen</h3>
+        <p class="timeline-details-text">
+          Panitia SPMB SMAN 2 Bandung melakukan validasi fisik dan administrasi atas berkas yang diunggah peserta. Khusus pendaftar jalur prestasi kejuaraan non-akademik, peserta diwajibkan menghadiri seleksi uji kelayakan bakat (olahraga/seni/olimpiade) di sekolah dengan membawa dokumen fisik sertifikat/piagam asli.
+        </p>
+      </div>
+
+      <div class="timeline-details-box" id="details-step-2">
+        <h3 class="timeline-details-title">Tahap 3: Pengumuman Kelulusan Seleksi Final</h3>
+        <p class="timeline-details-text">
+          Pengumuman kelulusan final calon siswa baru yang lolos seleksi dapat diakses secara daring melalui situs web ini atau portal dinas pendidikan Jawa Barat mulai pukul 08:00 WIB. Keputusan panitia bersifat mutlak dan tidak dapat diganggu gugat. Pendaftar yang lolos diwajibkan mencetak bukti kelulusan untuk pendaftaran ulang.
+        </p>
+      </div>
+
+      <div class="timeline-details-box" id="details-step-3">
+        <h3 class="timeline-details-title">Tahap 4: Registrasi Fisik & Daftar Ulang Sekolah</h3>
+        <p class="timeline-details-text">
+          Calon siswa baru yang dinyatakan diterima wajib melapor diri secara langsung ke panitia PPDB SMAN 2 Bandung. Persiapkan berkas fisik asli beserta salinannya (fotokopi terlegalisir) guna pencocokan data profil siswa. Kegagalan melakukan daftar ulang sesuai jadwal yang ditentukan dianggap mengundurkan diri.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. FAQ ACCORDION SUB-SECTION -->
+  <section class="section" id="faq" style="background-color: var(--bg-body); border-top: 1px solid var(--border-color);">
+    <div class="container" style="max-width: 800px;">
+      <div class="section-header" style="margin-bottom: 40px;">
+        <span class="section-tag">FAQ</span>
+        <h2 class="section-title" style="font-size: 30px;">Tanya Jawab Pendaftar</h2>
+        <p class="section-desc">Berikut jawaban atas pertanyaan-pertanyaan yang paling sering ditanyakan oleh calon siswa dan orang tua.</p>
+      </div>
+
+      <div class="accordion-wrapper">
+        <!-- Q1 -->
+        <div class="accordion-item">
+          <button class="accordion-header">
+            <span>Bagaimana cara menentukan titik koordinat domisili rumah pendaftar?</span>
+            <i data-lucide="chevron-down"></i>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              Penetapan koordinat dilakukan saat pendaftaran online dengan meletakkan pin peta digital sesuai alamat yang tertera di Kartu Keluarga (KK). Harap pastikan koordinat akurat karena akan dilakukan verifikasi lapangan oleh panitia. Kesalahan fatal koordinat dapat menyebabkan diskualifikasi.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="accordion-item">
+          <button class="accordion-header">
+            <span>Apakah ada kuota khusus bagi siswa di luar wilayah Jawa Barat?</span>
+            <i data-lucide="chevron-down"></i>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              Kuota siswa luar provinsi dibatasi maksimal 5% dari total daya tampung sekolah dan hanya dapat diakses melalui jalur prestasi kejuaraan bersertifikat nasional/internasional atau mutasi kedinasan orang tua kerja.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="accordion-item">
+          <button class="accordion-header">
+            <span>Jika tidak lolos seleksi Zonasi tahap 1, apakah bisa daftar lagi di Tahap 2?</span>
+            <i data-lucide="chevron-down"></i>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              Bisa. Pendaftar yang tidak lolos seleksi tahap pertama (Zonasi/Afirmasi) dapat mendaftar kembali pada seleksi tahap kedua menggunakan jalur Prestasi Nilai Rapor. Akun pendaftaran tetap sama tanpa perlu registrasi ulang.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="accordion-item">
+          <button class="accordion-header">
+            <span>Apakah piagam kejuaraan beregu dinilai sama dengan kejuaraan individu?</span>
+            <i data-lucide="chevron-down"></i>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              Nilai poin piagam kejuaraan beregu memiliki bobot skor pembobotan yang berbeda dibanding kejuaraan perorangan sesuai petunjuk teknis dinas pendidikan Jawa Barat. Hanya piagam juara 1, 2, dan 3 resmi dari lembaga pemerintah yang diakui.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. NEWS SECTION -->
+  <section class="section" id="berita">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Kabar Terkini</span>
+        <h2 class="section-title">Berita & Pengumuman Terbaru</h2>
+        <p class="section-desc">Ikuti perkembangan terbaru mengenai program sekolah, kegiatan akademik, prestasi siswa, dan pembaruan seputar SPMB 2026.</p>
+      </div>
+
+      <!-- Slider Carousel -->
+      <div class="news-carousel-container reveal">
+        <button class="carousel-nav-btn carousel-prev" id="news-prev" aria-label="Berita Sebelumnya">
+          <i data-lucide="chevron-left"></i>
+        </button>
+        
+        <div class="news-track" id="news-track">
+          
+          <!-- Card 1 -->
+          <div class="news-card">
+            <div class="news-thumb">
+              <img src="assets/news_achievement.png" alt="Siswa berprestasi memegang piala emas">
+              <span class="news-badge">Prestasi</span>
+            </div>
+            <div class="news-body">
+              <span class="news-date"><i data-lucide="clock" style="width: 14px; height: 14px;"></i> 18 Mei 2026</span>
+              <h3 class="news-title">Siswa SMAN 2 Bandung Sabet Juara 1 Olimpiade Fisika Nasional</h3>
+              <p class="news-desc">Perwakilan tim sains kami berhasil merebut medali emas dalam kompetisi Fisika Nasional yang diadakan di Universitas Indonesia...</p>
+              <a href="#" class="news-link">Baca Selengkapnya <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i></a>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="news-card">
+            <div class="news-thumb">
+              <img src="assets/about_classroom.png" alt="Siswa berdiskusi kelas digital">
+              <span class="news-badge">Akademik</span>
+            </div>
+            <div class="news-body">
+              <span class="news-date"><i data-lucide="clock" style="width: 14px; height: 14px;"></i> 12 Mei 2026</span>
+              <h3 class="news-title">Implementasi Smart Classroom untuk Dukung Kurikulum Merdeka</h3>
+              <p class="news-desc">SMAN 2 Bandung mulai menerapkan sistem pembelajaran digital interaktif penuh untuk kelas 10 guna mendukung penguasaan sains digital...</p>
+              <a href="#" class="news-link">Baca Selengkapnya <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i></a>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="news-card">
+            <div class="news-thumb">
+              <img src="assets/hero_school.png" alt="Gedung sekolah SMAN 2 Bandung">
+              <span class="news-badge">SPMB</span>
+            </div>
+            <div class="news-body">
+              <span class="news-date"><i data-lucide="clock" style="width: 14px; height: 14px;"></i> 05 Mei 2026</span>
+              <h3 class="news-title">Sosialisasi Teknis SPMB 2026 bagi Calon Pendaftar</h3>
+              <p class="news-desc">Panitia menyelenggarakan webinar terbuka membahas tuntas cara pendaftaran dan verifikasi titik lokasi zonasi pendaftar...</p>
+              <a href="#" class="news-link">Baca Selengkapnya <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i></a>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="news-card">
+            <div class="news-thumb">
+              <img src="assets/about_laboratory.png" alt="Lab Praktikum Biologi SMAN 2">
+              <span class="news-badge">Lingkungan</span>
+            </div>
+            <div class="news-body">
+              <span class="news-date"><i data-lucide="clock" style="width: 14px; height: 14px;"></i> 28 April 2026</span>
+              <h3 class="news-title">Laboratorium Kimia Dapatkan Standardisasi Akreditasi Baru</h3>
+              <p class="news-desc">Fasilitas lab IPA sekolah kami resmi memperoleh sertifikasi kelayakan peralatan modern dari Dinas Laboratorium Daerah...</p>
+              <a href="#" class="news-link">Baca Selengkapnya <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i></a>
+            </div>
+          </div>
+
+        </div>
+
+        <button class="carousel-nav-btn carousel-next" id="news-next" aria-label="Berita Selanjutnya">
+          <i data-lucide="chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. GALLERY SECTION -->
+  <section class="section" id="galeri" style="background-color: var(--bg-body);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Galeri</span>
+        <h2 class="section-title">Dokumentasi Kegiatan Kampus</h2>
+        <p class="section-desc">Kilas balik keseruan aktivitas, lingkungan kelas, olahraga, pentas seni, dan hari kelulusan murid SMAN 2 Bandung.</p>
+      </div>
+
+      <!-- Filters -->
+      <div class="gallery-filters">
+        <button class="filter-btn active" data-filter="all">Semua</button>
+        <button class="filter-btn" data-filter="akademik">Akademik</button>
+        <button class="filter-btn" data-filter="ekskul">Ekstrakurikuler</button>
+        <button class="filter-btn" data-filter="lingkungan">Fasilitas</button>
+      </div>
+
+      <!-- Masonry Grid -->
+      <div class="gallery-grid reveal">
+        <!-- Item 1 -->
+        <div class="gallery-item" data-category="lingkungan">
+          <img src="assets/hero_school.png" alt="Gedung Utama SMAN 2 Bandung">
+          <div class="gallery-overlay">
+            <div class="gallery-icon-view"><i data-lucide="maximize-2"></i></div>
+            <div class="gallery-info">
+              <h4 class="gallery-title">Gedung Utama</h4>
+              <span class="gallery-tag">Fasilitas</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="gallery-item" data-category="akademik">
+          <img src="assets/about_classroom.png" alt="Siswa berdiskusi di dalam kelas">
+          <div class="gallery-overlay">
+            <div class="gallery-icon-view"><i data-lucide="maximize-2"></i></div>
+            <div class="gallery-info">
+              <h4 class="gallery-title">Ruang Belajar Digital</h4>
+              <span class="gallery-tag">Akademik</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="gallery-item" data-category="akademik">
+          <img src="assets/about_laboratory.png" alt="Praktikum di lab biologi kimia">
+          <div class="gallery-overlay">
+            <div class="gallery-icon-view"><i data-lucide="maximize-2"></i></div>
+            <div class="gallery-info">
+              <h4 class="gallery-title">Praktikum Kimia Organik</h4>
+              <span class="gallery-tag">Akademik</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="gallery-item" data-category="ekskul">
+          <img src="assets/gallery_sports.png" alt="Siswa bermain bola basket">
+          <div class="gallery-overlay">
+            <div class="gallery-icon-view"><i data-lucide="maximize-2"></i></div>
+            <div class="gallery-info">
+              <h4 class="gallery-title">Pertandingan Liga Basket</h4>
+              <span class="gallery-tag">Ekstrakurikuler</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 5 -->
+        <div class="gallery-item" data-category="ekskul">
+          <img src="assets/gallery_music.png" alt="Pentas Seni konser orkestra sekolah">
+          <div class="gallery-overlay">
+            <div class="gallery-icon-view"><i data-lucide="maximize-2"></i></div>
+            <div class="gallery-info">
+              <h4 class="gallery-title">Konser Paduan Suara & Musik</h4>
+              <span class="gallery-tag">Ekstrakurikuler</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 6 -->
+        <div class="gallery-item" data-category="lingkungan">
+          <img src="assets/gallery_graduation.png" alt="Hari Kelulusan Siswa SMAN 2 Bandung">
+          <div class="gallery-overlay">
+            <div class="gallery-icon-view"><i data-lucide="maximize-2"></i></div>
+            <div class="gallery-info">
+              <h4 class="gallery-title">Upacara Pelepasan Alumni</h4>
+              <span class="gallery-tag">Fasilitas</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13. TESTIMONIAL SECTION -->
+  <section class="section" id="testimoni">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Testimoni</span>
+        <h2 class="section-title">Apa Kata Mereka?</h2>
+        <p class="section-desc">Dengarkan kisah sukses alumni, pandangan orang tua murid, dan pengalaman belajar aktif langsung dari siswa-siswi kami.</p>
+      </div>
+
+      <!-- Testimonial Slider / Carousel -->
+      <div class="testimonial-carousel-wrapper reveal">
+        <div class="testimonial-track" id="testimonial-track">
+          
+          <!-- Slide 1: Alumni -->
+          <div class="testimonial-slide">
+            <div class="testimonial-card glass-panel">
+              <span class="testimonial-quote-icon">“</span>
+              <p class="testimonial-quote">
+                "SMAN 2 Bandung tidak hanya memberikan bekal ilmu akademik yang sangat solid, namun juga mendidik mentalitas kemandirian dan rasa kekeluargaan yang erat. Lingkungan kompetitif positif di sekolah ini sangat membantu saya beradaptasi cepat di perkuliahan ITB hingga karier profesional saat ini."
+              </p>
+              <div class="testimonial-user">
+                <img src="assets/avatar_alumni.png" alt="Faris Syahlana" class="testimonial-avatar">
+                <div class="testimonial-info">
+                  <span class="testimonial-name">Faris Syahlana, S.T.</span>
+                  <span class="testimonial-role">Alumni Angkatan 2018 — Software Engineer at Gojek</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2: Siswa -->
+          <div class="testimonial-slide">
+            <div class="testimonial-card glass-panel">
+              <span class="testimonial-quote-icon">“</span>
+              <p class="testimonial-quote">
+                "Belajar di SMAN 2 Bandung seru banget! Selain fasilitas kelas dan laboratorium yang lengkap, guru-guru di sini sangat sabar, ramah, dan interaktif dalam mengajar. Ada banyak klub ekstrakurikuler menarik yang bisa menyalurkan bakat minat saya di bidang seni."
+              </p>
+              <div class="testimonial-user">
+                <img src="assets/avatar_student.png" alt="Amanda Larasati" class="testimonial-avatar">
+                <div class="testimonial-info">
+                  <span class="testimonial-name">Amanda Larasati</span>
+                  <span class="testimonial-role">Siswa Kelas XI MIPA 3 — Ketua Klub Musik</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3: Orang Tua -->
+          <div class="testimonial-slide">
+            <div class="testimonial-card glass-panel">
+              <span class="testimonial-quote-icon">“</span>
+              <p class="testimonial-quote">
+                "Sebagai orang tua, kami merasa sangat tenang memercayakan pendidikan putri kami di sini. SMAN 2 memiliki sistem komunikasi terpadu yang transparan kepada wali murid, serta selalu mengedepankan pembentukan budi pekerti karakter disiplin di samping pencapaian prestasi belajarnya."
+              </p>
+              <div class="testimonial-user">
+                <img src="assets/avatar_parent.png" alt="Dra. Sri Wahyuni" class="testimonial-avatar">
+                <div class="testimonial-info">
+                  <span class="testimonial-name">Dra. Sri Wahyuni</span>
+                  <span class="testimonial-role">Orang Tua Murid Kelas XII IPS 1</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        
+        <!-- Navigation Dots -->
+        <div class="testimonial-dots" id="testimonial-dots"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14. CONTACT SECTION -->
+  <section class="section" id="kontak" style="background-color: var(--bg-body); border-top: 1px solid var(--border-color);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Kontak</span>
+        <h2 class="section-title">Hubungi Layanan SPMB</h2>
+        <p class="section-desc">Kunjungi sekretariat panitia atau hubungi nomor layanan helpdesk kami untuk mendapatkan penjelasan teknis lebih lanjut.</p>
+      </div>
+
+      <div class="contact-grid reveal">
+        <!-- Left Column: Map & Address Details -->
+        <div class="contact-info-block">
+          <!-- Dummy Map Embed Visual representation -->
+          <div class="map-embed-wrapper">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.9169600109723!2d107.60831617590858!3d-6.900547067527668!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e6471e4284cf%3A0xc3cf90176882be1e!2sSMA%20Negeri%202%20Bandung!5e0!3m2!1sid!2sid!4v1716186411234!5m2!1sid!2sid" 
+              width="100%" 
+              height="100%" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Peta Lokasi SMAN 2 Bandung">
+            </iframe>
+          </div>
+
+          <!-- Address Details Card Grid -->
+          <div class="contact-details">
+            <div class="detail-item">
+              <div class="detail-icon"><i data-lucide="map-pin"></i></div>
+              <div class="detail-info">
+                <span class="detail-title">Alamat Sekolah</span>
+                <span class="detail-value">Jl. Cihampelas No.173, Cipaganti, Kec. Coblong, Kota Bandung, Jawa Barat 40131</span>
+              </div>
+            </div>
+
+            <div class="detail-item">
+              <div class="detail-icon"><i data-lucide="mail"></i></div>
+              <div class="detail-info">
+                <span class="detail-title">Surel Resmi</span>
+                <span class="detail-value">info@sman2bdg.sch.id<br>spmb@sman2bdg.sch.id</span>
+              </div>
+            </div>
+
+            <div class="detail-item">
+              <div class="detail-icon"><i data-lucide="phone-call"></i></div>
+              <div class="detail-info">
+                <span class="detail-title">Telepon / Fax</span>
+                <span class="detail-value">(022) 2032610</span>
+              </div>
+            </div>
+
+            <div class="detail-item">
+              <div class="detail-icon"><i data-lucide="clock"></i></div>
+              <div class="detail-info">
+                <span class="detail-title">Jam Pelayanan Helpdesk</span>
+                <span class="detail-value">Senin - Jumat: 08:00 - 15:00 WIB<br>Sabtu & Minggu: Tutup</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Form -->
+        <div class="contact-form-card">
+          <h3>Kirim Pertanyaan</h3>
+          <form id="contact-form">
+            <div class="form-group">
+              <label for="form-nama">Nama Lengkap</label>
+              <input type="text" id="form-nama" class="form-control" placeholder="Masukkan nama lengkap Anda" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="form-email">Alamat Email</label>
+              <input type="email" id="form-email" class="form-control" placeholder="Alamat email aktif (Contoh: nama@domain.com)" required>
+            </div>
+
+            <div class="form-group">
+              <label for="form-pesan">Detail Pertanyaan Anda</label>
+              <textarea id="form-pesan" class="form-control" rows="5" placeholder="Tuliskan kendala pendaftaran atau pertanyaan detail Anda secara jelas..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+              Kirim Pesan <i data-lucide="send" style="width: 16px; height: 16px;"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15. FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        
+        <!-- Logo Column -->
+        <div class="footer-logo-block">
+          <div class="brand">
+            <img src="assets/logo_smanda.png" alt="Logo SMAN 2 Bandung" class="brand-logo">
+            <div class="brand-text">
+              <span class="brand-name" style="font-size: 16px;">SMAN 2 BANDUNG</span>
+              <span class="brand-tagline" style="color: rgba(255,255,255,0.4);">Unggul, Berkarakter, Berbudaya</span>
+            </div>
+          </div>
+          <p class="footer-desc">
+            Pusat pendidikan menengah negeri unggulan nasional berkomitmen melahirkan intelektual bangsa berkarakter moral kuat.
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-btn" aria-label="Kunjungi Facebook Kami"><i data-lucide="facebook"></i></a>
+            <a href="#" class="social-btn" aria-label="Kunjungi Instagram Kami"><i data-lucide="instagram"></i></a>
+            <a href="#" class="social-btn" aria-label="Kunjungi YouTube Kami"><i data-lucide="youtube"></i></a>
+            <a href="#" class="social-btn" aria-label="Hubungi Twitter Kami"><i data-lucide="twitter"></i></a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="footer-title">Tautan Kilat</h4>
+          <ul class="footer-links">
+            <li><a href="#beranda">Halaman Beranda</a></li>
+            <li><a href="#profil">Profil & Sejarah</a></li>
+            <li><a href="#informasi">Informasi Pendaftaran</a></li>
+            <li><a href="#spmb-timeline">Timeline PPDB 2026</a></li>
+            <li><a href="#faq">FAQ Pendaftar</a></li>
+          </ul>
+        </div>
+
+        <!-- Academics Links -->
+        <div>
+          <h4 class="footer-title">Akademik</h4>
+          <ul class="footer-links">
+            <li><a href="#">Kurikulum Merdeka</a></li>
+            <li><a href="#">Fasilitas Lab IPA</a></li>
+            <li><a href="#">Perpustakaan Digital</a></li>
+            <li><a href="#">OSIS & Ekskul</a></li>
+            <li><a href="#">Prestasi Sekolah</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact details -->
+        <div>
+          <h4 class="footer-title">Sekretariat SPMB</h4>
+          <ul class="footer-contacts">
+            <li>
+              <i data-lucide="map-pin" style="width: 18px; height: 18px;"></i>
+              <span>Gedung Tata Usaha SMAN 2 Bandung, Jl. Cihampelas No.173, Bandung</span>
+            </li>
+            <li>
+              <i data-lucide="phone" style="width: 18px; height: 18px;"></i>
+              <span>(022) 2032610</span>
+            </li>
+            <li>
+              <i data-lucide="mail" style="width: 18px; height: 18px;"></i>
+              <span>spmb@sman2bdg.sch.id</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <span class="footer-copyright">© 2026 SMAN 2 Bandung — All Rights Reserved</span>
+        <span style="color: rgba(255,255,255,0.25);">Developed with Pride by Antigravity IDE</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 16. FLOATING WIDGETS & MODALS -->
+  <div class="floating-widgets">
+    <!-- Scroll to top -->
+    <button class="float-btn scroll-top-float" aria-label="Kembali ke atas" id="scroll-top-btn">
+      <i data-lucide="arrow-up" style="width: 24px; height: 24px; color: var(--text-primary);"></i>
+    </button>
+    
+    <!-- Help Chat Widget toggle -->
+    <button class="float-btn help-chat-float" aria-label="Bantuan Chat Layanan" id="help-chat-btn">
+      <i data-lucide="message-square" style="width: 24px; height: 24px;"></i>
+    </button>
+
+    <!-- WhatsApp float shortcut link -->
+    <a href="https://wa.me/6281234567890" target="_blank" class="float-btn whatsapp-float" aria-label="WhatsApp Panitia">
+      <i data-lucide="phone" style="width: 24px; height: 24px;"></i>
+    </a>
+  </div>
+
+  <!-- Help Chat Box Widget -->
+  <div class="help-chat-widget" id="help-chat-widget">
+    <div class="help-chat-header">
+      <div class="chat-bot-info">
+        <div class="bot-avatar">S2</div>
+        <div>
+          <span class="bot-title">Asisten SPMB</span>
+          <span class="bot-status">Aktif Pelayanan</span>
+        </div>
+      </div>
+      <button style="background: none; border: none; color: #ffffff; cursor: pointer;" id="close-chat-btn" aria-label="Tutup Chat">
+        <i data-lucide="x" style="width: 16px; height: 16px;"></i>
+      </button>
+    </div>
+    <div class="help-chat-body" id="help-chat-body">
+      <div class="chat-msg chat-msg-bot">
+        Halo! Selamat datang di Portal SPMB SMAN 2 Bandung 2026. Ada yang bisa kami bantu terkait info persyaratan, alur jalur seleksi, atau jadwal PPDB?
+      </div>
+    </div>
+    <div class="help-chat-footer">
+      <input type="text" id="chat-input" class="chat-input" placeholder="Ketik pertanyaan Anda...">
+      <button class="chat-send-btn" id="chat-send-btn" aria-label="Kirim Pesan">
+        <i data-lucide="send" style="width: 16px; height: 16px;"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Sticky CTA Banner for Mobile -->
+  <div class="sticky-cta-banner" id="mobile-sticky-cta">
+    <div class="sticky-cta-text">
+      <strong>SPMB SMAN 2 Bandung 2026</strong>
+      <span>Registrasi Akun Gelombang 1 Dibuka</span>
+    </div>
+    <a href="#spmb-timeline" class="btn btn-gold" style="padding: 8px 16px; font-size: 12px; border-radius: var(--radius-sm);">Daftar</a>
+  </div>
+
+  <!-- Lightbox Gallery Modal -->
+  <div class="lightbox-modal" id="lightbox-modal">
+    <button class="lightbox-close-btn" id="lightbox-close" aria-label="Tutup Tampilan Gambar"><i data-lucide="x"></i></button>
+    <div class="lightbox-content-wrapper">
+      <img src="" alt="" class="lightbox-image" id="lightbox-img">
+      <h3 class="lightbox-title" id="lightbox-title">Judul Gambar</h3>
+    </div>
+  </div>
+
+  <!-- About Detail Info Modal -->
+  <div class="info-modal" id="about-modal">
+    <div class="info-modal-card">
+      <div class="info-modal-header">
+        <h3>Sejarah Singkat & Nilai SMAN 2 Bandung</h3>
+        <button class="info-modal-close" id="close-about-modal"><i data-lucide="x"></i></button>
+      </div>
+      <div class="info-modal-body">
+        <h4 style="margin-bottom: 8px; color: var(--primary);">Sejarah Singkat</h4>
+        <p style="margin-bottom: 16px;">
+          SMA Negeri 2 Bandung diresmikan pertama kali pada akhir dasawarsa 1950-an. Sekolah ini menempati area strategis di kawasan bersejarah Jl. Cihampelas, Bandung. Sejak awal pendiriannya, sekolah ini dikenal memiliki integritas akademik yang kokoh serta disiplin tinggi. Banyak mencetak lulusan berprestasi nasional yang melanjutkan studi di perguruan tinggi ternama seperti ITB, Unpad, UI, dan UGM, serta institusi global di luar negeri.
+        </p>
+        
+        <h4 style="margin-bottom: 8px; color: var(--primary);">Nilai Filosofis: Unggul, Berkarakter, Berbudaya</h4>
+        <p style="margin-bottom: 16px;">
+          Sekolah menerapkan falsafah Sunda *Silih Asih, Silih Asah, Silih Asuh* yang dipadukan dengan wawasan literasi sains modern. Kami percaya pendidikan sejati adalah yang memupuk intelek siswa sekaligus mengasah empati kemanusiaan mereka.
+        </p>
+
+        <h4 style="margin-bottom: 8px; color: var(--primary);">Akreditasi & Penghargaan</h4>
+        <p>
+          SMAN 2 Bandung saat ini menyandang predikat Akreditasi A (Sangat Baik / Unggul) dari Badan Akreditasi Nasional. Sekolah juga mendapat penghargaan sebagai Sekolah Adiwiyata (Peduli Lingkungan) dan Sekolah Pelopor Digitalisasi Pendidikan Provinsi Jawa Barat.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Re-registration (Daftar Ulang) Modal -->
+  <div class="info-modal" id="daftar-ulang-modal">
+    <div class="info-modal-card daftar-ulang-card">
+      <div class="info-modal-header">
+        <h3>Daftar Ulang Online SPMB 2026</h3>
+        <button class="info-modal-close" id="close-daftar-ulang-modal"><i data-lucide="x"></i></button>
+      </div>
+      
+      <!-- Multi-step Progress Bar -->
+      <div class="modal-steps-indicator">
+        <div class="step-indicator-item active" id="indicator-step-1">
+          <div class="step-indicator-num">1</div>
+          <span>Verifikasi</span>
+        </div>
+        <div class="step-indicator-line"></div>
+        <div class="step-indicator-item" id="indicator-step-2">
+          <div class="step-indicator-num">2</div>
+          <span>Biodata</span>
+        </div>
+        <div class="step-indicator-line"></div>
+        <div class="step-indicator-item" id="indicator-step-3">
+          <div class="step-indicator-num">3</div>
+          <span>Berkas</span>
+        </div>
+        <div class="step-indicator-line"></div>
+        <div class="step-indicator-item" id="indicator-step-4">
+          <div class="step-indicator-num">4</div>
+          <span>Bukti</span>
+        </div>
+      </div>
+      
+      <!-- Alert Message (For error / status) -->
+      <div id="daftar-ulang-alert" class="modal-alert hidden"></div>
+
+      <!-- Modal Step Contents -->
+      <div class="info-modal-body">
+        
+        <!-- STEP 1: VERIFIKASI NISN -->
+        <div class="form-step-content active" id="form-step-1">
+          <h4 class="form-step-title">Verifikasi Status Kelulusan PPDB</h4>
+          <p class="form-step-desc">Masukkan Nomor Induk Siswa Nasional (NISN) Anda yang terdaftar pada hasil seleksi PPDB Dinas Pendidikan Jawa Barat untuk memulai proses daftar ulang.</p>
+          <div class="form-group">
+            <label for="du-nisn">Masukkan NISN Calon Siswa</label>
+            <input type="text" id="du-nisn" class="form-control" placeholder="Contoh: 1234567890" maxlength="10" required>
+            <small class="form-helper">Masukkan 10 digit angka NISN Anda.</small>
+          </div>
+          <div class="form-step-actions">
+            <button class="btn btn-primary" id="btn-step1-next">
+              Verifikasi NISN <i data-lucide="check-circle"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 2: BIODATA FORM -->
+        <div class="form-step-content" id="form-step-2">
+          <h4 class="form-step-title">Formulir Biodata Konfirmasi</h4>
+          <p class="form-step-desc">Silakan lengkapi data kontak dan konfirmasi di bawah ini dengan benar.</p>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="du-name">Nama Lengkap (Sesuai PPDB Dinas)</label>
+              <input type="text" id="du-name" class="form-control" readonly>
+            </div>
+            <div class="form-group">
+              <label for="du-email">Alamat Email Aktif</label>
+              <input type="email" id="du-email" class="form-control" placeholder="nama@email.com" required>
+            </div>
+            <div class="form-group">
+              <label for="du-phone">Nomor WhatsApp/Telepon</label>
+              <input type="tel" id="du-phone" class="form-control" placeholder="Contoh: 0812XXXXXXXX" required>
+            </div>
+            <div class="form-group">
+              <label for="du-uniform">Ukuran Baju Seragam</label>
+              <select id="du-uniform" class="form-control" required>
+                <option value="" disabled selected>Pilih Ukuran Baju</option>
+                <option value="S">S (Small)</option>
+                <option value="M">M (Medium)</option>
+                <option value="L">L (Large)</option>
+                <option value="XL">XL (Extra Large)</option>
+                <option value="XXL">XXL (Double Extra Large)</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group" style="margin-top: 15px;">
+            <label for="du-address">Alamat Rumah Lengkap</label>
+            <textarea id="du-address" class="form-control" rows="3" placeholder="Masukkan alamat lengkap rumah Anda sesuai Kartu Keluarga..." required></textarea>
+          </div>
+          <div class="form-step-actions" style="margin-top: 20px;">
+            <button class="btn btn-outline-primary" id="btn-step2-prev">Kembali</button>
+            <button class="btn btn-primary" id="btn-step2-next">Lanjutkan <i data-lucide="arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- STEP 3: FILE UPLOAD -->
+        <div class="form-step-content" id="form-step-3">
+          <h4 class="form-step-title">Unggah Dokumen Persyaratan Fisik</h4>
+          <p class="form-step-desc">Unggah salinan dokumen dalam format gambar (JPG, JPEG, PNG) atau PDF (Maksimal 2MB per berkas).</p>
+          
+          <div class="form-group">
+            <label for="du-kk-file">Scan Kartu Keluarga (KK) Asli</label>
+            <div class="file-upload-drag" id="drag-kk">
+              <i data-lucide="upload-cloud" class="upload-icon"></i>
+              <span>Tarik & lepas file di sini atau <strong>pilih file</strong></span>
+              <input type="file" id="du-kk-file" accept=".pdf,.jpg,.jpeg,.png" required style="display:none;">
+              <div class="file-selected-name" id="name-kk">Belum ada file terpilih</div>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 15px;">
+            <label for="du-ppdb-file">Bukti Kelulusan PPDB (Portal Dinas Jabar)</label>
+            <div class="file-upload-drag" id="drag-ppdb">
+              <i data-lucide="upload-cloud" class="upload-icon"></i>
+              <span>Tarik & lepas file di sini atau <strong>pilih file</strong></span>
+              <input type="file" id="du-ppdb-file" accept=".pdf,.jpg,.jpeg,.png" required style="display:none;">
+              <div class="file-selected-name" id="name-ppdb">Belum ada file terpilih</div>
+            </div>
+          </div>
+
+          <div class="form-step-actions" style="margin-top: 24px;">
+            <button class="btn btn-outline-primary" id="btn-step3-prev">Kembali</button>
+            <button class="btn btn-gold" id="btn-step3-submit">
+              Kirim Pendaftaran Ulang <i data-lucide="send"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 4: RECEIPT GENERATION -->
+        <div class="form-step-content" id="form-step-4">
+          <div class="receipt-success-icon" style="text-align: center; margin-bottom: 10px;">
+            <i data-lucide="check-circle" style="width: 54px; height: 54px; color: var(--success);"></i>
+          </div>
+          <h4 class="receipt-success-title" style="text-align: center; font-family: var(--font-display); color: var(--primary);">Pendaftaran Ulang Online Berhasil!</h4>
+          <p class="receipt-success-desc" style="text-align: center; font-size: 13px; color: var(--text-secondary); margin-bottom: 20px;">Data Anda telah disimpan dalam antrean verifikator SMAN 2 Bandung. Simpan bukti pendaftaran ini untuk diperlihatkan saat verifikasi berkas fisik.</p>
+          
+          <!-- Receipt Card Layout -->
+          <div class="receipt-card" id="print-receipt-area">
+            <div class="receipt-header">
+              <img src="assets/logo_smanda.png" alt="Logo SMAN 2 Bandung" class="receipt-logo">
+              <div class="receipt-header-text">
+                <h5>SMAN 2 BANDUNG</h5>
+                <span>TANDA BUKTI PRA-DAFTAR ULANG 2026</span>
+              </div>
+            </div>
+            
+            <div class="receipt-body">
+              <div class="receipt-info-grid">
+                <div>
+                  <span class="receipt-label">Nama Siswa:</span>
+                  <span class="receipt-value" id="receipt-name">-</span>
+                </div>
+                <div>
+                  <span class="receipt-label">NISN:</span>
+                  <span class="receipt-value" id="receipt-nisn">-</span>
+                </div>
+                <div>
+                  <span class="receipt-label">Jadwal Sesi Verifikasi Fisik:</span>
+                  <span class="receipt-value text-highlight" id="receipt-session">-</span>
+                </div>
+                <div>
+                  <span class="receipt-label">Status Awal:</span>
+                  <span class="receipt-value" style="color: var(--gold); font-weight: 600;">Pending Verifikasi Berkas</span>
+                </div>
+              </div>
+              
+              <div class="receipt-qr-block">
+                <img id="receipt-qr-img" src="" alt="QR Code Bukti Daftar Ulang">
+                <span class="qr-info-text">Pindai saat tiba di sekolah</span>
+              </div>
+            </div>
+            
+            <div class="receipt-footer">
+              *Harap datang tepat waktu 15 menit sebelum sesi Anda dimulai untuk mencocokkan dokumen fisik asli.
+            </div>
+          </div>
+
+          <div class="form-step-actions" style="margin-top: 24px; justify-content: center;">
+            <button class="btn btn-primary" id="btn-print-receipt">
+              Cetak Bukti <i data-lucide="printer"></i>
+            </button>
+            <button class="btn btn-outline-primary" id="btn-close-receipt">Tutup</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Lucide Icons Script -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Main App Script -->
+  <script src="app.js"></script>
+  <script>
+    // Initialize Lucide Icons immediately after script loads
+    if (window.lucide) {
+      lucide.createIcons();
+    }
+  </script>
+</body>
+</html>

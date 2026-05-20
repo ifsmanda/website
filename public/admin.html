@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Administrasi Verifikasi Daftar Ulang — SMAN 2 Bandung</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="assets/logo_smanda.png" type="image/png">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Styling -->
+  <link rel="stylesheet" href="style.css">
+  
+  <style>
+    :root {
+      --admin-primary: #0a2e73;
+      --admin-gold: #f4c542;
+      --admin-bg: #f8fafc;
+      --admin-card: #ffffff;
+      --admin-border: #e2e8f0;
+      --admin-text: #1e293b;
+      --admin-text-secondary: #64748b;
+    }
+    
+    .dark-mode-admin {
+      --admin-primary: #f4c542;
+      --admin-gold: #0a2e73;
+      --admin-bg: #0f172a;
+      --admin-card: #1e293b;
+      --admin-border: #334155;
+      --admin-text: #f8fafc;
+      --admin-text-secondary: #94a3b8;
+    }
+    
+    body.admin-body {
+      background-color: var(--admin-bg);
+      color: var(--admin-text);
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      transition: background-color var(--transition-normal), color var(--transition-normal);
+    }
+    
+    .admin-header {
+      background-color: #0b1329;
+      color: #ffffff;
+      padding: 16px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .admin-brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .admin-logo {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+    }
+    
+    .admin-title-block h1 {
+      margin: 0;
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+    
+    .admin-title-block span {
+      font-size: 11px;
+      color: #94a3b8;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    
+    .admin-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .admin-container {
+      max-width: 1400px;
+      margin: 32px auto;
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    
+    /* Stats Layout */
+    .admin-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    
+    .stat-card {
+      background-color: var(--admin-card);
+      border: 1px solid var(--admin-border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition-fast) ease;
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-2px);
+    }
+    
+    .stat-icon-wrapper {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+    
+    .icon-blue { background-color: rgba(10, 46, 115, 0.08); color: #0a2e73; }
+    .icon-yellow { background-color: rgba(244, 197, 66, 0.12); color: #b78a04; }
+    .icon-green { background-color: rgba(34, 197, 94, 0.08); color: #22c55e; }
+    .icon-red { background-color: rgba(239, 68, 68, 0.08); color: #ef4444; }
+    
+    .stat-info {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .stat-label {
+      font-size: 12px;
+      color: var(--admin-text-secondary);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .stat-val {
+      font-size: 28px;
+      font-weight: 800;
+      font-family: 'Outfit', sans-serif;
+      margin-top: 4px;
+    }
+    
+    /* Table Filter Controls */
+    .table-control-card {
+      background-color: var(--admin-card);
+      border: 1px solid var(--admin-border);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .search-input-group {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--admin-border);
+      border-radius: var(--radius-md);
+      padding: 8px 16px;
+      background-color: var(--admin-bg);
+      width: 320px;
+      max-width: 100%;
+      gap: 10px;
+    }
+    
+    .search-input-group input {
+      border: none;
+      background: none;
+      color: var(--admin-text);
+      outline: none;
+      font-size: 13px;
+      width: 100%;
+    }
+    
+    .action-btn-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    /* Table styling */
+    .admin-table-container {
+      background-color: var(--admin-card);
+      border: 1px solid var(--admin-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      overflow-x: auto;
+    }
+    
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13px;
+    }
+    
+    .admin-table th {
+      background-color: rgba(10, 46, 115, 0.02);
+      border-bottom: 1px solid var(--admin-border);
+      padding: 16px 20px;
+      font-weight: 700;
+      color: var(--admin-text);
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+    }
+    
+    .admin-table td {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--admin-border);
+      vertical-align: middle;
+    }
+    
+    .admin-table tbody tr:hover {
+      background-color: rgba(10, 46, 115, 0.01);
+    }
+    
+    /* Status Badges */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+    
+    .badge-pending { background-color: rgba(244, 197, 66, 0.12); color: #b78a04; }
+    .badge-verified { background-color: rgba(34, 197, 94, 0.08); color: #22c55e; }
+    .badge-rejected { background-color: rgba(239, 68, 68, 0.08); color: #ef4444; }
+    
+    /* Document Links */
+    .doc-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--admin-primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: opacity var(--transition-fast) ease;
+    }
+    
+    .doc-link:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+    
+    /* verification Modal stylesheet */
+    .verify-modal-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+    }
+    
+    @media (max-width: 900px) {
+      .verify-modal-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .doc-preview-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .doc-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--admin-border);
+      gap: 8px;
+    }
+    
+    .doc-tab-btn {
+      padding: 10px 16px;
+      border: none;
+      background: none;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--admin-text-secondary);
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: all var(--transition-fast) ease;
+    }
+    
+    .doc-tab-btn.active {
+      color: var(--admin-primary);
+      border-bottom-color: var(--admin-primary);
+    }
+    
+    .doc-preview-frame {
+      border: 1px solid var(--admin-border);
+      border-radius: var(--radius-md);
+      height: 480px;
+      background-color: #f1f5f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    
+    .doc-preview-frame iframe, .doc-preview-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border: none;
+    }
+    
+    .verify-form-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    
+    .meta-data-info {
+      background-color: var(--admin-bg);
+      border: 1px solid var(--admin-border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .meta-item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+    }
+    
+    .meta-label {
+      color: var(--admin-text-secondary);
+      font-weight: 600;
+    }
+    
+    .meta-value {
+      font-weight: 700;
+      text-align: right;
+    }
+    
+    .loading-container {
+      padding: 80px;
+      text-align: center;
+      color: var(--admin-text-secondary);
+    }
+    
+    .loading-spinner {
+      border: 4px solid rgba(0, 0, 0, 0.1);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border-left-color: var(--admin-primary);
+      animation: spin 1s linear infinite;
+      margin: 0 auto 16px auto;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body class="admin-body">
+
+  <!-- Header -->
+  <header class="admin-header">
+    <div class="admin-brand">
+      <img src="assets/logo_smanda.png" alt="Logo SMAN 2 Bandung" class="admin-logo">
+      <div class="admin-title-block">
+        <h1>VERIFIKATOR DAFTAR ULANG ONLINE</h1>
+        <span>SMAN 2 BANDUNG — PPDB 2026</span>
+      </div>
+    </div>
+    
+    <div class="admin-header-actions">
+      <!-- Dark mode switch -->
+      <button class="theme-toggle-btn" id="admin-theme-toggle" aria-label="Ganti Tema" style="background: none; border: none; color: white; cursor: pointer;">
+        <i data-lucide="moon"></i>
+      </button>
+      <a href="index.html" class="btn btn-outline-primary" style="border-color: rgba(255,255,255,0.2); color: white; font-size: 12px; padding: 8px 16px;">
+        <i data-lucide="external-link"></i> Portal Utama
+      </a>
+    </div>
+  </header>
+
+  <!-- Container -->
+  <main class="admin-container">
+    
+    <!-- STATS BLOCKS -->
+    <section class="admin-stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon-wrapper icon-blue">
+          <i data-lucide="users"></i>
+        </div>
+        <div class="stat-info">
+          <span class="stat-label">Total Pendaftar</span>
+          <span class="stat-val" id="stat-total">0</span>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon-wrapper icon-yellow">
+          <i data-lucide="clock"></i>
+        </div>
+        <div class="stat-info">
+          <span class="stat-label">Pending Review</span>
+          <span class="stat-val" id="stat-pending">0</span>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon-wrapper icon-green">
+          <i data-lucide="check-square"></i>
+        </div>
+        <div class="stat-info">
+          <span class="stat-label">Terverifikasi</span>
+          <span class="stat-val" id="stat-verified">0</span>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon-wrapper icon-red">
+          <i data-lucide="alert-triangle"></i>
+        </div>
+        <div class="stat-info">
+          <span class="stat-label">Ditolak / Bermasalah</span>
+          <span class="stat-val" id="stat-rejected">0</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TABLE CONTROLS -->
+    <section class="table-control-card">
+      <div class="search-input-group">
+        <i data-lucide="search" style="color: var(--admin-text-secondary); width: 18px; height: 18px;"></i>
+        <input type="text" id="admin-search" placeholder="Cari nama siswa atau NISN...">
+      </div>
+      
+      <div class="action-btn-group">
+        <button class="btn btn-outline-primary" id="btn-refresh" style="font-size: 13px; padding: 10px 18px; display: inline-flex; align-items: center; gap: 8px;">
+          <i data-lucide="refresh-cw"></i> Segarkan Data
+        </button>
+        <a href="/api/admin/export" class="btn btn-gold" id="btn-export-excel" style="font-size: 13px; padding: 10px 18px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+          <i data-lucide="file-spreadsheet"></i> Ekspor ke Excel (Dapodik)
+        </a>
+      </div>
+    </section>
+
+    <!-- DATABASE TABLE -->
+    <section class="admin-table-container">
+      <table class="admin-table" id="registrants-table">
+        <thead>
+          <tr>
+            <th>NISN</th>
+            <th>Nama Siswa</th>
+            <th>Email & No. WA</th>
+            <th>Ukuran Baju</th>
+            <th>Jadwal Sesi Fisik</th>
+            <th>Tanggal Daftar</th>
+            <th>Status</th>
+            <th>Catatan</th>
+            <th>Aksi Verifikasi</th>
+          </tr>
+        </thead>
+        <tbody id="registrants-tbody">
+          <tr>
+            <td colspan="9" class="loading-container">
+              <div class="loading-spinner"></div>
+              <span>Memuat data pendaftar dari server...</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <!-- INTERACTIVE REVIEW MODAL -->
+  <div class="info-modal" id="review-modal">
+    <div class="info-modal-card" style="max-width: 1000px;">
+      <div class="info-modal-header">
+        <h3>Tinjau Dokumen & Verifikasi Pendaftaran</h3>
+        <button class="info-modal-close" id="close-review-modal"><i data-lucide="x"></i></button>
+      </div>
+      
+      <div id="review-alert" class="modal-alert hidden"></div>
+      
+      <div class="info-modal-body" style="max-height: 80vh;">
+        <div class="verify-modal-grid">
+          
+          <!-- Document Preview Tab Panel (Left) -->
+          <div class="doc-preview-panel">
+            <div class="doc-tabs">
+              <button class="doc-tab-btn active" id="tab-kk-btn">Kartu Keluarga (KK)</button>
+              <button class="doc-tab-btn" id="tab-ppdb-btn">Bukti PPDB Dinas</button>
+            </div>
+            
+            <div class="doc-preview-frame">
+              <iframe id="doc-preview-iframe" src="" style="display:none;"></iframe>
+              <img id="doc-preview-img" src="" alt="Pratinjau Berkas" style="display:none;">
+              <div id="doc-preview-placeholder" style="color: var(--admin-text-secondary); text-align: center;">
+                <i data-lucide="file-text" style="width: 48px; height: 48px; margin-bottom: 8px;"></i>
+                <p>Klik tab dokumen di atas untuk melihat berkas unggahan</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Meta data and Verification notes (Right) -->
+          <div class="verify-form-panel">
+            <h4 class="form-step-title" style="margin-top: 0;">Biodata Calon Siswa</h4>
+            
+            <div class="meta-data-info">
+              <div class="meta-item">
+                <span class="meta-label">Nama Siswa:</span>
+                <span class="meta-value" id="meta-name">-</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">NISN:</span>
+                <span class="meta-value" id="meta-nisn">-</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Alamat Rumah:</span>
+                <span class="meta-value" id="meta-address">-</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Email:</span>
+                <span class="meta-value" id="meta-email">-</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">No. WhatsApp:</span>
+                <span class="meta-value" id="meta-phone">-</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Ukuran Baju:</span>
+                <span class="meta-value" id="meta-uniform">-</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Jadwal Sesi Fisik:</span>
+                <span class="meta-value text-highlight" id="meta-session">-</span>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="verification-notes">Catatan Tambahan Verifikator (Untuk Siswa)</label>
+              <textarea id="verification-notes" class="form-control" rows="4" placeholder="Masukkan instruksi khusus atau alasan penolakan berkas..."></textarea>
+            </div>
+            
+            <div class="form-step-actions" style="margin-top: auto; justify-content: flex-end;">
+              <button class="btn btn-outline-primary" id="btn-review-cancel">Batal</button>
+              <button class="btn btn-primary" id="btn-reject" style="background-color: #ef4444; border-color: #ef4444; color: white;">
+                Tolak Berkas <i data-lucide="x-circle"></i>
+              </button>
+              <button class="btn btn-gold" id="btn-approve" style="background-color: #22c55e; border-color: #22c55e; color: white;">
+                Setujui & Verifikasi <i data-lucide="check-circle"></i>
+              </button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Dashboard Control Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Theme toggler logic for admin panel
+      const adminThemeBtn = document.getElementById('admin-theme-toggle');
+      if (adminThemeBtn) {
+        // Read theme from portal settings
+        const currentSavedTheme = localStorage.getItem('theme');
+        if (currentSavedTheme === 'dark') {
+          document.body.classList.add('dark-mode-admin');
+        }
+        
+        adminThemeBtn.addEventListener('click', () => {
+          if (document.body.classList.contains('dark-mode-admin')) {
+            document.body.classList.remove('dark-mode-admin');
+            localStorage.setItem('theme', 'light');
+          } else {
+            document.body.classList.add('dark-mode-admin');
+            localStorage.setItem('theme', 'dark');
+          }
+        });
+      }
+
+      // App state
+      let registrantsList = [];
+      let currentSelectedRegistrant = null;
+      let activeTabDoc = 'kk'; // 'kk' or 'ppdb'
+      
+      const tbody = document.getElementById('registrants-tbody');
+      const searchInput = document.getElementById('admin-search');
+      const btnRefresh = document.getElementById('btn-refresh');
+      
+      // Stats elements
+      const statTotal = document.getElementById('stat-total');
+      const statPending = document.getElementById('stat-pending');
+      const statVerified = document.getElementById('stat-verified');
+      const statRejected = document.getElementById('stat-rejected');
+      
+      // Modal elements
+      const reviewModal = document.getElementById('review-modal');
+      const closeReviewModalBtn = document.getElementById('close-review-modal');
+      const btnReviewCancel = document.getElementById('btn-review-cancel');
+      const btnApprove = document.getElementById('btn-approve');
+      const btnReject = document.getElementById('btn-reject');
+      const notesField = document.getElementById('verification-notes');
+      
+      // Tab elements
+      const tabKkBtn = document.getElementById('tab-kk-btn');
+      const tabPpdbBtn = document.getElementById('tab-ppdb-btn');
+      const previewIframe = document.getElementById('doc-preview-iframe');
+      const previewImg = document.getElementById('doc-preview-img');
+      const previewPlaceholder = document.getElementById('doc-preview-placeholder');
+      
+      // Load all records from backend
+      async function loadRegistrants() {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="9" class="loading-container">
+              <div class="loading-spinner"></div>
+              <span>Memuat data pendaftar dari server...</span>
+            </td>
+          </tr>
+        `;
+        
+        try {
+          const response = await fetch('/api/admin/registrants');
+          if (!response.ok) {
+            throw new Error('Gagal mengambil data dari server.');
+          }
+          
+          registrantsList = await response.json();
+          renderTable(registrantsList);
+          updateStats(registrantsList);
+        } catch (err) {
+          console.error(err);
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="9" class="loading-container" style="color: #ef4444;">
+                <i data-lucide="alert-circle" style="width: 36px; height: 36px; margin-bottom: 8px;"></i>
+                <br>
+                <span>Gagal menghubungkan ke server API. Pastikan Express server backend berjalan.</span>
+              </td>
+            </tr>
+          `;
+          if (window.lucide) lucide.createIcons();
+        }
+      }
+      
+      // Update statistics panel values
+      function updateStats(list) {
+        const total = list.length;
+        const pending = list.filter(r => r.status === 'Pending').length;
+        const verified = list.filter(r => r.status === 'Verified').length;
+        const rejected = list.filter(r => r.status === 'Rejected').length;
+        
+        statTotal.textContent = total;
+        statPending.textContent = pending;
+        statVerified.textContent = verified;
+        statRejected.textContent = rejected;
+      }
+      
+      // Render database table rows
+      function renderTable(list) {
+        if (list.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="9" class="loading-container">
+                <span>Tidak ada data pendaftar ditemukan.</span>
+              </td>
+            </tr>
+          `;
+          return;
+        }
+        
+        tbody.innerHTML = '';
+        list.forEach(row => {
+          const tr = document.createElement('tr');
+          
+          // Badge formatting
+          let badgeClass = 'badge-pending';
+          if (row.status === 'Verified') badgeClass = 'badge-verified';
+          if (row.status === 'Rejected') badgeClass = 'badge-rejected';
+          
+          const regDate = new Date(row.registration_date).toLocaleString('id-ID');
+          
+          tr.innerHTML = `
+            <td style="font-weight: 700;">${row.nisn}</td>
+            <td style="font-weight: 600; color: var(--admin-primary);">${row.name}</td>
+            <td>
+              <div>${row.email}</div>
+              <div style="font-size: 11px; color: var(--admin-text-secondary); margin-top: 2px;">WA: ${row.phone}</div>
+            </td>
+            <td style="text-align: center; font-weight: 700;">${row.uniform_size}</td>
+            <td style="font-size: 12px; font-weight: 600;">${row.queue_session}</td>
+            <td>${regDate}</td>
+            <td>
+              <span class="status-badge ${badgeClass}">${row.status}</span>
+            </td>
+            <td style="max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-style: italic; color: var(--admin-text-secondary);">
+              ${row.verification_notes || '-'}
+            </td>
+            <td>
+              <button class="btn btn-primary btn-review-row" data-nisn="${row.nisn}" style="padding: 6px 12px; font-size: 11px;">
+                <i data-lucide="eye" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i> Tinjau
+              </button>
+            </td>
+          `;
+          
+          tbody.appendChild(tr);
+        });
+        
+        // Add row review button listeners
+        document.querySelectorAll('.btn-review-row').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const nisn = btn.getAttribute('data-nisn');
+            const student = registrantsList.find(r => r.nisn === nisn);
+            if (student) {
+              openReviewModal(student);
+            }
+          });
+        });
+        
+        if (window.lucide) lucide.createIcons();
+      }
+      
+      // Filter list based on search term
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        const filtered = registrantsList.filter(row => 
+          row.name.toLowerCase().includes(query) || 
+          row.nisn.includes(query)
+        );
+        renderTable(filtered);
+      });
+      
+      // Refresh click
+      btnRefresh.addEventListener('click', loadRegistrants);
+      
+      // Modal actions
+      function openReviewModal(student) {
+        currentSelectedRegistrant = student;
+        
+        // Populate metadata
+        document.getElementById('meta-name').textContent = student.name;
+        document.getElementById('meta-nisn').textContent = student.nisn;
+        document.getElementById('meta-address').textContent = student.address;
+        document.getElementById('meta-email').textContent = student.email;
+        document.getElementById('meta-phone').textContent = student.phone;
+        document.getElementById('meta-uniform').textContent = student.uniform_size;
+        document.getElementById('meta-session').textContent = student.queue_session;
+        notesField.value = student.verification_notes || '';
+        
+        // Hide review modal alerts
+        document.getElementById('review-alert').className = 'modal-alert hidden';
+        
+        // Activate review modal
+        reviewModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        // Load default tab
+        switchDocTab('kk');
+      }
+      
+      function closeReviewModal() {
+        reviewModal.classList.remove('active');
+        document.body.style.overflow = '';
+        currentSelectedRegistrant = null;
+        
+        // Reset previews
+        previewIframe.style.display = 'none';
+        previewImg.style.display = 'none';
+        previewIframe.src = '';
+        previewImg.src = '';
+        previewPlaceholder.style.display = 'block';
+      }
+      
+      closeReviewModalBtn.addEventListener('click', closeReviewModal);
+      btnReviewCancel.addEventListener('click', closeReviewModal);
+      reviewModal.addEventListener('click', (e) => {
+        if (e.target === reviewModal) closeReviewModal();
+      });
+      
+      // Doc tabs switching
+      function switchDocTab(tabName) {
+        activeTabDoc = tabName;
+        
+        if (tabName === 'kk') {
+          tabKkBtn.classList.add('active');
+          tabPpdbBtn.classList.remove('active');
+          showDocumentPreview(currentSelectedRegistrant.kk_file_path);
+        } else {
+          tabPpdbBtn.classList.add('active');
+          tabKkBtn.classList.remove('active');
+          showDocumentPreview(currentSelectedRegistrant.ppdb_file_path);
+        }
+      }
+      
+      tabKkBtn.addEventListener('click', () => switchDocTab('kk'));
+      tabPpdbBtn.addEventListener('click', () => switchDocTab('ppdb'));
+      
+      // Show file in frame (handles PDF vs Image rendering)
+      function showDocumentPreview(filePath) {
+        previewIframe.style.display = 'none';
+        previewImg.style.display = 'none';
+        previewPlaceholder.style.display = 'none';
+        
+        if (!filePath) {
+          previewPlaceholder.style.display = 'block';
+          return;
+        }
+        
+        const ext = filePath.split('.').pop().toLowerCase();
+        if (ext === 'pdf') {
+          previewIframe.src = filePath;
+          previewIframe.style.display = 'block';
+        } else if (['jpg', 'jpeg', 'png'].includes(ext)) {
+          previewImg.src = filePath;
+          previewImg.style.display = 'block';
+        } else {
+          previewPlaceholder.style.display = 'block';
+        }
+      }
+      
+      // API call: Send verification
+      async function sendVerification(status) {
+        if (!currentSelectedRegistrant) return;
+        
+        const notesVal = notesField.value.trim();
+        const alertBox = document.getElementById('review-alert');
+        
+        btnApprove.disabled = true;
+        btnReject.disabled = true;
+        
+        try {
+          const response = await fetch(`/api/admin/verify/${currentSelectedRegistrant.nisn}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status: status, notes: notesVal })
+          });
+          
+          const result = await response.json();
+          
+          if (!response.ok) {
+            alertBox.textContent = result.error || 'Gagal mengubah status verifikasi.';
+            alertBox.className = 'modal-alert';
+            btnApprove.disabled = false;
+            btnReject.disabled = false;
+          } else {
+            alertBox.textContent = result.message;
+            alertBox.className = 'modal-alert success';
+            
+            // Reload list and close modal shortly
+            setTimeout(() => {
+              closeReviewModal();
+              loadRegistrants();
+              btnApprove.disabled = false;
+              btnReject.disabled = false;
+            }, 1000);
+          }
+        } catch (err) {
+          console.error(err);
+          alertBox.textContent = 'Kesalahan jaringan. Gagal menghubungi server verifikasi.';
+          alertBox.className = 'modal-alert';
+          btnApprove.disabled = false;
+          btnReject.disabled = false;
+        }
+      }
+      
+      btnApprove.addEventListener('click', () => sendVerification('Verified'));
+      btnReject.addEventListener('click', () => sendVerification('Rejected'));
+      
+      // Initial Load
+      loadRegistrants();
+      
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    });
+  </script>
+</body>
+</html>
