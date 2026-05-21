@@ -404,3 +404,29 @@ Hasil akhir harus terasa seperti:
 - Premium institutional landing page
 - Trustworthy & informative
 - Modern 2026 UI trend
+
+---
+
+# DEPLOYMENT, HOSTING, & SUPABASE MIGRATION PLAN
+
+Rencana ini disimpan untuk direalisasikan setelah pengerjaan fitur Absensi dan Aktivitas Positif pada Sistem Informasi (SI) Sekolah selesai.
+
+## 1. Skema Pengaturan Domain (Official & Secure)
+*   **Domain Utama**: `https://sman2bandung.sch.id` (Landing Page Utama & Portal SPMB Publik)
+*   **Subdomain Internal**: `https://si.sman2bandung.sch.id` (Sistem Informasi Sekolah Internal)
+
+## 2. Pilihan Arsitektur Hosting
+*   **Opsi VPS (Virtual Private Server)**:
+    *   Menggunakan cloud provider lokal (Biznet, Niagahoster, Domainesia) agar latensi rendah.
+    *   NodeJS Express berjalan di latar belakang menggunakan `PM2`.
+    *   Nginx bertindak sebagai Reverse Proxy + SSL Gratis Let's Encrypt (HTTPS).
+*   **Opsi Serverless (Vercel + Railway + Supabase)**:
+    *   *Frontend (Landing Page)* di-deploy ke Vercel/Cloudflare Pages (Gratis & CDN super cepat).
+    *   *Backend API* di-deploy ke Railway/Render.
+    *   *Database & Storage* diarahkan langsung ke Supabase Cloud.
+
+## 3. Rencana Migrasi ke Supabase
+Untuk menyatukan sistem daftar ulang dengan database SI Sekolah utama:
+1.  **Migrasi Tabel**: Memindahkan skema `registrations` dari SQLite ke tabel baru di database PostgreSQL Supabase.
+2.  **Penyimpanan Berkas (Supabase Storage)**: Memodifikasi backend Express (`server.js`) agar berkas scan KK dan PPDB tidak disimpan di local disk `/uploads`, melainkan diunggah langsung ke *Supabase Storage Buckets* dengan enkripsi dan hak akses ketat.
+3.  **Supabase RLS (Row Level Security)**: Menjamin data pendaftar hanya dapat dibaca/diubah oleh siswa bersangkutan (melalui login) dan admin sekolah.
