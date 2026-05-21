@@ -989,8 +989,8 @@ header.scrolled .navbar {
 /* --- SPMB INFORMATION SECTION --- */
 .spmb-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
 }
 .spmb-card {
   background-color: var(--bg-card);
@@ -1044,6 +1044,39 @@ header.scrolled .navbar {
   font-family: var(--font-heading);
   font-size: 18px;
   font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+.badge-new {
+  display: inline-block;
+  background: linear-gradient(135deg, #EF4444 0%, #F59E0B 100%);
+  color: #FFFFFF;
+  font-family: var(--font-subheading);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  margin-left: 8px;
+  vertical-align: middle;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2);
+  animation: pulseBadge 2s infinite;
+  line-height: 1.4;
+}
+@keyframes pulseBadge {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 6px rgba(239, 68, 68, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
 }
 .spmb-card-content {
   font-size: 14px;
