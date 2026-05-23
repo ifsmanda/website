@@ -454,6 +454,70 @@
       </div>
     </section>
 
+    <!-- =============================================
+         INSTAGRAM POSTS MANAGER
+         ============================================= -->
+    <section style="background: var(--admin-card); border: 1px solid var(--admin-border); border-radius: 16px; padding: 28px; box-shadow: var(--shadow-md);">
+
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px; flex-wrap:wrap; gap:12px;">
+        <div>
+          <h2 style="margin:0; font-size:17px; font-weight:800; font-family:'Outfit',sans-serif; display:flex; align-items:center; gap:8px;">
+            📸 Kelola Postingan Instagram
+          </h2>
+          <p style="margin:4px 0 0; font-size:12px; color:var(--admin-text-secondary);">
+            Tambahkan URL postingan @smandabandung agar tampil di section Berita website. Foto & caption langsung dari Instagram.
+          </p>
+        </div>
+        <a href="https://www.instagram.com/smandabandung/" target="_blank" rel="noopener noreferrer"
+          style="font-size:12px; color:#E1306C; font-weight:700; text-decoration:none;">
+          🔗 Buka @smandabandung
+        </a>
+      </div>
+
+      <!-- Add Post Form -->
+      <div id="ig-add-alert" style="display:none; padding:10px 16px; border-radius:8px; font-size:13px; font-weight:600; margin-bottom:16px;"></div>
+
+      <form id="ig-add-form" style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom: 24px;">
+        <input type="text" id="ig-post-url" placeholder="https://www.instagram.com/p/XXXXXXXXXXXXX/"
+          style="flex:1; min-width:260px; padding:10px 16px; border:1px solid var(--admin-border); border-radius:8px;
+                 background:var(--admin-bg); color:var(--admin-text); font-size:13px; outline:none;"
+          required>
+        <input type="number" id="ig-post-order" placeholder="Urutan (1=pertama)" min="1" max="99"
+          style="width:180px; padding:10px 16px; border:1px solid var(--admin-border); border-radius:8px;
+                 background:var(--admin-bg); color:var(--admin-text); font-size:13px; outline:none;">
+        <button type="submit" id="ig-add-btn"
+          style="padding:10px 24px; background:linear-gradient(135deg,#E1306C,#F77737); color:white; border:none;
+                 border-radius:8px; font-weight:700; font-size:13px; cursor:pointer; display:inline-flex; align-items:center; gap:8px;">
+          ＋ Tambah Postingan
+        </button>
+      </form>
+
+      <!-- Posts Table -->
+      <div style="overflow-x:auto;">
+        <table style="width:100%; border-collapse:collapse; font-size:13px;">
+          <thead>
+            <tr style="border-bottom:2px solid var(--admin-border);">
+              <th style="padding:10px 12px; text-align:left; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700;">Urutan</th>
+              <th style="padding:10px 12px; text-align:left; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700;">URL Postingan Instagram</th>
+              <th style="padding:10px 12px; text-align:center; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700;">Status</th>
+              <th style="padding:10px 12px; text-align:center; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700;">Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="ig-posts-tbody">
+            <tr><td colspan="4" style="padding:24px; text-align:center; color:var(--admin-text-secondary);">Memuat daftar postingan...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Info Box -->
+      <div style="margin-top: 20px; padding: 14px 16px; background: rgba(225,48,108,0.06); border-radius: 8px; border-left: 3px solid #E1306C;">
+        <p style="margin:0; font-size:12px; color: var(--admin-text-secondary); line-height: 1.6;">
+          <strong style="color:#E1306C;">Cara pakai:</strong> Buka Instagram di browser → pilih postingan @smandabandung → klik ⋯ (titik tiga) → <em>Salin Tautan</em>
+          → paste URL di kotak di atas → klik Tambah. Postingan langsung tampil di website dengan foto & caption asli dari Instagram.
+        </p>
+      </div>
+    </section>
+
     <!-- TABLE CONTROLS -->
     <section class="table-control-card">
       <div class="search-input-group">
@@ -907,6 +971,124 @@
         lucide.createIcons();
       }
     });
+
+    // ===== INSTAGRAM POSTS MANAGER =====
+    (function() {
+      const tbody = document.getElementById('ig-posts-tbody');
+      const form  = document.getElementById('ig-add-form');
+      const alertBox = document.getElementById('ig-add-alert');
+
+      function showAlert(msg, ok) {
+        alertBox.textContent = msg;
+        alertBox.style.display = 'block';
+        alertBox.style.background = ok ? 'rgba(34,197,94,0.1)' : 'rgba(239,68,68,0.1)';
+        alertBox.style.color = ok ? '#15803d' : '#dc2626';
+        alertBox.style.border = ok ? '1px solid #86efac' : '1px solid #fca5a5';
+        setTimeout(() => { alertBox.style.display = 'none'; }, 4000);
+      }
+
+      async function loadPosts() {
+        tbody.innerHTML = '<tr><td colspan="4" style="padding:20px;text-align:center;color:#94a3b8;">Memuat...</td></tr>';
+        try {
+          const res = await fetch('/api/admin/instagram-posts');
+          const data = await res.json();
+          renderPosts(data.posts || []);
+        } catch(e) {
+          tbody.innerHTML = '<tr><td colspan="4" style="padding:20px;text-align:center;color:#ef4444;">Gagal memuat data.</td></tr>';
+        }
+      }
+
+      function renderPosts(posts) {
+        if (!posts.length) {
+          tbody.innerHTML = '<tr><td colspan="4" style="padding:24px;text-align:center;color:#94a3b8;">Belum ada postingan. Tambahkan di atas.</td></tr>';
+          return;
+        }
+        tbody.innerHTML = posts.map(p => `
+          <tr style="border-bottom:1px solid var(--admin-border);" data-id="${p.id}">
+            <td style="padding:12px; font-weight:700; text-align:center;">${p.display_order}</td>
+            <td style="padding:12px;">
+              <a href="${p.post_url}" target="_blank" rel="noopener noreferrer"
+                style="color:#E1306C; font-weight:600; font-size:12px; word-break:break-all;">
+                ${p.post_url}
+              </a>
+            </td>
+            <td style="padding:12px; text-align:center;">
+              <button onclick="togglePost(${p.id}, this)"
+                style="padding:4px 12px; border-radius:20px; border:none; font-size:11px; font-weight:700; cursor:pointer;
+                       background:${p.is_active ? 'rgba(34,197,94,0.12)' : 'rgba(148,163,184,0.15)'};
+                       color:${p.is_active ? '#15803d' : '#64748b'};">
+                ${p.is_active ? '✓ Aktif' : '✗ Nonaktif'}
+              </button>
+            </td>
+            <td style="padding:12px; text-align:center;">
+              <button onclick="deletePost(${p.id})"
+                style="padding:4px 12px; border-radius:6px; border:none; font-size:11px; font-weight:700; cursor:pointer;
+                       background:rgba(239,68,68,0.1); color:#dc2626;">
+                🗑 Hapus
+              </button>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const url   = document.getElementById('ig-post-url').value.trim();
+        const order = parseInt(document.getElementById('ig-post-order').value) || 0;
+        const btn   = document.getElementById('ig-add-btn');
+        btn.disabled = true;
+        btn.textContent = 'Menyimpan...';
+        try {
+          const res = await fetch('/api/admin/instagram-posts', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ post_url: url, display_order: order })
+          });
+          const data = await res.json();
+          if (data.success) {
+            showAlert('✓ Postingan berhasil ditambahkan! Website akan langsung menampilkan embed Instagram.', true);
+            form.reset();
+            loadPosts();
+          } else {
+            showAlert('✗ ' + (data.error || 'Gagal menambah postingan.'), false);
+          }
+        } catch(err) {
+          showAlert('✗ Kesalahan jaringan. Coba lagi.', false);
+        } finally {
+          btn.disabled = false;
+          btn.textContent = '＋ Tambah Postingan';
+        }
+      });
+
+      window.togglePost = async (id, btn) => {
+        try {
+          const res = await fetch(`/api/admin/instagram-posts/${id}/toggle`, { method: 'POST' });
+          const data = await res.json();
+          if (data.success) {
+            btn.textContent = data.is_active ? '✓ Aktif' : '✗ Nonaktif';
+            btn.style.background = data.is_active ? 'rgba(34,197,94,0.12)' : 'rgba(148,163,184,0.15)';
+            btn.style.color = data.is_active ? '#15803d' : '#64748b';
+          }
+        } catch(e) { alert('Gagal mengubah status.'); }
+      };
+
+      window.deletePost = async (id) => {
+        if (!confirm('Hapus postingan ini dari website? Postingan di Instagram tidak terpengaruh.')) return;
+        try {
+          const res = await fetch(`/api/admin/instagram-posts/${id}`, { method: 'DELETE' });
+          const data = await res.json();
+          if (data.success) {
+            showAlert('✓ Postingan berhasil dihapus.', true);
+            loadPosts();
+          } else {
+            showAlert('✗ ' + (data.error || 'Gagal menghapus.'), false);
+          }
+        } catch(e) { alert('Kesalahan jaringan.'); }
+      };
+
+      loadPosts();
+    })();
   </script>
 </body>
 </html>
+

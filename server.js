@@ -147,13 +147,13 @@ app.post('/api/register', upload.fields([
     let queueSession = '';
 
     if (seq <= 100) {
-      queueSession = 'Sesi 1: Senin, 26 Juni 2026 (08:00 - 11:00 WIB)';
+      queueSession = 'Sesi 1: Rabu, 1 Juli 2026 (08:00 - 11:00 WIB)';
     } else if (seq <= 200) {
-      queueSession = 'Sesi 2: Senin, 26 Juni 2026 (13:00 - 15:00 WIB)';
+      queueSession = 'Sesi 2: Rabu, 1 Juli 2026 (13:00 - 15:00 WIB)';
     } else if (seq <= 300) {
-      queueSession = 'Sesi 3: Selasa, 27 Juni 2026 (08:00 - 11:00 WIB)';
+      queueSession = 'Sesi 3: Kamis, 2 Juli 2026 (08:00 - 11:00 WIB)';
     } else {
-      queueSession = 'Sesi 4: Selasa, 27 Juni 2026 (13:00 - 15:00 WIB)';
+      queueSession = 'Sesi 4: Kamis, 2 Juli 2026 (13:00 - 15:00 WIB)';
     }
 
     // Insert record
@@ -355,7 +355,138 @@ app.get('/api/admin/export', async (req, res) => {
   }
 });
 
+// ==========================================
+// 7. API: INSTAGRAM POSTS — PUBLIC (GET /api/instagram-posts)
+// Returns active Instagram post URLs ordered by display_order for embed rendering on frontend
+// ==========================================
+app.get('/api/instagram-posts', async (req, res) => {
+  try {
+    const posts = await db.all(
+      'SELECT id, post_url, caption, display_order FROM instagram_posts WHERE is_active = 1 ORDER BY display_order ASC'
+    );
+    return res.status(200).json({ success: true, posts });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: 'Gagal mengambil data postingan Instagram.' });
+  }
+});
+
+// ==========================================
+// 8. API: INSTAGRAM oembed PROXY (GET /api/instagram-oembed?url=...)
+// Proxies Instagram oEmbed request to avoid CORS issues from browser
+// ==========================================
+app.get('/api/instagram-oembed', async (req, res) => {
+  const { url } = req.query;
+  if (!url || !url.includes('instagram.com/p/')) {
+    return res.status(400).json({ error: 'URL postingan Instagram tidak valid.' });
+  }
+
+  try {
+    const https = require('https');
+    const oembedUrl = `https://api.instagram.com/oembed/?url=${encodeURIComponent(url)}&omitscript=true`;
+
+    https.get(oembedUrl, { headers: { 'User-Agent': 'Mozilla/5.0' } }, (igRes) => {
+      let data = '';
+      igRes.on('data', chunk => { data += chunk; });
+      igRes.on('end', () => {
+        try {
+          const parsed = JSON.parse(data);
+          res.json({ success: true, html: parsed.html, thumbnail: parsed.thumbnail_url, author: parsed.author_name });
+        } catch {
+          res.status(502).json({ error: 'Respons oEmbed Instagram tidak valid.' });
+        }
+      });
+    }).on('error', (e) => {
+      res.status(502).json({ error: `Gagal menghubungi Instagram oEmbed: ${e.message}` });
+    });
+
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: 'Gagal proxy oEmbed Instagram.' });
+  }
+});
+
+// ==========================================
+// 9. API: ADMIN — GET ALL INSTAGRAM POSTS (GET /api/admin/instagram-posts)
+// ==========================================
+app.get('/api/admin/instagram-posts', async (req, res) => {
+  try {
+    const posts = await db.all('SELECT * FROM instagram_posts ORDER BY display_order ASC');
+    return res.status(200).json({ success: true, posts });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: 'Gagal mengambil daftar postingan Instagram.' });
+  }
+});
+
+// ==========================================
+// 10. API: ADMIN — ADD/UPDATE INSTAGRAM POST (POST /api/admin/instagram-posts)
+// ==========================================
+app.post('/api/admin/instagram-posts', async (req, res) => {
+  const { post_url, caption, display_order, id } = req.body;
+
+  if (!post_url || !post_url.includes('instagram.com/p/')) {
+    return res.status(400).json({ error: 'URL postingan Instagram tidak valid. Pastikan formatnya: https://www.instagram.com/p/XXXX/' });
+  }
+
+  try {
+    if (id) {
+      // Update existing
+      await db.run(
+        'UPDATE instagram_posts SET post_url = ?, caption = ?, display_order = ? WHERE id = ?',
+        [post_url.trim(), caption || '', parseInt(display_order) || 0, id]
+      );
+      return res.status(200).json({ success: true, message: 'Postingan Instagram berhasil diperbarui.' });
+    } else {
+      // Insert new
+      const result = await db.run(
+        'INSERT INTO instagram_posts (post_url, caption, display_order, is_active) VALUES (?, ?, ?, 1)',
+        [post_url.trim(), caption || '', parseInt(display_order) || 0]
+      );
+      return res.status(200).json({ success: true, message: 'Postingan Instagram berhasil ditambahkan.', id: result.lastID });
+    }
+  } catch (err) {
+    if (err.message && err.message.includes('UNIQUE')) {
+      return res.status(400).json({ error: 'URL postingan ini sudah ada di database.' });
+    }
+    console.error(err);
+    return res.status(500).json({ error: 'Gagal menyimpan postingan Instagram.' });
+  }
+});
+
+// ==========================================
+// 11. API: ADMIN — TOGGLE ACTIVE / DELETE INSTAGRAM POST
+// POST /api/admin/instagram-posts/:id/toggle  → aktifkan/nonaktifkan
+// DELETE /api/admin/instagram-posts/:id       → hapus permanen
+// ==========================================
+app.post('/api/admin/instagram-posts/:id/toggle', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const post = await db.get('SELECT is_active FROM instagram_posts WHERE id = ?', [id]);
+    if (!post) return res.status(404).json({ error: 'Postingan tidak ditemukan.' });
+    const newState = post.is_active === 1 ? 0 : 1;
+    await db.run('UPDATE instagram_posts SET is_active = ? WHERE id = ?', [newState, id]);
+    return res.status(200).json({ success: true, is_active: newState });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: 'Gagal mengubah status postingan.' });
+  }
+});
+
+app.delete('/api/admin/instagram-posts/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await db.run('DELETE FROM instagram_posts WHERE id = ?', [id]);
+    if (result.changes === 0) return res.status(404).json({ error: 'Postingan tidak ditemukan.' });
+    return res.status(200).json({ success: true, message: 'Postingan berhasil dihapus.' });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: 'Gagal menghapus postingan.' });
+  }
+});
+
 // Error handling middleware
+
 app.use((err, req, res, next) => {
   if (err instanceof multer.MulterError) {
     return res.status(400).json({ error: `File Upload Error: ${err.message}` });

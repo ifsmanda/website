@@ -52,6 +52,36 @@ db.serialize(() => {
     if (err) console.error('Gagal membuat tabel registrations:', err.message);
   });
 
+  // 3. Table for Instagram Posts (admin-managed embed URLs)
+  db.run(`
+    CREATE TABLE IF NOT EXISTS instagram_posts (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      post_url TEXT NOT NULL UNIQUE,
+      caption TEXT DEFAULT '',
+      display_order INTEGER DEFAULT 0,
+      is_active INTEGER DEFAULT 1,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )
+  `, (err) => {
+    if (err) console.error('Gagal membuat tabel instagram_posts:', err.message);
+    else {
+      // Seed with placeholder posts — admin harus update dengan URL asli dari @smandabandung
+      db.get("SELECT COUNT(*) AS count FROM instagram_posts", [], (err2, row) => {
+        if (!err2 && row.count === 0) {
+          const seedPosts = [
+            ['https://www.instagram.com/p/C-iQ1V6S2fA/', 'Reuni Besar VII SMAN 2 Bandung: Karetna Dua, Reuni Lada & Peresmian Amphitheater', 1],
+            ['https://www.instagram.com/p/CG4m7X_A7uA/', 'Shakira Kayla Terpilih Mengikuti Kopi Good Day DBL Camp 2026', 2],
+            ['https://www.instagram.com/p/CtunN3fOyQv/', 'Sosialisasi Alur & Mekanisme Seleksi SPMB Jabar 2026', 3],
+            ['https://www.instagram.com/p/DAq00l8SR7G/', 'Lolos Fakultas Kedokteran Unhan RI, Violethanara Raih Beasiswa Penuh', 4],
+          ];
+          const stmtPosts = db.prepare("INSERT OR IGNORE INTO instagram_posts (post_url, caption, display_order) VALUES (?, ?, ?)");
+          seedPosts.forEach(p => stmtPosts.run(p));
+          stmtPosts.finalize(() => console.log('Data seed instagram_posts selesai. Silakan update dengan URL asli @smandabandung di panel Admin.'));
+        }
+      });
+    }
+  });
+
   // 3. Seed accepted_students with dummy candidates if table is empty
   db.get("SELECT COUNT(*) AS count FROM accepted_students", [], (err, row) => {
     if (err) {

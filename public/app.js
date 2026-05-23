@@ -287,6 +287,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // === 9.2. INSTAGRAM CARD INTERACTION ===
+  const likeButtons = document.querySelectorAll('.action-icon-btn[aria-label="Suka"]');
+  const bookmarkButtons = document.querySelectorAll('.bookmark-btn');
+
+  likeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('liked');
+    });
+  });
+
+  bookmarkButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('bookmarked');
+    });
+  });
+
   // === 10. MASONRY GALLERY FILTER & LIGHTBOX ===
   const filterBtns = document.querySelectorAll('.filter-btn');
   const galleryItems = document.querySelectorAll('.gallery-item');
@@ -424,10 +440,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Message responses
     const botResponses = [
-      "Terima kasih atas pertanyaannya! SPMB SMAN 2 Bandung 2026 dibuka dalam beberapa jalur seleksi seperti Afirmasi, Prestasi, dan Zonasi.",
-      "Dokumen pendaftaran yang diperlukan meliputi Kartu Keluarga, Rapor SMP Semester 1-5, Ijazah/SKL, dan sertifikat prestasi jika ada.",
-      "Pendaftaran dimulai pada bulan Juni 2026. Anda dapat melihat jadwal lengkap di bagian 'Timeline SPMB' di atas.",
-      "Untuk informasi lebih lanjut tentang persentase kuota jalur zonasi, silakan kunjungi menu Informasi -> Jalur Seleksi.",
+      "Terima kasih atas pertanyaannya! SPMB SMAN 2 Bandung 2026 dibuka dalam 4 jalur seleksi utama: Jalur Domisili (35%), Jalur Prestasi (30%), Jalur Afirmasi (30%), dan Jalur Perpindahan Tugas Orang Tua/Wali/Anak Guru (5%).",
+      "Dokumen pendaftaran meliputi Persyaratan Umum (Ijazah/SKL, Akta Kelahiran/KIA, KTP Orang Tua, Kartu Keluarga minimal 1 tahun, dan SPTJM) serta Persyaratan Khusus (seperti Rapor Semester 1-5 atau Piagam Kejuaraan sesuai jalur).",
+      "Pendaftaran diawali dengan fase Pemetaan & Akun pada 18 - 29 Mei 2026, lalu pendaftaran resmi Tahap 1 mulai 25 Juni 2026 dan Tahap 2 mulai 1 Juli 2026. Anda dapat melihat jadwal lengkap di bagian 'Timeline SPMB' di atas.",
+      "Untuk informasi lebih lanjut tentang persentase kuota dan mekanisme pendaftaran setiap jalur seleksi, silakan kunjungi menu Informasi -> Jalur Seleksi.",
       "Ada hal lain tentang SPMB SMAN 2 Bandung 2026 yang ingin Anda ketahui?"
     ];
     let responseIdx = 0;
@@ -831,4 +847,290 @@ document.addEventListener('DOMContentLoaded', () => {
   if (btnCloseReceipt) {
     btnCloseReceipt.addEventListener('click', closeModalDU);
   }
+
+  // === 15. HERO VIDEO SOUND TOGGLE ===
+  const heroVideo = document.querySelector('.hero-image-frame video');
+  const soundToggleBtn = document.getElementById('hero-video-sound-toggle');
+  
+  if (heroVideo && soundToggleBtn) {
+    // Try to play unmuted by default
+    heroVideo.muted = false;
+    
+    const playPromise = heroVideo.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        // Autoplay unmuted succeeded
+        soundToggleBtn.innerHTML = '<i data-lucide="volume-2"></i>';
+        soundToggleBtn.setAttribute('aria-label', 'Matikan Suara');
+        if (window.lucide) window.lucide.createIcons();
+      }).catch(err => {
+        // Autoplay unmuted blocked: fallback to muted autoplay
+        console.log("Browser policy blocked unmuted autoplay. Playing muted.");
+        heroVideo.muted = true;
+        heroVideo.play().catch(console.error);
+        soundToggleBtn.innerHTML = '<i data-lucide="volume-x"></i>';
+        soundToggleBtn.setAttribute('aria-label', 'Aktifkan Suara');
+        if (window.lucide) window.lucide.createIcons();
+      });
+    }
+
+    soundToggleBtn.addEventListener('click', () => {
+      heroVideo.muted = !heroVideo.muted;
+      if (heroVideo.muted) {
+        soundToggleBtn.innerHTML = '<i data-lucide="volume-x"></i>';
+        soundToggleBtn.setAttribute('aria-label', 'Aktifkan Suara');
+      } else {
+        soundToggleBtn.innerHTML = '<i data-lucide="volume-2"></i>';
+        soundToggleBtn.setAttribute('aria-label', 'Matikan Suara');
+      }
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
+    });
+  }
+
+  // === 16. DETAILED REQUIREMENTS MODAL LOGIC ===
+  const openBerkasModalBtn = document.getElementById('btn-berkas-modal');
+  const berkasModal = document.getElementById('berkas-modal');
+  const closeBerkasModalBtn = document.getElementById('close-berkas-modal');
+  
+  if (openBerkasModalBtn && berkasModal) {
+    openBerkasModalBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      berkasModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+    
+    const closeBerkasModal = () => {
+      berkasModal.classList.remove('active');
+      document.body.style.overflow = '';
+    };
+    
+    if (closeBerkasModalBtn) {
+      closeBerkasModalBtn.addEventListener('click', closeBerkasModal);
+    }
+    
+    berkasModal.addEventListener('click', (e) => {
+      if (e.target === berkasModal) closeBerkasModal();
+    });
+    
+    // Tab switching logic
+    const tabUmumBtn = document.getElementById('tab-umum-btn');
+    const tabKhususBtn = document.getElementById('tab-khusus-btn');
+    const tabUmumContent = document.getElementById('tab-umum-content');
+    const tabKhususContent = document.getElementById('tab-khusus-content');
+    
+    if (tabUmumBtn && tabKhususBtn && tabUmumContent && tabKhususContent) {
+      tabUmumBtn.addEventListener('click', () => {
+        tabUmumBtn.classList.add('active');
+        tabKhususBtn.classList.remove('active');
+        tabUmumContent.classList.add('active-content');
+        tabKhususContent.classList.remove('active-content');
+      });
+      
+      tabKhususBtn.addEventListener('click', () => {
+        tabKhususBtn.classList.add('active');
+        tabUmumBtn.classList.remove('active');
+        tabKhususContent.classList.add('active-content');
+        tabUmumContent.classList.remove('active-content');
+      });
+    }
+  }
+
+  // === MISSION SLIDER LOGIC ===
+  const initMissionSlider = () => {
+    const slides = document.querySelectorAll('.mission-slide');
+    const prevBtn = document.getElementById('mission-prev');
+    const nextBtn = document.getElementById('mission-next');
+    const currentNumSpan = document.getElementById('current-mission-num');
+    
+    if (slides.length === 0) return;
+    
+    let currentIdx = 0;
+    
+    const showSlide = (idx) => {
+      // Hide current slide
+      slides[currentIdx].classList.remove('active');
+      
+      // Update index
+      currentIdx = (idx + slides.length) % slides.length;
+      
+      // Show new slide
+      slides[currentIdx].classList.add('active');
+      
+      // Update number in author text
+      if (currentNumSpan) {
+        currentNumSpan.textContent = currentIdx + 1;
+      }
+    };
+    
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        showSlide(currentIdx - 1);
+      });
+    }
+    
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        showSlide(currentIdx + 1);
+      });
+    }
+  };
+  initMissionSlider();
+
+  // === INSTAGRAM LIVE FEED LOADER ===
+  initInstagramFeed();
 });
+
+/**
+ * Loads Instagram embed posts from the backend API and renders them
+ * as official Instagram blockquote embeds with carousel navigation.
+ */
+async function initInstagramFeed() {
+  const track = document.getElementById('ig-feed-track');
+  const prevBtn = document.getElementById('ig-prev');
+  const nextBtn = document.getElementById('ig-next');
+
+  if (!track) return;
+
+  try {
+    const res = await fetch('/api/instagram-posts');
+    const data = await res.json();
+
+    if (!data.success || !data.posts || data.posts.length === 0) {
+      track.innerHTML = `
+        <div style="text-align:center; padding: 48px; color: var(--text-muted); width:100%;">
+          <i style="font-size:48px; opacity:0.3;">📷</i>
+          <p style="margin-top:16px; font-size:15px;">Belum ada postingan yang ditambahkan.<br>
+          Silakan tambahkan URL postingan Instagram di panel Admin.</p>
+          <a href="/admin.html" style="color:var(--secondary); font-weight:600; text-decoration:none; font-size:14px;">
+            → Buka Panel Admin
+          </a>
+        </div>`;
+      return;
+    }
+
+    const posts = data.posts;
+
+    // Build embed HTML for each post
+    track.innerHTML = posts.map(post => {
+      // Normalize URL: ensure trailing slash and no query params
+      const cleanUrl = post.post_url.split('?')[0].replace(/\/?$/, '/');
+      return `
+        <div class="ig-embed-card">
+          <blockquote
+            class="instagram-media"
+            data-instgrm-permalink="${cleanUrl}"
+            data-instgrm-version="14"
+            style="background:var(--bg-card); border:0; border-radius:var(--radius-lg); box-shadow:var(--shadow-md);
+                   margin: 0; max-width: 100%; width: 100%;
+                   padding: 0; overflow: hidden;">
+            <div style="padding: 16px; display:flex; align-items:center; gap:12px;">
+              <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);"></div>
+              <div>
+                <div style="height:12px;width:100px;background:#eee;border-radius:4px;margin-bottom:6px;"></div>
+                <div style="height:10px;width:70px;background:#eee;border-radius:4px;"></div>
+              </div>
+            </div>
+            <div style="aspect-ratio:1;background:linear-gradient(135deg,#e0e0e0 25%,#f5f5f5 50%,#e0e0e0 75%);background-size:200% 200%;animation:igSkeleton 1.4s ease infinite;"></div>
+            <div style="padding:12px 16px;">
+              <div style="height:12px;width:90%;background:#eee;border-radius:4px;margin-bottom:8px;"></div>
+              <div style="height:12px;width:70%;background:#eee;border-radius:4px;"></div>
+            </div>
+          </blockquote>
+        </div>`;
+    }).join('');
+
+    // Add CSS for skeleton animation if not present
+    if (!document.getElementById('ig-skeleton-style')) {
+      const style = document.createElement('style');
+      style.id = 'ig-skeleton-style';
+      style.textContent = `
+        @keyframes igSkeleton {
+          0% { background-position: 200% 0; }
+          100% { background-position: -200% 0; }
+        }
+        .ig-embed-card { flex: 0 0 auto; width: 328px; }
+        @media (max-width: 480px) { .ig-embed-card { width: 280px; } }
+      `;
+      document.head.appendChild(style);
+    }
+
+    // Show carousel nav buttons
+    if (prevBtn) prevBtn.style.display = '';
+    if (nextBtn) nextBtn.style.display = '';
+
+    // Load Instagram embed.js and process embeds
+    loadInstagramEmbedScript(() => {
+      if (window.instgrm) {
+        window.instgrm.Embeds.process();
+      }
+    });
+
+    // Setup carousel navigation
+    setupIgCarousel(track, prevBtn, nextBtn, 328 + 20);
+
+  } catch (err) {
+    console.error('Gagal memuat feed Instagram:', err);
+    track.innerHTML = `
+      <div style="text-align:center; padding: 48px; color: var(--text-muted); width:100%;">
+        <p>Gagal memuat feed Instagram. Coba refresh halaman.</p>
+      </div>`;
+  }
+}
+
+/**
+ * Dynamically loads Instagram embed.js script (idempotent).
+ * @param {Function} callback - Called after script loads
+ */
+function loadInstagramEmbedScript(callback) {
+  if (window.instgrm) {
+    callback();
+    return;
+  }
+  const existing = document.getElementById('instagram-embed-script');
+  if (existing) {
+    existing.addEventListener('load', callback);
+    return;
+  }
+  const script = document.createElement('script');
+  script.id = 'instagram-embed-script';
+  script.src = 'https://www.instagram.com/embed.js';
+  script.async = true;
+  script.defer = true;
+  script.onload = callback;
+  document.body.appendChild(script);
+}
+
+/**
+ * Sets up prev/next carousel navigation for the Instagram feed track.
+ */
+function setupIgCarousel(track, prevBtn, nextBtn, cardWidth) {
+  let currentIndex = 0;
+  const cards = track.querySelectorAll('.ig-embed-card');
+  const visibleCount = () => Math.max(1, Math.floor(track.offsetWidth / cardWidth));
+  const maxIndex = () => Math.max(0, cards.length - visibleCount());
+
+  const updateNav = () => {
+    if (prevBtn) prevBtn.style.opacity = currentIndex === 0 ? '0.3' : '1';
+    if (nextBtn) nextBtn.style.opacity = currentIndex >= maxIndex() ? '0.3' : '1';
+  };
+
+  const scrollTo = (idx) => {
+    currentIndex = Math.max(0, Math.min(idx, maxIndex()));
+    track.scrollTo({ left: currentIndex * cardWidth, behavior: 'smooth' });
+    updateNav();
+  };
+
+  if (prevBtn) prevBtn.addEventListener('click', () => scrollTo(currentIndex - 1));
+  if (nextBtn) nextBtn.addEventListener('click', () => scrollTo(currentIndex + 1));
+
+  // Sync index on manual scroll
+  track.addEventListener('scroll', () => {
+    currentIndex = Math.round(track.scrollLeft / cardWidth);
+    updateNav();
+  });
+
+  updateNav();
+}
+
