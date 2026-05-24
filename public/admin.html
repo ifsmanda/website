@@ -383,6 +383,76 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+
+    /* Admin Panel Responsive Styling */
+    @media (max-width: 900px) {
+      .admin-header {
+        padding: 12px 16px;
+      }
+      .admin-title-block h1 {
+        font-size: 16px;
+      }
+      .admin-logo {
+        width: 36px;
+        height: 36px;
+      }
+      .admin-container {
+        margin: 16px auto;
+        padding: 0 12px;
+        gap: 16px;
+      }
+      .admin-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      .stat-card {
+        padding: 16px;
+        gap: 12px;
+      }
+      .stat-icon-wrapper {
+        width: 44px;
+        height: 44px;
+        font-size: 18px;
+      }
+      .stat-val {
+        font-size: 20px;
+      }
+      .table-control-card {
+        padding: 16px;
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .search-input-group {
+        width: 100%;
+      }
+      .action-btn-group {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .action-btn-group button, .action-btn-group a {
+        flex: 1;
+        text-align: center;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .admin-brand h1 {
+        font-size: 14px;
+      }
+      .admin-brand span {
+        display: none;
+      }
+      .admin-stats-grid {
+        grid-template-columns: 1fr;
+      }
+      .action-btn-group {
+        flex-direction: column;
+      }
+      .action-btn-group button, .action-btn-group a {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body class="admin-body">

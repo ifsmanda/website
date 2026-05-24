@@ -514,7 +514,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // === 14. DAFTAR ULANG ONLINE MODAL & MULTI-STEP LOGIC ===
-  const btnOpenDaftarUlang = document.getElementById('btn-open-daftar-ulang');
+  const btnsOpenDaftarUlang = document.querySelectorAll('.btn-open-daftar-ulang');
   const daftarUlangModal = document.getElementById('daftar-ulang-modal');
   const btnCloseDaftarUlang = document.getElementById('close-daftar-ulang-modal');
   const duAlert = document.getElementById('daftar-ulang-alert');
@@ -610,11 +610,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Open modal
-  if (btnOpenDaftarUlang && daftarUlangModal) {
-    btnOpenDaftarUlang.addEventListener('click', () => {
-      resetDaftarUlangForm();
-      daftarUlangModal.classList.add('active');
-      document.body.style.overflow = 'hidden';
+  if (btnsOpenDaftarUlang && daftarUlangModal) {
+    btnsOpenDaftarUlang.forEach(btn => {
+      btn.addEventListener('click', () => {
+        resetDaftarUlangForm();
+        daftarUlangModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
     });
   }
 
