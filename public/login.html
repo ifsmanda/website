@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Verifikator — SMAN 2 Bandung</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    :root {
+      --primary: #0A2E73;
+      --primary-hover: #082459;
+      --secondary: #123F9C;
+      --accent-gold: #F4C542;
+      --accent-gold-hover: #dbb037;
+      --bg-slate: #f8fafc;
+      --text-dark: #1e293b;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --radius-lg: 16px;
+      --radius-md: 10px;
+      --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+      --transition: all 0.25s ease;
+    }
+
+    /* Dark Mode variables */
+    .dark-mode {
+      --bg-slate: #0b0f19;
+      --text-dark: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: #1e293b;
+      --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-slate);
+      color: var(--text-dark);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      transition: background-color var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decorative background blobs */
+    .bg-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      z-index: -1;
+      opacity: 0.15;
+    }
+    .blob-1 {
+      top: -10%;
+      left: -10%;
+      width: 400px;
+      height: 400px;
+      background-color: var(--primary);
+    }
+    .blob-2 {
+      bottom: -10%;
+      right: -10%;
+      width: 450px;
+      height: 450px;
+      background-color: var(--accent-gold);
+    }
+
+    /* Center Login Container */
+    .login-container {
+      width: 100%;
+      max-width: 440px;
+      padding: 24px;
+    }
+
+    .login-card {
+      background-color: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 40px 32px;
+      box-shadow: var(--shadow-lg);
+      transition: background-color var(--transition), border-color var(--transition);
+      position: relative;
+    }
+
+    .dark-mode .login-card {
+      background-color: #111827;
+    }
+
+    /* School Branding Header */
+    .brand-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .school-logo {
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+      margin-bottom: 16px;
+    }
+
+    .brand-header h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+    .dark-mode .brand-header h1 {
+      color: #38bdf8;
+    }
+
+    .brand-header p {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Form Fields */
+    .form-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 14px;
+      color: var(--text-muted);
+      pointer-events: none;
+      width: 18px;
+      height: 18px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px 14px 12px 42px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      background-color: transparent;
+      color: var(--text-dark);
+      font-size: 14px;
+      font-weight: 500;
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .form-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(18, 63, 156, 0.15);
+    }
+    .dark-mode .form-input:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+    }
+
+    /* Toggle visibility button */
+    .toggle-password {
+      position: absolute;
+      right: 14px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+      border-radius: 4px;
+      outline: none;
+    }
+    .toggle-password:hover {
+      color: var(--text-dark);
+    }
+
+    /* Error Alert styling */
+    .alert-danger {
+      background-color: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      color: #ef4444;
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      display: none;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Button styling */
+    .btn-login {
+      width: 100%;
+      padding: 12px 24px;
+      background-color: var(--primary);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: var(--transition);
+      box-shadow: 0 4px 12px rgba(10, 46, 115, 0.15);
+    }
+
+    .btn-login:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(10, 46, 115, 0.25);
+    }
+
+    .btn-login:active {
+      transform: translateY(0);
+    }
+
+    .btn-login:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* Loading Spinner */
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: #ffffff;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      display: none;
+    }
+
+    /* Theme Toggle Switcher */
+    .theme-switcher {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    .theme-btn {
+      background: none;
+      border: 1px solid var(--border-color);
+      color: var(--text-dark);
+      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+    .theme-btn:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+    .dark-mode .theme-btn:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Footer link back to portal */
+    .portal-link {
+      display: block;
+      text-align: center;
+      margin-top: 24px;
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color var(--transition);
+    }
+    .portal-link:hover {
+      color: var(--primary);
+    }
+    .dark-mode .portal-link:hover {
+      color: #38bdf8;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Decorative Blobs -->
+  <div class="bg-blob blob-1"></div>
+  <div class="bg-blob blob-2"></div>
+
+  <!-- Theme Toggle -->
+  <div class="theme-switcher">
+    <button class="theme-btn" id="theme-toggle" aria-label="Ganti Tema">
+      <i data-lucide="moon"></i>
+    </button>
+  </div>
+
+  <!-- Container -->
+  <div class="login-container">
+    <div class="login-card">
+      <div class="brand-header">
+        <img src="assets/logo_smanda.png" alt="Logo SMAN 2 Bandung" class="school-logo">
+        <h1>PANEL VERIFIKATOR</h1>
+        <p>SPMB SMAN 2 BANDUNG 2026</p>
+      </div>
+
+      <!-- Alert Message Box -->
+      <div id="error-alert" class="alert-danger">
+        <i data-lucide="alert-circle" style="width: 18px; height: 18px; flex-shrink: 0;"></i>
+        <span id="error-text">Nama pengguna atau kata sandi salah.</span>
+      </div>
+
+      <!-- Form -->
+      <form id="login-form">
+        <div class="form-group">
+          <label for="username">Nama Pengguna (Username)</label>
+          <div class="input-wrapper">
+            <i data-lucide="user" class="input-icon"></i>
+            <input type="text" id="username" class="form-input" placeholder="Masukkan username" required autocomplete="username">
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 28px;">
+          <label for="password">Kata Sandi (Password)</label>
+          <div class="input-wrapper">
+            <i data-lucide="lock" class="input-icon"></i>
+            <input type="password" id="password" class="form-input" placeholder="Masukkan password" required autocomplete="current-password">
+            <button type="button" id="toggle-password-btn" class="toggle-password" aria-label="Lihat Password">
+              <i data-lucide="eye" id="eye-icon"></i>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" id="submit-btn" class="btn-login">
+          <span class="spinner" id="btn-spinner"></span>
+          <span id="btn-text">Masuk</span>
+        </button>
+      </form>
+    </div>
+
+    <a href="/index.html" class="portal-link">
+      <i data-lucide="arrow-left" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> Kembali ke Portal Utama
+    </a>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const loginForm = document.getElementById('login-form');
+      const usernameInput = document.getElementById('username');
+      const passwordInput = document.getElementById('password');
+      const togglePasswordBtn = document.getElementById('toggle-password-btn');
+      const eyeIcon = document.getElementById('eye-icon');
+      const submitBtn = document.getElementById('submit-btn');
+      const btnText = document.getElementById('btn-text');
+      const btnSpinner = document.getElementById('btn-spinner');
+      const errorAlert = document.getElementById('error-alert');
+      const errorText = document.getElementById('error-text');
+      const themeToggle = document.getElementById('theme-toggle');
+
+      // Initialize Lucide icons
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+
+      // Theme toggle functionality (matching the other page dark modes)
+      const currentSavedTheme = localStorage.getItem('theme');
+      if (currentSavedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        updateThemeToggleIcon(true);
+      }
+
+      themeToggle.addEventListener('click', () => {
+        const isDark = document.body.classList.toggle('dark-mode');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        updateThemeToggleIcon(isDark);
+      });
+
+      function updateThemeToggleIcon(isDark) {
+        themeToggle.innerHTML = isDark ? '<i data-lucide="sun"></i>' : '<i data-lucide="moon"></i>';
+        if (window.lucide) lucide.createIcons();
+      }
+
+      // Toggle Password Visibility
+      togglePasswordBtn.addEventListener('click', () => {
+        const isPassword = passwordInput.getAttribute('type') === 'password';
+        passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+        eyeIcon.setAttribute('data-lucide', isPassword ? 'eye-off' : 'eye');
+        if (window.lucide) lucide.createIcons();
+      });
+
+      // Submit Form
+      loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Clear previous alert
+        errorAlert.style.display = 'none';
+
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value;
+
+        if (!username || !password) {
+          showError('Username dan password wajib diisi!');
+          return;
+        }
+
+        // Start spinner/loading state
+        submitBtn.disabled = true;
+        btnText.textContent = 'Menghubungkan...';
+        btnSpinner.style.display = 'block';
+
+        try {
+          const response = await fetch('/api/admin/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+          });
+
+          const result = await response.json();
+
+          if (response.ok && result.success) {
+            btnText.textContent = 'Berhasil! Mengalihkan...';
+            setTimeout(() => {
+              window.location.href = '/admin.html';
+            }, 800);
+          } else {
+            showError(result.error || 'Nama pengguna atau kata sandi salah.');
+            resetButton();
+          }
+        } catch (err) {
+          console.error(err);
+          showError('Koneksi ke server gagal. Pastikan jaringan aktif.');
+          resetButton();
+        }
+      });
+
+      function showError(msg) {
+        errorText.textContent = msg;
+        errorAlert.style.display = 'flex';
+      }
+
+      function resetButton() {
+        submitBtn.disabled = false;
+        btnText.textContent = 'Masuk';
+        btnSpinner.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>

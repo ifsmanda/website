@@ -82,8 +82,15 @@
           <li class="nav-item"><a href="#berita" class="nav-link">Berita</a></li>
           <li class="nav-item"><a href="#galeri" class="nav-link">Galeri</a></li>
           <li class="nav-item"><a href="#kontak" class="nav-link">Kontak</a></li>
-          <li class="nav-item mobile-nav-action"><button class="btn btn-gold btn-open-daftar-ulang" style="width: 100%; margin-top: 15px; padding: 12px;">Daftar Ulang</button></li>
-          <li class="nav-item mobile-nav-action"><a href="#kontak" class="btn btn-primary" style="width: 100%; margin-top: 10px; padding: 12px; display: block; text-align: center;">Login ADMIN</a></li>
+          <li class="nav-item mobile-nav-action"><button class="btn btn-gold btn-open-daftar-ulang"
+              style="width: 100%; margin-top: 15px; padding: 12px;">Daftar Ulang Online</button></li>
+          <li class="nav-item mobile-nav-action"><a href="#kontak" class="btn btn-primary"
+              style="width: 100%; margin-top: 10px; padding: 12px; display: block; text-align: center;">Login SI
+              SMANDA</a>
+          </li>
+          <li class="nav-item mobile-nav-action"><a href="/admin.html" class="btn btn-secondary"
+              style="width: 100%; margin-top: 10px; padding: 12px; display: block; text-align: center;">Login Admin</a>
+          </li>
         </ul>
 
         <!-- Right Action Button & Dark Mode Toggle -->
@@ -93,8 +100,9 @@
             <i data-lucide="sun" class="sun-icon"></i>
           </button>
           <button class="btn btn-gold btn-open-daftar-ulang" id="btn-open-daftar-ulang"
-            style="padding: 10px 22px; font-size: 13px; margin-right: 8px;">Daftar Ulang</button>
-          <a href="#kontak" class="btn btn-primary" style="padding: 10px 22px; font-size: 13px;">Login ADMIN</a>
+            style="padding: 10px 22px; font-size: 13px; margin-right: 8px;">Daftar Ulang Online</button>
+          <a href="#kontak" class="btn btn-primary" style="padding: 10px 22px; font-size: 13px; margin-right: 8px;">Login SI SMANDA</a>
+          <a href="/admin.html" class="btn btn-secondary" style="padding: 10px 22px; font-size: 13px;">Login Admin</a>
           <button class="hamburger" id="hamburger-btn" aria-label="Buka Menu Navigasi" aria-expanded="false">
             <span></span>
             <span></span>
@@ -124,9 +132,9 @@
           - VISI SMA NEGERI 2 BANDUNG -
         </p>
         <div class="hero-actions">
-          <a href="#spmb-timeline" class="btn btn-gold">
-            Akses Sekarang <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
-          </a>
+          <button class="btn btn-gold btn-open-ppid" id="btn-hero-ppid">
+            Daftar Konsultasi PPID <i data-lucide="users" style="width: 16px; height: 16px;"></i>
+          </button>
           <a href="#informasi" class="btn btn-outline-white">Informasi Lengkap</a>
         </div>
       </div>
@@ -152,7 +160,7 @@
         <div class="floating-badge badge-students">
           <div class="badge-icon"><i data-lucide="users" style="width: 20px; height: 20px;"></i></div>
           <div class="badge-info">
-            <span class="badge-title">1.250+ Siswa</span>
+            <span class="badge-title">1.280+ Siswa</span>
             <span class="badge-desc">Aktif Berprestasi</span>
           </div>
         </div>
@@ -217,6 +225,19 @@
         <!-- Menu 5 -->
         <div class="quick-card glow-effect">
           <div class="quick-icon-wrapper">
+            <i data-lucide="users"></i>
+          </div>
+          <h3 class="quick-card-title">Konsultasi PPID</h3>
+          <p class="quick-card-desc">Ambil nomor antrean online untuk datang langsung berkonsultasi tentang PPDB di
+            sekolah.</p>
+          <a href="#" class="quick-card-cta btn-open-ppid" onclick="return false;">
+            Ambil Antrean <i data-lucide="chevron-right" style="width: 14px; height: 14px;"></i>
+          </a>
+        </div>
+
+        <!-- Menu 6 -->
+        <div class="quick-card glow-effect">
+          <div class="quick-icon-wrapper">
             <i data-lucide="phone"></i>
           </div>
           <h3 class="quick-card-title">Hubungi Kami</h3>
@@ -236,12 +257,12 @@
       <!-- Left side: Stats Counters -->
       <div class="stats-grid">
         <div class="stat-item">
-          <span class="stat-number" data-target="1250" data-suffix="+">0</span>
+          <span class="stat-number" data-target="1280" data-suffix="+">0</span>
           <span class="stat-label">Siswa Aktif</span>
           <span class="stat-desc">Belajar di bawah bimbingan kurikulum nasional unggulan.</span>
         </div>
         <div class="stat-item">
-          <span class="stat-number" data-target="120" data-suffix="+">0</span>
+          <span class="stat-number" data-target="60" data-suffix="+">0</span>
           <span class="stat-label">Guru Profesional</span>
           <span class="stat-desc">Tenaga pendidik tersertifikasi dengan komitmen mendidik tinggi.</span>
         </div>
@@ -911,6 +932,65 @@
         <!-- Navigation Dots -->
         <div class="testimonial-dots" id="testimonial-dots"></div>
       </div>
+
+      <!-- Testimonial Form Toggle & Form Card -->
+      <div style="margin-top: 30px; text-align: center;">
+        <button class="btn btn-secondary" id="btn-toggle-testimonial-form" style="font-size: 14px; padding: 10px 24px;">
+          Tulis Testimoni Anda <i data-lucide="edit-3" style="width: 16px; height: 16px; margin-left: 4px;"></i>
+        </button>
+      </div>
+
+      <div class="testimonial-form-wrapper" id="testimonial-form-wrapper"
+        style="display: none; max-width: 600px; margin: 30px auto 0; padding: 24px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); transition: all 0.3s ease;">
+        <h3
+          style="font-family: var(--font-heading); font-size: 17px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; color: var(--primary);"
+          class="dark:text-gold-accent">
+          Bagikan Pengalaman Anda
+        </h3>
+        <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 20px;">
+          Berikan kesan pesan belajar, lingkungan sekolah, atau layanan pendaftaran di SMAN 2 Bandung. Testimoni Anda
+          akan langsung ditampilkan.
+        </p>
+
+        <div id="testimonial-alert" class="modal-alert hidden" style="margin: 0 0 16px 0;"></div>
+
+        <form id="testimonial-form">
+          <div class="form-group-grid"
+            style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="testi-name">Nama Lengkap</label>
+              <input type="text" id="testi-name" class="form-control" placeholder="Contoh: Faris Syahlana" required
+                maxlength="50">
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="testi-role">Peran / Hubungan</label>
+              <input type="text" id="testi-role" class="form-control" placeholder="Contoh: Alumni Angkatan 2024"
+                required maxlength="80">
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label for="testi-avatar">Foto Profil <span
+                style="font-weight: normal; color: var(--text-light);">(Opsional)</span></label>
+            <input type="file" id="testi-avatar" class="form-control" accept="image/*" style="padding: 8px 12px;">
+            <small style="font-size: 11px; color: var(--text-light); margin-top: 4px; display: block;">Format: JPG,
+              JPEG, PNG. Maksimal 1MB.</small>
+          </div>
+          <div class="form-group" style="margin-bottom: 20px;">
+            <label for="testi-message">Kesan & Pesan (Testimoni)</label>
+            <textarea id="testi-message" class="form-control" rows="4" placeholder="Ketik testimoni Anda di sini..."
+              required maxlength="500"></textarea>
+          </div>
+          <div style="display: flex; justify-content: flex-end; gap: 12px;">
+            <button type="button" class="btn btn-secondary" id="btn-cancel-testimonial"
+              style="padding: 10px 20px; font-size: 13px;">Batal</button>
+            <button type="submit" class="btn btn-gold" id="btn-submit-testimonial"
+              style="padding: 10px 24px; font-size: 13px; font-weight: 700;">
+              Kirim Testimoni <i data-lucide="send" style="width: 14px; height: 14px; margin-left: 4px;"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+
     </div>
   </section>
 
@@ -1027,26 +1107,30 @@
             <a href="https://www.facebook.com/people/SMA-Negeri-2-Bandung/100067664654714/" target="_blank"
               rel="noopener noreferrer" class="social-btn sb-facebook" aria-label="Kunjungi Facebook Kami">
               <svg viewBox="0 0 24 24" class="social-icon" fill="currentColor">
-                <path d="M14 13.5h2.5l1-3H14v-2c0-.8.2-1.3 1.3-1.3h1.7V4.5c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1v2H8v3h2.6V21h3.4v-7.5z"/>
+                <path
+                  d="M14 13.5h2.5l1-3H14v-2c0-.8.2-1.3 1.3-1.3h1.7V4.5c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1v2H8v3h2.6V21h3.4v-7.5z" />
               </svg>
             </a>
             <a href="https://www.instagram.com/smandabandung/" target="_blank" rel="noopener noreferrer"
               class="social-btn sb-instagram" aria-label="Kunjungi Instagram Kami">
               <svg viewBox="0 0 24 24" class="social-icon" fill="currentColor">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
               </svg>
             </a>
             <a href="https://www.youtube.com/@smandabandung" target="_blank" rel="noopener noreferrer"
               class="social-btn sb-youtube" aria-label="Kunjungi YouTube Kami">
               <svg viewBox="0 0 24 24" class="social-icon" fill="currentColor">
-                <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.108C19.524 3.545 12 3.545 12 3.545s-7.525 0-9.387.51a3.003 3.003 0 0 0-2.11 2.108C0 8.025 0 12 0 12s0 3.975.503 5.837a2.999 2.999 0 0 0 2.11 2.108c1.862.51 9.387.51 9.387.51s7.525 0 9.387-.51a3.002 3.002 0 0 0 2.11-2.108c.502-1.862.502-5.837.502-5.837s0-3.975-.502-5.837z"/>
+                <path
+                  d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.108C19.524 3.545 12 3.545 12 3.545s-7.525 0-9.387.51a3.003 3.003 0 0 0-2.11 2.108C0 8.025 0 12 0 12s0 3.975.503 5.837a2.999 2.999 0 0 0 2.11 2.108c1.862.51 9.387.51 9.387.51s7.525 0 9.387-.51a3.002 3.002 0 0 0 2.11-2.108c.502-1.862.502-5.837.502-5.837s0-3.975-.502-5.837z" />
                 <polygon points="9.545 15.568 15.818 12 9.545 8.432 9.545 15.568" fill="#ffffff" />
               </svg>
             </a>
-            <a href="https://twitter.com/smandabandung" target="_blank" rel="noopener noreferrer" class="social-btn sb-twitter"
-              aria-label="Hubungi Twitter Kami">
+            <a href="https://twitter.com/smandabandung" target="_blank" rel="noopener noreferrer"
+              class="social-btn sb-twitter" aria-label="Hubungi Twitter Kami">
               <svg viewBox="0 0 24 24" class="social-icon" fill="currentColor">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
               </svg>
             </a>
           </div>
@@ -1116,9 +1200,12 @@
     </button>
 
     <!-- WhatsApp float shortcut link -->
-    <a href="https://wa.me/6281234567890" target="_blank" class="float-btn whatsapp-float"
-      aria-label="WhatsApp Panitia">
-      <i data-lucide="phone" style="width: 24px; height: 24px;"></i>
+    <a href="https://wa.me/6281222858281" target="_blank" class="float-btn whatsapp-float" aria-label="WhatsApp Panitia"
+      style="display: flex; align-items: center; justify-content: center; background: #25d366; color: white; padding: 0;">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" style="display: block;">
+        <path
+          d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.747 1.45 5.515 0 9.993-4.48 9.997-9.995.002-2.67-1.037-5.18-2.92-7.068C16.536 1.65 14.028.61 11.37.61 5.856.61 1.374 5.09 1.37 10.605c-.001 1.642.437 3.254 1.272 4.7l-.997 3.639 3.733-.979L6.647 19.16zM17.15 14.54c-.28-.14-1.654-.816-1.91-.908-.255-.093-.44-.139-.626.139-.185.279-.718.908-.879 1.093-.162.186-.323.209-.603.069-.28-.14-1.18-.435-2.247-1.387-.83-.74-1.39-1.653-1.552-1.93-.162-.28-.017-.43.123-.569.126-.125.28-.325.42-.487.14-.163.186-.279.28-.465.093-.186.046-.349-.023-.488-.069-.14-.626-1.506-.857-2.063-.225-.54-.452-.467-.626-.476-.162-.008-.349-.009-.536-.009-.186 0-.49.07-.746.349-.256.279-.979.957-.979 2.334s1.002 2.709 1.142 2.894c.14.186 1.972 3.01 4.777 4.22.668.288 1.189.46 1.597.59.67.213 1.28.183 1.761.11.536-.08 1.654-.676 1.886-1.33.232-.653.232-1.213.162-1.33-.07-.116-.255-.209-.536-.349z" />
+      </svg>
     </a>
   </div>
 
@@ -1504,7 +1591,7 @@
 
           <div class="form-step-actions" style="margin-top: 24px; justify-content: center;">
             <button class="btn btn-primary" id="btn-print-receipt">
-              Cetak Bukti <i data-lucide="printer"></i>
+              Simpan Gambar Tiket <i data-lucide="download"></i>
             </button>
             <button class="btn btn-outline-primary" id="btn-close-receipt">Tutup</button>
           </div>
@@ -1514,16 +1601,225 @@
     </div>
   </div>
 
-  <!-- Lucide Icons Script -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- Main App Script -->
-  <script src="app.js"></script>
-  <script>
-    // Initialize Lucide Icons immediately after script loads
-    if (window.lucide) {
-      lucide.createIcons();
-    }
-  </script>
+  <!-- PPID Consultation (Antrean Konsultasi) Modal -->
+  <div class="info-modal" id="ppid-modal">
+    <div class="info-modal-card ppid-card">
+      <div class="info-modal-header">
+        <h3>Ambil Antrean Konsultasi PPID</h3>
+        <button class="info-modal-close" id="close-ppid-modal"><i data-lucide="x"></i></button>
+      </div>
+
+      <!-- Modal Body Contents -->
+      <div class="info-modal-body">
+        <!-- Alert Message inside modal -->
+        <div id="ppid-alert" class="modal-alert hidden" style="margin: 0 0 16px 0;"></div>
+
+        <!-- STEP 1: REGISTRATION FORM -->
+        <div class="form-step-content active" id="ppid-form-step">
+          <h4 class="form-step-title">Formulir Pendaftaran Konsultasi Tatap Muka</h4>
+          <p class="form-step-desc">Isi formulir ini untuk mendapatkan nomor antrean konsultasi langsung di sekolah
+            dengan tim layanan informasi (PPID) SMAN 2 Bandung.</p>
+
+          <form id="ppid-registration-form" onsubmit="return false;">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="ppid-name">Nama Lengkap Anda</label>
+                <input type="text" id="ppid-name" class="form-control" placeholder="Contoh: Budi Santoso" required>
+              </div>
+              <div class="form-group">
+                <label for="ppid-role">Status / Hubungan</label>
+                <select id="ppid-role" class="form-control" required>
+                  <option value="" disabled selected>Pilih Kategori Anda</option>
+                  <option value="Orang Tua / Wali Murid">Orang Tua / Wali Murid</option>
+                  <option value="Calon Siswa">Calon Siswa</option>
+                  <option value="Umum">Umum / Lainnya</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="ppid-phone">Nomor WhatsApp Aktif</label>
+                <input type="tel" id="ppid-phone" class="form-control" placeholder="Contoh: 0812XXXXXXXX" required>
+                <small class="form-helper">Notifikasi pemanggilan akan dikirim via WhatsApp.</small>
+              </div>
+              <div class="form-group">
+                <label for="ppid-topic">Topik Konsultasi Utama</label>
+                <select id="ppid-topic" class="form-control" required>
+                  <option value="" disabled selected>Pilih Topik Konsultasi</option>
+                  <option value="Jalur Seleksi & Kuota PPDB">Jalur Seleksi & Kuota PPDB</option>
+                  <option value="Kendala Dokumen & Verifikasi Berkas">Kendala Dokumen & Verifikasi Berkas</option>
+                  <option value="Memenuhi Panggilan Verifikator">Memenuhi Panggilan Verifikator</option>
+                  <option value="Lainnya">Lainnya</option>
+                </select>
+              </div>
+              <div class="form-group" id="ppid-verifikator-group" style="display: none; grid-column: span 2;">
+                <label for="ppid-verifikator">Pilih Nama Verifikator yang Memanggil</label>
+                <select id="ppid-verifikator" class="form-control">
+                  <option value="" disabled selected>Pilih Nama Verifikator</option>
+                  <option value="Hj. Susi Susilawati, S.Pd.">Hj. Susi Susilawati, S.Pd.</option>
+                  <option value="Dr. Hj. Lilis Nurhayati, M.Ag.">Dr. Hj. Lilis Nurhayati, M.Ag.</option>
+                  <option value="Yulvianah, S.Pd.,M.Si.P">Yulvianah, S.Pd.,M.Si.P</option>
+                  <option value="Asep Suryanto, S.Pd.">Asep Suryanto, S.Pd.</option>
+                  <option value="Winda Cantika, S.Pd.">Winda Cantika, S.Pd.</option>
+                  <option value="Astrid Elvan, S.Pd.">Astrid Elvan, S.Pd.</option>
+                  <option value="Ade Permana Sidik, S.Pd.">Ade Permana Sidik, S.Pd.</option>
+                  <option value="Hendi Antopani, S.Pd.">Hendi Antopani, S.Pd.</option>
+                  <option value="Eka Khairunnisa,S.Pd.">Eka Khairunnisa, S.Pd.</option>
+                  <option value="Rodhia Izzati, S.Pd., Gr.">Rodhia Izzati, S.Pd., Gr.</option>
+                  <option value="Azis Suryaman, S.Pd., Gr.">Azis Suryaman, S.Pd., Gr.</option>
+                  <option value="Vilda Assyifa Dinnurillah, S.Pd.">Vilda Assyifa Dinnurillah, S.Pd.</option>
+                  <option value="Inayatus Solihah, S.Pd.">Inayatus Solihah, S.Pd.</option>
+                  <option value="Mita Santika, S.Pd.">Mita Santika, S.Pd.</option>
+                  <option value="Fitria Dwi Nurjanah, S.Pd.">Fitria Dwi Nurjanah, S.Pd.</option>
+                  <option value="Yani Suryani, S.Pd">Yani Suryani, S.Pd</option>
+                  <option value="Febri Vika BR Purba, S.Pd">Febri Vika BR Purba, S.Pd</option>
+                  <option value="Santi Febriani, S.Pd">Santi Febriani, S.Pd</option>
+                  <option value="Syaiful Rucky, SPd., Gr">Syaiful Rucky, SPd., Gr</option>
+                  <option value="Wiwi Yuliani, S.T.">Wiwi Yuliani, S.T.</option>
+                  <option value="Asep Saepudin, S.Pd">Asep Saepudin, S.Pd</option>
+                  <option value="Sry Gandhi Sitio, S.Th.">Sry Gandhi Sitio, S.Th.</option>
+                  <option value="Ega Prakarsa, S.Pd.">Ega Prakarsa, S.Pd.</option>
+                  <option value="Malvin Majid, S.P.d.">Malvin Majid, S.P.d.</option>
+                  <option value="Alief Panca Islami, S.Pd.">Alief Panca Islami, S.Pd.</option>
+                  <option value="Neng Lilis Sugiyanti, S.Pd.">Neng Lilis Sugiyanti, S.Pd.</option>
+                  <option value="Syifa Nurul Ain Rasyidi, S.Pd.">Syifa Nurul Ain Rasyidi, S.Pd.</option>
+                  <option value="Zehan Husein Sanusi, S.Pd.">Zehan Husein Sanusi, S.Pd.</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-grid" style="margin-top: 15px;">
+              <div class="form-group">
+                <label for="ppid-date">Pilih Tanggal Rencana Datang</label>
+                <input type="date" id="ppid-date" class="form-control" required>
+                <small class="form-helper">Konsultasi hanya dilayani pada hari kerja (Senin - Jumat).</small>
+              </div>
+              <div class="form-group">
+                <label for="ppid-session">Pilih Sesi Kedatangan</label>
+                <select id="ppid-session" class="form-control" required disabled>
+                  <option value="" disabled selected>Pilih tanggal terlebih dahulu</option>
+                  <option value="Sesi Pagi (08:00 - 12:00 WIB)" id="ppid-opt-pagi">Sesi Pagi (08:00 - 12:00 WIB)
+                  </option>
+                  <option value="Sesi Siang (13:00 - 14:30 WIB)" id="ppid-opt-siang">Sesi Siang (13:00 - 14:30 WIB)
+                  </option>
+                </select>
+                <small class="form-helper">Pilih tanggal untuk melihat tingkat kepadatan antrean saat ini.</small>
+              </div>
+            </div>
+
+            <div class="form-step-actions" style="margin-top: 24px;">
+              <button type="button" class="btn btn-outline-primary" id="btn-close-ppid-form">Batal</button>
+              <button type="submit" class="btn btn-gold" id="btn-submit-ppid">
+                Ambil Nomor Antrean <i data-lucide="ticket"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- STEP 2: TICKET SUCCESS STATE -->
+        <div class="form-step-content" id="ppid-receipt-step">
+          <div class="receipt-success-icon" style="text-align: center; margin-bottom: 10px;">
+            <i data-lucide="check-circle" style="width: 54px; height: 54px; color: var(--success);"></i>
+          </div>
+          <h4 class="receipt-success-title"
+            style="text-align: center; font-family: var(--font-display); color: var(--primary);">Registrasi Antrean
+            Berhasil!</h4>
+          <p class="receipt-success-desc"
+            style="text-align: center; font-size: 13px; color: var(--text-secondary); margin-bottom: 20px;">Anda telah
+            berhasil mendaftar antrean online. Silakan tangkap layar atau cetak tanda bukti di bawah ini.</p>
+
+          <!-- PPID Receipt Card Layout (print-friendly) -->
+          <div class="receipt-card" id="print-ppid-area">
+            <div class="receipt-header" style="background-color: var(--secondary);">
+              <img src="assets/logo_smanda.png" alt="Logo SMAN 2 Bandung" class="receipt-logo">
+              <div class="receipt-header-text">
+                <h5>SMAN 2 BANDUNG</h5>
+                <span>TIKET ANTREAN KONSULTASI PPDB (PPID)</span>
+              </div>
+            </div>
+
+            <div class="receipt-body">
+              <div class="receipt-info-grid">
+                <div>
+                  <span class="receipt-label">Nomor Antrean Anda:</span>
+                  <span class="receipt-value" id="ppid-receipt-number"
+                    style="font-size: 28px; color: var(--secondary); font-family: var(--font-heading); margin-top: 4px;">-</span>
+                </div>
+                <div>
+                  <span class="receipt-label">Nama Pendaftar:</span>
+                  <span class="receipt-value" id="ppid-receipt-name">-</span>
+                </div>
+                <div>
+                  <span class="receipt-label">Tanggal Kedatangan:</span>
+                  <span class="receipt-value" id="ppid-receipt-date">-</span>
+                </div>
+                <div>
+                  <span class="receipt-label">Sesi Kedatangan:</span>
+                  <span class="receipt-value text-highlight" id="ppid-receipt-session">-</span>
+                </div>
+              </div>
+
+              <div class="receipt-qr-block">
+                <img id="ppid-receipt-qr-img" src="" alt="QR Code Antrean PPID">
+                <span class="qr-info-text">Tunjukkan saat tiba di sekolah</span>
+              </div>
+            </div>
+
+            <div class="receipt-footer">
+              <strong>PENTING:</strong> Pelayanan dilakukan berdasarkan urutan kehadiran fisik di sekolah pada sesi
+              pilihan Anda. Datanglah lebih awal di jam sesi Anda. Sesi Pagi berakhir jam 12.00, Sesi Siang berakhir jam
+              14.30.
+            </div>
+          </div>
+
+          <div class="form-step-actions" style="margin-top: 24px; justify-content: center;">
+            <button class="btn btn-primary" id="btn-print-ppid">
+              Simpan Gambar Tiket <i data-lucide="download"></i>
+            </button>
+            <button class="btn btn-outline-primary" id="btn-close-ppid-receipt">Tutup</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- Ticket Preview & Mobile Download Modal -->
+    <div class="info-modal" id="ticket-preview-modal">
+      <div class="info-modal-card" style="max-width: 420px; width: 100%;">
+        <div class="info-modal-header">
+          <h3>Unduh Gambar Tiket</h3>
+          <button class="info-modal-close" id="close-preview-modal"><i data-lucide="x"></i></button>
+        </div>
+        <div class="info-modal-body"
+          style="display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 20px;">
+          <div class="modal-alert info" style="margin: 0; width: 100%; text-align: center;">
+            <i data-lucide="info"
+              style="display: inline-block; vertical-align: middle; margin-right: 4px; width: 16px; height: 16px;"></i>
+            Jika unduhan tidak mulai otomatis, <strong>tekan lama gambar</strong> lalu pilih <strong>Simpan
+              Gambar</strong>.
+          </div>
+          <div id="ticket-preview-container"
+            style="width: 100%; border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; background: var(--bg-body); display: flex; justify-content: center; padding: 10px; box-sizing: border-box;">
+            <img id="ticket-preview-img"
+              style="max-width: 100%; height: auto; border-radius: var(--radius-sm); box-shadow: var(--shadow-md);"
+              alt="Pratinjau Tiket">
+          </div>
+          <button class="btn btn-primary" id="btn-fallback-download" style="width: 100%;">
+            Unduh Gambar <i data-lucide="download"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- html2canvas Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- Lucide Icons Script -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Main App Script -->
+    <script src="app.js"></script>
+    <script>
+      // Initialize Lucide Icons immediately after script loads
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    </script>
 </body>
 
 </html>

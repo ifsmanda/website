@@ -744,8 +744,8 @@ header.scrolled .navbar {
 }
 .quick-access-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
 }
 .quick-card {
   background-color: var(--bg-card);
@@ -2023,6 +2023,8 @@ header.scrolled .navbar {
   color: var(--text-secondary);
 }
 .form-control {
+  width: 100%;
+  box-sizing: border-box;
   border: 1px solid var(--border-color);
   background-color: var(--bg-body);
   color: var(--text-primary);
@@ -2443,6 +2445,10 @@ footer {
 }
 
 /* --- KEYFRAME ANIMATIONS --- */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 @keyframes floatAnim {
   0% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
@@ -2732,6 +2738,14 @@ footer {
   .hero-actions .btn {
     width: 100%;
   }
+  .form-step-actions {
+    flex-direction: column-reverse;
+    width: 100%;
+    gap: 8px;
+  }
+  .form-step-actions .btn {
+    width: 100%;
+  }
   .stats-grid {
     grid-template-columns: 1fr;
   }
@@ -2999,6 +3013,18 @@ footer {
   color: #22c55e;
 }
 
+.modal-alert.info {
+  background-color: rgba(18, 63, 156, 0.06);
+  border: 1px solid rgba(18, 63, 156, 0.15);
+  color: var(--secondary);
+}
+
+.dark .modal-alert.info {
+  background-color: rgba(244, 197, 66, 0.06);
+  border: 1px solid rgba(244, 197, 66, 0.15);
+  color: var(--accent-gold);
+}
+
 .modal-alert.hidden {
   display: none;
 }
@@ -3010,7 +3036,9 @@ footer {
   overflow: hidden;
   background-color: var(--bg-card);
   box-shadow: var(--shadow-md);
-  margin-bottom: 16px;
+  margin: 0 auto 16px auto;
+  max-width: 380px;
+  width: 100%;
 }
 
 .receipt-header {
@@ -3039,6 +3067,7 @@ footer {
   font-size: 15px;
   font-weight: 800;
   letter-spacing: 0.5px;
+  color: var(--accent-gold);
 }
 
 .receipt-header-text span {
@@ -3048,24 +3077,20 @@ footer {
 }
 
 .receipt-body {
-  padding: 24px;
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 20px;
   border-bottom: 1px dashed var(--border-color);
   background-color: var(--bg-body);
-}
-
-@media (max-width: 550px) {
-  .receipt-body {
-    grid-template-columns: 1fr;
-  }
 }
 
 .receipt-info-grid {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  width: 100%;
 }
 
 .receipt-label {
@@ -3102,6 +3127,8 @@ footer {
   padding: 12px;
   border-radius: var(--radius-md);
   border: 1px solid var(--border-color);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .receipt-qr-block img {
@@ -3130,10 +3157,10 @@ footer {
   body * {
     visibility: hidden;
   }
-  #print-receipt-area, #print-receipt-area * {
+  #print-receipt-area, #print-receipt-area *, #print-ppid-area, #print-ppid-area * {
     visibility: visible;
   }
-  #print-receipt-area {
+  #print-receipt-area, #print-ppid-area {
     position: absolute;
     left: 0;
     top: 0;

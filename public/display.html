@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layar Monitor Antrean PPID — SMAN 2 Bandung</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    /* Design System & Variables matching website_smanda portal styling */
+    :root {
+      --primary: #0A2E73;
+      --secondary: #123F9C;
+      --accent-gold: #F4C542;
+      --bg-dark: #070B13;
+      --bg-card: #0F1626;
+      --border-color: #1F2937;
+      --text-light: #9CA3AF;
+      --text-primary: #F3F4F6;
+      --success: #22c55e;
+      --danger: #ef4444;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* HEADER */
+    .header {
+      background-color: rgba(15, 22, 38, 0.95);
+      border-bottom: 2px solid var(--primary);
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 90px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo {
+      height: 55px;
+      object-fit: contain;
+    }
+
+    .brand-title h1 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--text-primary);
+      letter-spacing: 0.5px;
+      line-height: 1.2;
+    }
+
+    .brand-title p {
+      font-size: 12px;
+      color: var(--accent-gold);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .clock-section {
+      text-align: right;
+    }
+
+    .clock-time {
+      font-family: 'Poppins', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent-gold);
+      line-height: 1;
+    }
+
+    .clock-date {
+      font-size: 13px;
+      color: var(--text-light);
+      font-weight: 500;
+      margin-top: 4px;
+    }
+
+    /* MAIN CONTAINER */
+    .main-content {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 24px;
+      padding: 24px;
+      height: calc(100vh - 140px); /* accounting for header & marquee footer */
+    }
+
+    /* LEFT SIDE: CURRENTLY SERVED (GIANT CARD) */
+    .served-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .served-card {
+      flex: 1;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      background-image: radial-gradient(circle at top right, rgba(18, 63, 156, 0.15), transparent 60%);
+    }
+
+    .served-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, var(--secondary), var(--accent-gold));
+    }
+
+    .served-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .served-number {
+      font-family: 'Poppins', sans-serif;
+      font-size: 120px;
+      font-weight: 800;
+      color: var(--accent-gold);
+      line-height: 1;
+      letter-spacing: -2px;
+      text-shadow: 0 0 40px rgba(244, 197, 66, 0.25);
+      margin: 10px 0;
+      animation: pulseGlow 2.5s infinite alternate;
+    }
+
+    .served-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-top: 10px;
+    }
+
+    .served-session {
+      font-size: 16px;
+      color: var(--secondary);
+      background-color: rgba(18, 63, 156, 0.15);
+      border: 1px solid rgba(18, 63, 156, 0.3);
+      padding: 6px 16px;
+      border-radius: 99px;
+      font-weight: 600;
+      margin-top: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dark .served-session {
+      color: var(--accent-gold);
+    }
+
+    .served-placeholder {
+      font-size: 20px;
+      color: var(--text-light);
+      font-style: italic;
+    }
+
+    /* RIGHT SIDE: UPCOMING QUEUE LIST */
+    .upcoming-container {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .upcoming-header {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-primary);
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .upcoming-list {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      overflow-y: auto;
+    }
+
+    .upcoming-item {
+      background-color: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s ease;
+    }
+
+    .upcoming-item:hover {
+      background-color: rgba(255, 255, 255, 0.04);
+      border-color: var(--primary);
+    }
+
+    .upcoming-num {
+      font-family: 'Poppins', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--accent-gold);
+    }
+
+    .upcoming-details {
+      text-align: right;
+    }
+
+    .upcoming-name {
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--text-primary);
+    }
+
+    .upcoming-session {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-top: 2px;
+      font-weight: 500;
+    }
+
+    /* STATS ROW BELOW */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .stat-box {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .stat-icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stat-icon-total {
+      background-color: rgba(18, 63, 156, 0.15);
+      color: var(--secondary);
+    }
+
+    .stat-icon-waiting {
+      background-color: rgba(244, 197, 66, 0.1);
+      color: var(--accent-gold);
+    }
+
+    .stat-icon-completed {
+      background-color: rgba(34, 197, 94, 0.1);
+      color: var(--success);
+    }
+
+    .stat-info h4 {
+      font-size: 12px;
+      color: var(--text-light);
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .stat-info p {
+      font-family: 'Poppins', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+
+    /* MARQUEE FOOTER */
+    .marquee-footer {
+      background-color: #0d1424;
+      border-top: 1px solid var(--primary);
+      height: 50px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .marquee-title {
+      background-color: var(--primary);
+      color: #ffffff;
+      height: 100%;
+      padding: 0 24px;
+      font-weight: 700;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      z-index: 10;
+      box-shadow: 6px 0 15px rgba(0, 0, 0, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .marquee-content {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 25s linear infinite;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .marquee-content span {
+      display: inline-block;
+      padding-right: 60px;
+    }
+
+    /* VOICE ENGINE AUDIO STATE BANNER */
+    .audio-alert {
+      position: absolute;
+      top: 105px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(244, 197, 66, 0.95);
+      color: #070B13;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 13px;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      animation: bounce 2s infinite;
+    }
+
+    /* ANIMATIONS */
+    @keyframes marquee {
+      0% { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(-100%, 0, 0); }
+    }
+
+    @keyframes pulseGlow {
+      from { text-shadow: 0 0 25px rgba(244, 197, 66, 0.15); }
+      to { text-shadow: 0 0 50px rgba(244, 197, 66, 0.45); }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translate3d(-50%, 0, 0); }
+      50% { transform: translate3d(-50%, -4px, 0); }
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* RESPONSIVE SCALING FOR TV MONITORS */
+    @media (max-width: 1024px) {
+      .main-content {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1.2fr 1fr;
+        overflow-y: auto;
+        height: auto;
+      }
+      body {
+        overflow-y: auto;
+        height: auto;
+      }
+      .marquee-footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Audio Context Click Warning Banner (browsers require user interaction to allow audio) -->
+  <div id="audio-banner" class="audio-alert" onclick="enableAudioEngine()">
+    <i data-lucide="volume-2" style="width:16px; height:16px;"></i>
+    <span>Klik di sini untuk mengaktifkan Suara Panggilan Antrean Otomatis</span>
+  </div>
+
+  <!-- HEADER BOARD -->
+  <header class="header">
+    <div class="brand-section">
+      <img src="assets/logo_smanda.png" alt="Logo SMAN 2 Bandung" class="logo">
+      <div class="brand-title">
+        <h1>MONITOR TV ANTREAN PPID</h1>
+        <p>Layanan Informasi PPDB • SMAN 2 Bandung</p>
+      </div>
+    </div>
+    <div class="clock-section">
+      <div class="clock-time" id="clock-display">00:00:00</div>
+      <div class="clock-date" id="date-display">Senin, 1 Januari 2026</div>
+    </div>
+  </header>
+
+  <!-- GRID CONTENT -->
+  <main class="main-content">
+    
+    <!-- LEFT PANEL: CURRENT CALL -->
+    <div class="served-container">
+      <div class="served-card" id="served-card-panel">
+        <div class="served-label">
+          <i data-lucide="volume-2" style="color:var(--accent-gold); width:24px; height:24px;"></i>
+          <span>Sedang Dilayani</span>
+        </div>
+        <div id="served-number-wrapper">
+          <div class="served-number" id="served-number-txt">-</div>
+          <div class="served-name" id="served-name-txt">Silakan Hubungi Admin</div>
+          <div class="served-session" id="served-session-txt">
+            <i data-lucide="clock" style="width:16px; height:16px;"></i>
+            <span>Siap Melayani</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATS BAR -->
+      <div class="stats-row">
+        <div class="stat-box">
+          <div class="stat-icon stat-icon-total">
+            <i data-lucide="users" style="width:22px; height:22px;"></i>
+          </div>
+          <div class="stat-info">
+            <h4>Total Terdaftar</h4>
+            <p id="stat-total-txt">0</p>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon stat-icon-waiting">
+            <i data-lucide="clock-3" style="width:22px; height:22px;"></i>
+          </div>
+          <div class="stat-info">
+            <h4>Sisa Menunggu</h4>
+            <p id="stat-pending-txt">0</p>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon stat-icon-completed">
+            <i data-lucide="check-circle" style="width:22px; height:22px;"></i>
+          </div>
+          <div class="stat-info">
+            <h4>Selesai Dilayani</h4>
+            <p id="stat-completed-txt">0</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL: UPCOMING LIST -->
+    <div class="upcoming-container">
+      <div class="upcoming-header">
+        <i data-lucide="list-ordered" style="color:var(--accent-gold); width:20px; height:20px;"></i>
+        <span>Antrean Selanjutnya</span>
+      </div>
+      <div class="upcoming-list" id="upcoming-list-container">
+        <!-- Rendered dynamically -->
+        <div class="served-placeholder" style="text-align:center; padding-top:40px;">
+          Memuat daftar antrean...
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- MARQUEE RUNNING FOOTER -->
+  <footer class="marquee-footer">
+    <div class="marquee-title">PENGUMUMAN</div>
+    <div class="marquee-content">
+      <span>📢 Selamat Datang di Layanan Informasi PPDB (PPID) SMAN 2 Bandung.</span>
+      <span>• Harap persiapkan berkas dokumen fisik asli (KK, Akta Lahir, Rapor, dll.) sebelum dipanggil.</span>
+      <span>• Pelayanan dilakukan berdasarkan sesi dan jam kedatangan Anda. Sesi Pagi berakhir jam 12:00, Sesi Siang berakhir jam 14:30.</span>
+      <span>• Terima kasih atas ketertiban dan kerjasamanya dalam mengikuti prosedur pendaftaran.</span>
+    </div>
+  </footer>
+
+  <script>
+    // Audio Context State
+    let audioEngineEnabled = false;
+    let lastCalledId = localStorage.getItem('last_called_ppid_id') || '';
+
+    // Initialize Lucide icons
+    if (window.lucide) {
+      lucide.createIcons();
+    }
+
+    // Enable Audio Engine when user clicks banner
+    function enableAudioEngine() {
+      audioEngineEnabled = true;
+      document.getElementById('audio-banner').style.display = 'none';
+      
+      // Play a quick test chime
+      playDoubleChime();
+      
+      // Warm up TTS
+      if ('speechSynthesis' in window) {
+        const u = new SpeechSynthesisUtterance("Layanan suara diaktifkan");
+        u.lang = 'id-ID';
+        u.volume = 0.1;
+        window.speechSynthesis.speak(u);
+      }
+    }
+
+    // Web Audio API Synthesizer (Professional Double Chime: Ding-Dong)
+    function playDoubleChime() {
+      try {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) return;
+        
+        const ctx = new AudioContextClass();
+        
+        // DING (C5: 523Hz)
+        const osc1 = ctx.createOscillator();
+        const gain1 = ctx.createGain();
+        osc1.connect(gain1);
+        gain1.connect(ctx.destination);
+        osc1.type = 'sine';
+        osc1.frequency.setValueAtTime(523.25, ctx.currentTime);
+        gain1.gain.setValueAtTime(0, ctx.currentTime);
+        gain1.gain.linearRampToValueAtTime(0.4, ctx.currentTime + 0.05);
+        gain1.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
+        osc1.start(ctx.currentTime);
+        osc1.stop(ctx.currentTime + 0.65);
+
+        // DONG (E5: 659Hz)
+        const osc2 = ctx.createOscillator();
+        const gain2 = ctx.createGain();
+        osc2.connect(gain2);
+        gain2.connect(ctx.destination);
+        osc2.type = 'sine';
+        osc2.frequency.setValueAtTime(659.25, ctx.currentTime + 0.25);
+        gain2.gain.setValueAtTime(0, ctx.currentTime + 0.25);
+        gain2.gain.linearRampToValueAtTime(0.4, ctx.currentTime + 0.30);
+        gain2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.85);
+        osc2.start(ctx.currentTime + 0.25);
+        osc2.stop(ctx.currentTime + 0.9);
+      } catch (err) {
+        console.error("Web Audio API Chime error:", err);
+      }
+    }
+
+    // Text to Speech (Panggilan Suara Bahasa Indonesia)
+    function announceQueue(queueNum) {
+      if (!audioEngineEnabled) return;
+      if (!('speechSynthesis' in window)) return;
+
+      // Web speechSynthesis voices are loaded async
+      const makeCall = () => {
+        window.speechSynthesis.cancel();
+        
+        // Format queue number so browser reads letters and numbers nicely (e.g. A - Nol Satu)
+        const formattedNum = queueNum.replace(/([A-Z])\-?0*([0-9]+)/i, (match, letter, num) => {
+          return `${letter} ${num}`;
+        });
+
+        const textToSpeak = `Nomor antrean, ${formattedNum}, silakan menuju meja pelayanan.`;
+        const utterance = new SpeechSynthesisUtterance(textToSpeak);
+        utterance.lang = 'id-ID';
+        utterance.rate = 0.85; // Slightly slow and clear
+        utterance.pitch = 1.0;
+        utterance.volume = 1.0;
+
+        // Try to bind Indonesian voice
+        const voices = window.speechSynthesis.getVoices();
+        const idVoice = voices.find(v => v.lang.includes('id') || v.lang.includes('ID'));
+        if (idVoice) utterance.voice = idVoice;
+
+        window.speechSynthesis.speak(utterance);
+      };
+
+      // Play double chime first, then announce after 900ms delay
+      playDoubleChime();
+      setTimeout(makeCall, 950);
+    }
+
+    // DIGITAL CLOCK & DATE
+    function updateClock() {
+      const now = new Date();
+      const timeTxt = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+      const dateTxt = now.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+      
+      document.getElementById('clock-display').textContent = timeTxt.replace(/\./g, ':');
+      document.getElementById('date-display').textContent = dateTxt;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // LIVE QUEUE FETCH ENGINE
+    async function fetchLiveQueue() {
+      try {
+        const response = await fetch('/api/ppid/live');
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+          // 1. Render Current Active Call
+          const servedNumTxt = document.getElementById('served-number-txt');
+          const servedNameTxt = document.getElementById('served-name-txt');
+          const servedSessionTxt = document.getElementById('served-session-txt');
+          
+          if (result.calling && result.calling.length > 0) {
+            const activeCall = result.calling[0]; // Latest called
+            servedNumTxt.textContent = activeCall.queue_number;
+            servedNameTxt.textContent = activeCall.name;
+            servedSessionTxt.innerHTML = `<i data-lucide="clock" style="width:16px; height:16px;"></i> <span>Sesi ${activeCall.session}</span>`;
+            servedNumTxt.style.color = 'var(--accent-gold)';
+
+            // Trigger Voice Announcement if it is a new call
+            if (activeCall.id !== lastCalledId) {
+              lastCalledId = activeCall.id;
+              localStorage.setItem('last_called_ppid_id', lastCalledId);
+              announceQueue(activeCall.queue_number);
+            }
+          } else {
+            servedNumTxt.textContent = '-';
+            servedNameTxt.textContent = 'Menunggu Panggilan';
+            servedSessionTxt.innerHTML = `<i data-lucide="circle-dot" style="width:16px; height:16px; color:var(--success);"></i> <span>Siap Melayani</span>`;
+            servedNumTxt.style.color = 'var(--text-light)';
+          }
+
+          // 2. Render Stats Bar
+          document.getElementById('stat-total-txt').textContent = result.stats.total;
+          document.getElementById('stat-pending-txt').textContent = result.stats.pending;
+          document.getElementById('stat-completed-txt').textContent = result.stats.completed;
+
+          // 3. Render Upcoming queue list
+          const upcomingListContainer = document.getElementById('upcoming-list-container');
+          upcomingListContainer.innerHTML = '';
+
+          if (result.upcoming && result.upcoming.length > 0) {
+            result.upcoming.forEach(item => {
+              const div = document.createElement('div');
+              div.className = 'upcoming-item';
+              div.innerHTML = `
+                <span class="upcoming-num">${item.queue_number}</span>
+                <div class="upcoming-details">
+                  <span class="upcoming-name">${item.name}</span>
+                  <div class="upcoming-session">Sesi ${item.session}</div>
+                </div>
+              `;
+              upcomingListContainer.appendChild(div);
+            });
+          } else {
+            upcomingListContainer.innerHTML = `
+              <div class="served-placeholder" style="text-align:center; padding-top:40px;">
+                Belum ada antrean menunggu saat ini.
+              </div>
+            `;
+          }
+
+          if (window.lucide) lucide.createIcons();
+
+        } else {
+          console.error("Failed to load queue status:", result.error);
+        }
+      } catch (err) {
+        console.error("Live Queue Network Error:", err);
+      }
+    }
+
+    // Poll live queue every 4 seconds
+    setInterval(fetchLiveQueue, 4000);
+    fetchLiveQueue();
+
+    // Trigger voices load (required on some webviews/Safari)
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.getVoices();
+    }
+  </script>
+</body>
+</html>
