@@ -528,105 +528,6 @@
     </section>
 
     <!-- =============================================
-         INSTAGRAM POSTS MANAGER
-         ============================================= -->
-    <section style="background: var(--admin-card); border: 1px solid var(--admin-border); border-radius: 16px; padding: 28px; box-shadow: var(--shadow-md);">
-
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px; flex-wrap:wrap; gap:12px;">
-        <div>
-          <h2 style="margin:0; font-size:17px; font-weight:800; font-family:'Outfit',sans-serif; display:flex; align-items:center; gap:8px;">
-            📸 Kelola Postingan Instagram
-          </h2>
-          <p style="margin:4px 0 0; font-size:12px; color:var(--admin-text-secondary);">
-            Tambahkan URL postingan @smandabandung agar tampil di section Berita website. Foto & caption langsung dari Instagram.
-          </p>
-        </div>
-        <a href="https://www.instagram.com/smandabandung/" target="_blank" rel="noopener noreferrer"
-          style="font-size:12px; color:#E1306C; font-weight:700; text-decoration:none;">
-          🔗 Buka @smandabandung
-        </a>
-      </div>
-
-      <!-- Add Post Form -->
-      <div id="ig-add-alert" style="display:none; padding:10px 16px; border-radius:8px; font-size:13px; font-weight:600; margin-bottom:16px;"></div>
-
-      <form id="ig-add-form" style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom: 24px;">
-        <input type="text" id="ig-post-url" placeholder="https://www.instagram.com/p/XXXXXXXXXXXXX/"
-          style="flex:1; min-width:260px; padding:10px 16px; border:1px solid var(--admin-border); border-radius:8px;
-                 background:var(--admin-bg); color:var(--admin-text); font-size:13px; outline:none;"
-          required>
-        <input type="number" id="ig-post-order" placeholder="Urutan (1=pertama)" min="1" max="99"
-          style="width:180px; padding:10px 16px; border:1px solid var(--admin-border); border-radius:8px;
-                 background:var(--admin-bg); color:var(--admin-text); font-size:13px; outline:none;">
-        <button type="submit" id="ig-add-btn"
-          style="padding:10px 24px; background:linear-gradient(135deg,#E1306C,#F77737); color:white; border:none;
-                 border-radius:8px; font-weight:700; font-size:13px; cursor:pointer; display:inline-flex; align-items:center; gap:8px;">
-          ＋ Tambah Postingan
-        </button>
-      </form>
-
-      <!-- Posts Table -->
-      <div style="overflow-x:auto;">
-        <table style="width:100%; border-collapse:collapse; font-size:13px;">
-          <thead>
-            <tr style="border-bottom:2px solid var(--admin-border);">
-              <th style="padding:10px 12px; text-align:left; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700;">Urutan</th>
-              <th style="padding:10px 12px; text-align:left; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700;">URL Postingan Instagram</th>
-              <th style="padding:10px 12px; text-align:center; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700;">Status</th>
-              <th style="padding:10px 12px; text-align:center; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700;">Aksi</th>
-            </tr>
-          </thead>
-          <tbody id="ig-posts-tbody">
-            <tr><td colspan="4" style="padding:24px; text-align:center; color:var(--admin-text-secondary);">Memuat daftar postingan...</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Info Box -->
-      <div style="margin-top: 20px; padding: 14px 16px; background: rgba(225,48,108,0.06); border-radius: 8px; border-left: 3px solid #E1306C;">
-        <p style="margin:0; font-size:12px; color: var(--admin-text-secondary); line-height: 1.6;">
-          <strong style="color:#E1306C;">Cara pakai:</strong> Buka Instagram di browser → pilih postingan @smandabandung → klik ⋯ (titik tiga) → <em>Salin Tautan</em>
-          → paste URL di kotak di atas → klik Tambah. Postingan langsung tampil di website dengan foto & caption asli dari Instagram.
-        </p>
-      </div>
-    </section>
-
-    <!-- =============================================
-         CONTACT MESSAGES MANAGER
-         ============================================= -->
-    <section style="background: var(--admin-card); border: 1px solid var(--admin-border); border-radius: 16px; padding: 28px; box-shadow: var(--shadow-md);">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px; flex-wrap:wrap; gap:12px;">
-        <div>
-          <h2 style="margin:0; font-size:17px; font-weight:800; font-family:'Outfit',sans-serif; display:flex; align-items:center; gap:8px;">
-            📩 Kelola Pertanyaan Masuk
-          </h2>
-          <p style="margin:4px 0 0; font-size:12px; color:var(--admin-text-secondary);">
-            Daftar pertanyaan/pesan kendala dari pengunjung melalui formulir kontak. Balas langsung via email mereka.
-          </p>
-        </div>
-      </div>
-
-      <!-- Messages Table -->
-      <div style="overflow-x:auto;">
-        <table style="width:100%; border-collapse:collapse; font-size:13px;">
-          <thead>
-            <tr style="border-bottom:2px solid var(--admin-border);">
-              <th style="padding:12px 10px; text-align:left; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700; width:50px;">No</th>
-              <th style="padding:12px 10px; text-align:left; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700; width:140px;">Tanggal</th>
-              <th style="padding:12px 10px; text-align:left; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700; width:180px;">Pengirim</th>
-              <th style="padding:12px 10px; text-align:left; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700;">Isi Pertanyaan</th>
-              <th style="padding:12px 10px; text-align:center; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700; width:100px;">Status</th>
-              <th style="padding:12px 10px; text-align:center; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700; width:180px;">Aksi</th>
-            </tr>
-          </thead>
-          <tbody id="contact-messages-tbody">
-            <tr><td colspan="5" style="padding:24px; text-align:center; color:var(--admin-text-secondary);">Memuat daftar pertanyaan...</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- =============================================
          PPID CONSULTATIONS MANAGER
          ============================================= -->
     <section style="background: var(--admin-card); border: 1px solid var(--admin-border); border-radius: 16px; padding: 28px; box-shadow: var(--shadow-md);">
@@ -699,6 +600,41 @@
       </div>
     </section>
 
+    <!-- =============================================
+         CONTACT MESSAGES MANAGER
+         ============================================= -->
+    <section style="background: var(--admin-card); border: 1px solid var(--admin-border); border-radius: 16px; padding: 28px; box-shadow: var(--shadow-md);">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px; flex-wrap:wrap; gap:12px;">
+        <div>
+          <h2 style="margin:0; font-size:17px; font-weight:800; font-family:'Outfit',sans-serif; display:flex; align-items:center; gap:8px;">
+            📩 Kelola Pertanyaan Masuk
+          </h2>
+          <p style="margin:4px 0 0; font-size:12px; color:var(--admin-text-secondary);">
+            Daftar pertanyaan/pesan kendala dari pengunjung melalui formulir kontak. Balas langsung via email mereka.
+          </p>
+        </div>
+      </div>
+
+      <!-- Messages Table -->
+      <div style="overflow-x:auto;">
+        <table style="width:100%; border-collapse:collapse; font-size:13px;">
+          <thead>
+            <tr style="border-bottom:2px solid var(--admin-border);">
+              <th style="padding:12px 10px; text-align:left; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700; width:50px;">No</th>
+              <th style="padding:12px 10px; text-align:left; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700; width:140px;">Tanggal</th>
+              <th style="padding:12px 10px; text-align:left; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700; width:180px;">Pengirim</th>
+              <th style="padding:12px 10px; text-align:left; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700;">Isi Pertanyaan</th>
+              <th style="padding:12px 10px; text-align:center; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700; width:100px;">Status</th>
+              <th style="padding:12px 10px; text-align:center; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700; width:180px;">Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="contact-messages-tbody">
+            <tr><td colspan="5" style="padding:24px; text-align:center; color:var(--admin-text-secondary);">Memuat daftar pertanyaan...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
     <!-- TABLE CONTROLS -->
     <section class="table-control-card">
       <div class="search-input-group">
@@ -741,6 +677,70 @@
           </tr>
         </tbody>
       </table>
+    </section>
+
+    <!-- =============================================
+         INSTAGRAM POSTS MANAGER
+         ============================================= -->
+    <section style="background: var(--admin-card); border: 1px solid var(--admin-border); border-radius: 16px; padding: 28px; box-shadow: var(--shadow-md);">
+
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px; flex-wrap:wrap; gap:12px;">
+        <div>
+          <h2 style="margin:0; font-size:17px; font-weight:800; font-family:'Outfit',sans-serif; display:flex; align-items:center; gap:8px;">
+            📸 Kelola Postingan Instagram
+          </h2>
+          <p style="margin:4px 0 0; font-size:12px; color:var(--admin-text-secondary);">
+            Tambahkan URL postingan @smandabandung agar tampil di section Berita website. Foto & caption langsung dari Instagram.
+          </p>
+        </div>
+        <a href="https://www.instagram.com/smandabandung/" target="_blank" rel="noopener noreferrer"
+          style="font-size:12px; color:#E1306C; font-weight:700; text-decoration:none;">
+          🔗 Buka @smandabandung
+        </a>
+      </div>
+
+      <!-- Add Post Form -->
+      <div id="ig-add-alert" style="display:none; padding:10px 16px; border-radius:8px; font-size:13px; font-weight:600; margin-bottom:16px;"></div>
+
+      <form id="ig-add-form" style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom: 24px;">
+        <input type="text" id="ig-post-url" placeholder="https://www.instagram.com/p/XXXXXXXXXXXXX/"
+          style="flex:1; min-width:260px; padding:10px 16px; border:1px solid var(--admin-border); border-radius:8px;
+                 background:var(--admin-bg); color:var(--admin-text); font-size:13px; outline:none;"
+          required>
+        <input type="number" id="ig-post-order" placeholder="Urutan (1=pertama)" min="1" max="99"
+          style="width:180px; padding:10px 16px; border:1px solid var(--admin-border); border-radius:8px;
+                 background:var(--admin-bg); color:var(--admin-text); font-size:13px; outline:none;">
+        <button type="submit" id="ig-add-btn"
+          style="padding:10px 24px; background:linear-gradient(135deg,#E1306C,#F77737); color:white; border:none;
+                 border-radius:8px; font-weight:700; font-size:13px; cursor:pointer; display:inline-flex; align-items:center; gap:8px;">
+          ＋ Tambah Postingan
+        </button>
+      </form>
+
+      <!-- Posts Table -->
+      <div style="overflow-x:auto;">
+        <table style="width:100%; border-collapse:collapse; font-size:13px;">
+          <thead>
+            <tr style="border-bottom:2px solid var(--admin-border);">
+              <th style="padding:10px 12px; text-align:left; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700;">Urutan</th>
+              <th style="padding:10px 12px; text-align:left; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700;">URL Postingan Instagram</th>
+              <th style="padding:10px 12px; text-align:center; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700;">Status</th>
+              <th style="padding:10px 12px; text-align:center; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700;">Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="ig-posts-tbody">
+            <tr><td colspan="4" style="padding:24px; text-align:center; color:var(--admin-text-secondary);">Memuat daftar postingan...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Info Box -->
+      <div style="margin-top: 20px; padding: 14px 16px; background: rgba(225,48,108,0.06); border-radius: 8px; border-left: 3px solid #E1306C;">
+        <p style="margin:0; font-size:12px; color: var(--admin-text-secondary); line-height: 1.6;">
+          <strong style="color:#E1306C;">Cara pakai:</strong> Buka Instagram di browser → pilih postingan @smandabandung → klik ⋯ (titik tiga) → <em>Salin Tautan</em>
+          → paste URL di kotak di atas → klik Tambah. Postingan langsung tampil di website dengan foto & caption asli dari Instagram.
+        </p>
+      </div>
     </section>
 
   </main>
