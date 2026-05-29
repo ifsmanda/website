@@ -1034,43 +1034,29 @@ app.post('/api/ppid/register', async (req, res) => {
   }
 
   try {
-    // Count existing bookings for this date and session to generate sequential queue number
-    const { count, error: countError } = await supabase
-      .from('ws_ppid_consultations')
-      .select('*', { count: 'exact', head: true })
-      .eq('consultation_date', consultation_date)
-      .eq('session', session);
-
-    if (countError) throw countError;
-
-    const seq = (count || 0) + 1;
-    const formattedSeq = String(seq).padStart(2, '0');
-    const prefix = session.includes('Pagi') ? 'A' : 'B';
-    const queueNumber = `${prefix}-${formattedSeq}`;
-
-    // Insert record
-    const { data: newConsultation, error: insertError } = await supabase
-      .from('ws_ppid_consultations')
-      .insert({
-        name: name.trim(),
-        role: role.trim(),
-        phone: phone.trim(),
-        topic: topic.trim(),
-        consultation_date,
-        session,
-        queue_number: queueNumber,
-        status: 'Pending'
-      })
-      .select()
-      .single();
+    // Call Supabase RPC to securely insert consultation with a unique sequence queue number
+    const { data: newConsultationList, error: insertError } = await supabase
+      .rpc('register_ppid_consultation', {
+        p_name: name.trim(),
+        p_role: role.trim(),
+        p_phone: phone.trim(),
+        p_topic: topic.trim(),
+        p_consultation_date: consultation_date,
+        p_session: session
+      });
 
     if (insertError) throw insertError;
+
+    const newConsultation = newConsultationList && newConsultationList[0];
+    if (!newConsultation) {
+      throw new Error('Gagal menyimpan data pendaftaran antrean.');
+    }
 
     // Generate QR Code containing verification URL/details
     const qrData = JSON.stringify({
       code: `SMANDA-PPID-${newConsultation.id}`,
       name: newConsultation.name,
-      queue_number: queueNumber,
+      queue_number: newConsultation.queue_number,
       date: consultation_date,
       session: session
     });
