@@ -1004,6 +1004,19 @@ app.get('/api/ppid/live', async (req, res) => {
   }
 });
 
+let ppidLock = Promise.resolve();
+
+async function acquirePpidLock() {
+  let release;
+  const nextLock = new Promise(resolve => {
+    release = resolve;
+  });
+  const currentLock = ppidLock;
+  ppidLock = nextLock;
+  await currentLock;
+  return release;
+}
+
 // ==========================================
 // 15. API: PPID — REGISTER CONSULTATION (POST /api/ppid/register)
 // ==========================================
@@ -1033,21 +1046,58 @@ app.post('/api/ppid/register', async (req, res) => {
     return res.status(400).json({ error: 'Pilihan sesi waktu tidak valid.' });
   }
 
+  // Acquire lock to prevent race conditions on sequence number generation
+  const release = await acquirePpidLock();
+
   try {
-    // Call Supabase RPC to securely insert consultation with a unique sequence queue number
-    const { data: newConsultationList, error: insertError } = await supabase
-      .rpc('register_ppid_consultation', {
-        p_name: name.trim(),
-        p_role: role.trim(),
-        p_phone: phone.trim(),
-        p_topic: topic.trim(),
-        p_consultation_date: consultation_date,
-        p_session: session
-      });
+    // 1. Fetch existing queue numbers for this date and session
+    const { data: existing, error: fetchError } = await supabase
+      .from('ws_ppid_consultations')
+      .select('queue_number')
+      .eq('consultation_date', consultation_date)
+      .eq('session', session);
+
+    if (fetchError) throw fetchError;
+
+    // 2. Parse and determine the maximum sequence number (avoiding duplicates even after deletions)
+    let maxSeq = 0;
+    if (existing && existing.length > 0) {
+      for (const row of existing) {
+        if (row.queue_number) {
+          const parts = row.queue_number.split('-');
+          if (parts.length === 2) {
+            const num = parseInt(parts[1], 10);
+            if (!isNaN(num) && num > maxSeq) {
+              maxSeq = num;
+            }
+          }
+        }
+      }
+    }
+
+    const seq = maxSeq + 1;
+    const formattedSeq = String(seq).padStart(2, '0');
+    const prefix = session.includes('Pagi') ? 'A' : 'B';
+    const queueNumber = `${prefix}-${formattedSeq}`;
+
+    // 3. Insert record
+    const { data: newConsultation, error: insertError } = await supabase
+      .from('ws_ppid_consultations')
+      .insert({
+        name: name.trim(),
+        role: role.trim(),
+        phone: phone.trim(),
+        topic: topic.trim(),
+        consultation_date,
+        session,
+        queue_number: queueNumber,
+        status: 'Pending'
+      })
+      .select()
+      .single();
 
     if (insertError) throw insertError;
 
-    const newConsultation = newConsultationList && newConsultationList[0];
     if (!newConsultation) {
       throw new Error('Gagal menyimpan data pendaftaran antrean.');
     }
@@ -1075,6 +1125,9 @@ app.post('/api/ppid/register', async (req, res) => {
   } catch (err) {
     console.error('PPID Register Error:', err.message);
     return res.status(500).json({ error: 'Gagal memproses pendaftaran antrean. Terjadi kesalahan server.' });
+  } finally {
+    // Release the lock for the next concurrent request
+    release();
   }
 });
 
