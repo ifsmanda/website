@@ -687,7 +687,7 @@ document.addEventListener('DOMContentLoaded', () => {
       
       if (msg.includes('kontak') || msg.includes('telepon') || msg.includes('telp') || msg.includes('email') || msg.includes('wa') || msg.includes('whatsapp') || msg.includes('hubung') || msg.includes('panitia') || msg.includes('helpdesk') || msg.includes('nyambung') || msg.includes('sambung')) {
         return "<strong>Layanan Pengaduan & Informasi Helpdesk:</strong><br><br>" +
-               "• <strong>Telepon:</strong> (022) 2032610 (Hari kerja, Senin - Jumat: 08:00 - 15:00 WIB)<br>" +
+               "• <strong>Telepon:</strong> (022) 2032610 (Hari pelayanan, Senin - Sabtu: 08:00 - 15:00 WIB)<br>" +
                "• <strong>Email:</strong> contact@sman2bdg.sch.id<br>" +
                "• <strong>WhatsApp Panitia:</strong> Hubungi admin dengan mengklik logo WhatsApp hijau di pojok kanan bawah layar untuk chat langsung.";
       }
@@ -1313,9 +1313,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const selectedDate = new Date(selectedDateStr);
       const day = selectedDate.getDay();
 
-      // Check if it's a weekend (Saturday=6, Sunday=0)
-      if (day === 0 || day === 6) {
-        showPpidAlert('Mohon maaf, layanan konsultasi PPID libur pada hari Sabtu dan Minggu. Silakan pilih hari kerja (Senin - Jumat).');
+      // Check if it's a Sunday (Sunday=0)
+      if (day === 0) {
+        showPpidAlert('Mohon maaf, layanan konsultasi PPID libur pada hari Minggu. Silakan pilih hari pelayanan (Senin - Sabtu).');
         ppidInputDate.value = '';
         ppidSelectSession.disabled = true;
         ppidSelectSession.selectedIndex = 0;
@@ -1332,11 +1332,28 @@ document.addEventListener('DOMContentLoaded', () => {
         const result = await response.json();
 
         if (response.ok && result.success) {
-          ppidOptPagi.textContent = `Sesi Pagi (08:00 - 12:00 WIB) [${result.pagi} Antrean Terdaftar]`;
-          ppidOptSiang.textContent = `Sesi Siang (13:00 - 14:30 WIB) [${result.siang} Antrean Terdaftar]`;
+          if (result.pagi >= 250) {
+            ppidOptPagi.disabled = true;
+            ppidOptPagi.textContent = `Sesi Pagi (08:00 - 12:00 WIB) [PENUH / 250 Antrean]`;
+          } else {
+            ppidOptPagi.disabled = false;
+            ppidOptPagi.textContent = `Sesi Pagi (08:00 - 12:00 WIB) [${result.pagi}/250 Terdaftar]`;
+          }
+
+          if (result.siang >= 250) {
+            ppidOptSiang.disabled = true;
+            ppidOptSiang.textContent = `Sesi Siang (13:00 - 14:30 WIB) [PENUH / 250 Antrean]`;
+          } else {
+            ppidOptSiang.disabled = false;
+            ppidOptSiang.textContent = `Sesi Siang (13:00 - 14:30 WIB) [${result.siang}/250 Terdaftar]`;
+          }
           
           ppidSelectSession.disabled = false;
           ppidSelectSession.selectedIndex = 0;
+
+          if (result.pagi >= 250 && result.siang >= 250) {
+            showPpidAlert('Mohon maaf, semua sesi antrean pada tanggal ini sudah penuh. Silakan pilih tanggal lain.', 'warning');
+          }
         } else {
           showPpidAlert('Gagal memuat status antrean untuk tanggal ini.');
         }
@@ -1359,8 +1376,14 @@ document.addEventListener('DOMContentLoaded', () => {
       ppidSelectVerifikator.required = false;
       ppidSelectVerifikator.selectedIndex = 0;
     }
-    if (ppidOptPagi) ppidOptPagi.textContent = 'Sesi Pagi (08:00 - 12:00 WIB)';
-    if (ppidOptSiang) ppidOptSiang.textContent = 'Sesi Siang (13:00 - 14:30 WIB)';
+    if (ppidOptPagi) {
+      ppidOptPagi.disabled = false;
+      ppidOptPagi.textContent = 'Sesi Pagi (08:00 - 12:00 WIB)';
+    }
+    if (ppidOptSiang) {
+      ppidOptSiang.disabled = false;
+      ppidOptSiang.textContent = 'Sesi Siang (13:00 - 14:30 WIB)';
+    }
     if (ppidFormStep) ppidFormStep.classList.add('active');
     if (ppidReceiptStep) ppidReceiptStep.classList.remove('active');
     hidePpidAlert();

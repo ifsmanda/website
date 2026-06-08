@@ -268,11 +268,11 @@ app.post('/api/register', upload.fields([
     const seq = (count || 0) + 1;
     let queueSession = '';
 
-    if (seq <= 100) {
+    if (seq <= 250) {
       queueSession = 'Sesi 1: Rabu, 1 Juli 2026 (08:00 - 11:00 WIB)';
-    } else if (seq <= 200) {
+    } else if (seq <= 500) {
       queueSession = 'Sesi 2: Rabu, 1 Juli 2026 (13:00 - 15:00 WIB)';
-    } else if (seq <= 300) {
+    } else if (seq <= 750) {
       queueSession = 'Sesi 3: Kamis, 2 Juli 2026 (08:00 - 11:00 WIB)';
     } else {
       queueSession = 'Sesi 4: Kamis, 2 Juli 2026 (13:00 - 15:00 WIB)';
@@ -1058,6 +1058,11 @@ app.post('/api/ppid/register', async (req, res) => {
       .eq('session', session);
 
     if (fetchError) throw fetchError;
+
+    // Check if session is full (limit: 250)
+    if (existing && existing.length >= 250) {
+      return res.status(400).json({ error: 'Mohon maaf, kuota antrean untuk sesi ini sudah penuh (maksimal 250 pendaftar).' });
+    }
 
     // 2. Parse and determine the maximum sequence number (avoiding duplicates even after deletions)
     let maxSeq = 0;
