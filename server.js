@@ -930,6 +930,46 @@ app.get('/api/ppid/session-count', async (req, res) => {
   }
 });
 
+// Helper to parse queue number for numerical sorting (e.g. "A-01" -> {prefix: "A", num: 1})
+function parseQueueNumber(qNum) {
+  if (!qNum) return { prefix: '', num: 0 };
+  const parts = qNum.split('-');
+  if (parts.length === 2) {
+    return {
+      prefix: parts[0],
+      num: parseInt(parts[1], 10) || 0
+    };
+  }
+  return { prefix: qNum, num: 0 };
+}
+
+// Helper to sort consultations: date DESC, session ASC, queue_number ASC (numerical)
+function sortConsultationsList(list) {
+  return [...list].sort((a, b) => {
+    // 1. Sort by consultation_date DESC
+    const dateA = a.consultation_date || '';
+    const dateB = b.consultation_date || '';
+    if (dateA !== dateB) {
+      return dateB.localeCompare(dateA);
+    }
+
+    // 2. Sort by session ASC (Pagi first, then Siang)
+    const aSession = a.session.includes('Pagi') ? 1 : 2;
+    const bSession = b.session.includes('Pagi') ? 1 : 2;
+    if (aSession !== bSession) {
+      return aSession - bSession;
+    }
+
+    // 3. Sort by queue_number numerically
+    const qa = parseQueueNumber(a.queue_number);
+    const qb = parseQueueNumber(b.queue_number);
+    if (qa.prefix !== qb.prefix) {
+      return qa.prefix.localeCompare(qb.prefix);
+    }
+    return qa.num - qb.num;
+  });
+}
+
 // ==========================================
 // 14b. API: PPID — GET LIVE QUEUE FOR DISPLAY BOARD (GET /api/ppid/live)
 // ==========================================
@@ -961,7 +1001,14 @@ app.get('/api/ppid/live', async (req, res) => {
         const aSession = a.session.includes('Pagi') ? 1 : 2;
         const bSession = b.session.includes('Pagi') ? 1 : 2;
         if (aSession !== bSession) return aSession - bSession;
-        return a.queue_number.localeCompare(b.queue_number);
+
+        // Sort by queue_number numerically
+        const qa = parseQueueNumber(a.queue_number);
+        const qb = parseQueueNumber(b.queue_number);
+        if (qa.prefix !== qb.prefix) {
+          return qa.prefix.localeCompare(qb.prefix);
+        }
+        return qa.num - qb.num;
       })
       .slice(0, 5);
 
@@ -1143,13 +1190,14 @@ app.get('/api/admin/ppid/consultations', async (req, res) => {
   try {
     const { data: consultations, error: fetchError } = await supabase
       .from('ws_ppid_consultations')
-      .select('*')
-      .order('consultation_date', { ascending: false })
-      .order('session', { ascending: true })
-      .order('queue_number', { ascending: true });
+      .select('*');
 
     if (fetchError) throw fetchError;
-    return res.status(200).json({ success: true, consultations });
+
+    // Sort the list using numerical sorting for queue numbers
+    const sortedConsultations = sortConsultationsList(consultations || []);
+
+    return res.status(200).json({ success: true, consultations: sortedConsultations });
   } catch (err) {
     console.error('Fetch PPID Consultations Error:', err.message);
     return res.status(500).json({ error: 'Gagal mengambil database antrean PPID.' });
@@ -1191,13 +1239,14 @@ app.post('/api/admin/ppid/update-status/:id', async (req, res) => {
 // ==========================================
 app.get('/api/admin/ppid/export', async (req, res) => {
   try {
-    const { data: rows, error: rowsError } = await supabase
+    const { data: fetchedRows, error: rowsError } = await supabase
       .from('ws_ppid_consultations')
-      .select('*')
-      .order('consultation_date', { ascending: false })
-      .order('queue_number', { ascending: true });
+      .select('*');
 
     if (rowsError) throw rowsError;
+
+    // Sort the rows using the same custom numerical sorting function
+    const rows = sortConsultationsList(fetchedRows || []);
 
     // Create workbook
     const workbook = new ExcelJS.Workbook();
