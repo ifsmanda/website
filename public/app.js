@@ -1332,26 +1332,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const result = await response.json();
 
         if (response.ok && result.success) {
-          if (result.pagi >= 250) {
+          if (result.pagi >= 500) {
             ppidOptPagi.disabled = true;
-            ppidOptPagi.textContent = `Sesi Pagi (08:00 - 12:00 WIB) [PENUH / 250 Antrean]`;
+            ppidOptPagi.textContent = `Sesi Pagi (08:00 - 12:00 WIB) [PENUH / 500 Antrean]`;
           } else {
             ppidOptPagi.disabled = false;
-            ppidOptPagi.textContent = `Sesi Pagi (08:00 - 12:00 WIB) [${result.pagi}/250 Terdaftar]`;
+            ppidOptPagi.textContent = `Sesi Pagi (08:00 - 12:00 WIB) [${result.pagi}/500 Terdaftar]`;
           }
 
-          if (result.siang >= 250) {
+          if (result.siang >= 500) {
             ppidOptSiang.disabled = true;
-            ppidOptSiang.textContent = `Sesi Siang (13:00 - 14:30 WIB) [PENUH / 250 Antrean]`;
+            ppidOptSiang.textContent = `Sesi Siang (13:00 - 14:30 WIB) [PENUH / 500 Antrean]`;
           } else {
             ppidOptSiang.disabled = false;
-            ppidOptSiang.textContent = `Sesi Siang (13:00 - 14:30 WIB) [${result.siang}/250 Terdaftar]`;
+            ppidOptSiang.textContent = `Sesi Siang (13:00 - 14:30 WIB) [${result.siang}/500 Terdaftar]`;
           }
           
           ppidSelectSession.disabled = false;
           ppidSelectSession.selectedIndex = 0;
 
-          if (result.pagi >= 250 && result.siang >= 250) {
+          if (result.pagi >= 500 && result.siang >= 500) {
             showPpidAlert('Mohon maaf, semua sesi antrean pada tanggal ini sudah penuh. Silakan pilih tanggal lain.', 'warning');
           }
         } else {

@@ -1059,9 +1059,9 @@ app.post('/api/ppid/register', async (req, res) => {
 
     if (fetchError) throw fetchError;
 
-    // Check if session is full (limit: 250)
-    if (existing && existing.length >= 250) {
-      return res.status(400).json({ error: 'Mohon maaf, kuota antrean untuk sesi ini sudah penuh (maksimal 250 pendaftar).' });
+    // Check if session is full (limit: 500)
+    if (existing && existing.length >= 500) {
+      return res.status(400).json({ error: 'Mohon maaf, kuota antrean untuk sesi ini sudah penuh (maksimal 500 pendaftar).' });
     }
 
     // 2. Parse and determine the maximum sequence number (avoiding duplicates even after deletions)
