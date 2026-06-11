@@ -976,8 +976,13 @@ function sortConsultationsList(list) {
 app.get('/api/ppid/live', async (req, res) => {
   try {
     // Get current date in WIB timezone (Bandung, Indonesia)
-    const todayStr = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' }))
-      .toISOString().split('T')[0];
+    const todayStr = new Date().toLocaleDateString('sv-SE', { timeZone: 'Asia/Jakarta' });
+
+    // Determine current session based on local time in Jakarta
+    const nowJakarta = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' }));
+    const currentHour = nowJakarta.getHours() + (nowJakarta.getMinutes() / 60);
+    // Sesi Pagi ends at 12:00, Sesi Siang starts at 13:00. Threshold is set at 12.5 (12:30).
+    const currentSession = currentHour < 12.5 ? 'Pagi' : 'Siang';
 
     // Fetch all consultations for today
     const { data: consultations, error } = await supabase
@@ -997,7 +1002,12 @@ app.get('/api/ppid/live', async (req, res) => {
     const upcomingList = (consultations || [])
       .filter(c => c.status === 'Pending')
       .sort((a, b) => {
-        // Sort Sesi Pagi first, then Sesi Siang
+        // Prioritize the current active session
+        const aIsCurrent = a.session.includes(currentSession) ? 0 : 1;
+        const bIsCurrent = b.session.includes(currentSession) ? 0 : 1;
+        if (aIsCurrent !== bIsCurrent) return aIsCurrent - bIsCurrent;
+
+        // If both are current or both are not current, sort Sesi Pagi first, then Sesi Siang
         const aSession = a.session.includes('Pagi') ? 1 : 2;
         const bSession = b.session.includes('Pagi') ? 1 : 2;
         if (aSession !== bSession) return aSession - bSession;
