@@ -1004,7 +1004,8 @@
         `;
 
         try {
-          const response = await fetch('/api/admin/ppid/consultations');
+          const filterDate = ppidFilterDate ? ppidFilterDate.value : '';
+          const response = await fetch(`/api/admin/ppid/consultations?date=${filterDate}`);
           const result = await response.json();
 
           if (response.ok && result.success) {
@@ -1442,7 +1443,7 @@
         btnRefreshPpid.addEventListener('click', loadPpidConsultations);
       }
       if (ppidFilterDate) {
-        ppidFilterDate.addEventListener('change', renderPpidConsultations);
+        ppidFilterDate.addEventListener('change', loadPpidConsultations);
       }
       if (ppidFilterSession) {
         ppidFilterSession.addEventListener('change', renderPpidConsultations);

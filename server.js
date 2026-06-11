@@ -943,6 +943,39 @@ function parseQueueNumber(qNum) {
   return { prefix: qNum, num: 0 };
 }
 
+// Helper to recursively fetch all consultations from Supabase to bypass the 1000 row limit
+async function getAllConsultations(date = null) {
+  let allData = [];
+  let from = 0;
+  let to = 999;
+  let keepFetching = true;
+  
+  while (keepFetching) {
+    let query = supabase
+      .from('ws_ppid_consultations')
+      .select('*')
+      .range(from, to)
+      .order('consultation_date', { ascending: false })
+      .order('created_at', { ascending: false });
+      
+    if (date) {
+      query = query.eq('consultation_date', date);
+    }
+    
+    const { data, error } = await query;
+    if (error) throw error;
+    
+    allData = allData.concat(data || []);
+    if (!data || data.length < 1000) {
+      keepFetching = false;
+    } else {
+      from += 1000;
+      to += 1000;
+    }
+  }
+  return allData;
+}
+
 // Helper to sort consultations: date DESC, session ASC, queue_number ASC (numerical)
 function sortConsultationsList(list) {
   return [...list].sort((a, b) => {
@@ -1198,11 +1231,8 @@ app.post('/api/ppid/register', async (req, res) => {
 // ==========================================
 app.get('/api/admin/ppid/consultations', async (req, res) => {
   try {
-    const { data: consultations, error: fetchError } = await supabase
-      .from('ws_ppid_consultations')
-      .select('*');
-
-    if (fetchError) throw fetchError;
+    const { date } = req.query;
+    const consultations = await getAllConsultations(date);
 
     // Sort the list using numerical sorting for queue numbers
     const sortedConsultations = sortConsultationsList(consultations || []);
@@ -1249,11 +1279,7 @@ app.post('/api/admin/ppid/update-status/:id', async (req, res) => {
 // ==========================================
 app.get('/api/admin/ppid/export', async (req, res) => {
   try {
-    const { data: fetchedRows, error: rowsError } = await supabase
-      .from('ws_ppid_consultations')
-      .select('*');
-
-    if (rowsError) throw rowsError;
+    const fetchedRows = await getAllConsultations();
 
     // Sort the rows using the same custom numerical sorting function
     const rows = sortConsultationsList(fetchedRows || []);
