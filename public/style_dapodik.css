@@ -1,0 +1,223 @@
+/**
+ * SMAN 2 BANDUNG — SPMB 2026 DAPODIK F-PD STYLING EXTENSION
+ * Enhances the multi-step registration forms with modern grids and styled form components.
+ */
+
+/* Form Steps Layout & Scrollability */
+#daftar-ulang-modal .info-modal-card {
+  max-width: 900px; /* Wider modal for large form content */
+  width: 95%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#daftar-ulang-modal .info-modal-body {
+  overflow-y: auto;
+  flex: 1;
+  padding-right: 8px;
+}
+
+/* Sections & Typography */
+.dapodik-section-header {
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 8px;
+  margin: 28px 0 16px 0;
+  font-family: var(--font-display, 'Outfit', sans-serif);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dapodik-section-header::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 18px;
+  background-color: var(--gold, #f4c542);
+  border-radius: 2px;
+}
+
+.dapodik-section-header.first {
+  margin-top: 10px;
+}
+
+/* Custom Grid Layouts */
+.form-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.form-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 768px) {
+  .form-grid-3, .form-grid-4 {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+/* Label & Input tweaks */
+.form-group label {
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  display: block;
+}
+
+.form-helper {
+  font-size: 11px;
+  color: var(--text-secondary);
+  opacity: 0.8;
+  margin-top: 4px;
+  display: block;
+}
+
+/* Custom inputs styling */
+.form-control:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(10, 46, 115, 0.1);
+}
+
+/* Prestasi & Beasiswa Dynamic Grid Tables */
+.dapodik-table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md, 8px);
+  margin-bottom: 16px;
+  background: var(--bg-card, #ffffff);
+}
+
+.dapodik-input-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  text-align: left;
+}
+
+.dapodik-input-table th {
+  background-color: rgba(10, 46, 115, 0.03);
+  border-bottom: 2px solid var(--border-color);
+  padding: 10px 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 10px;
+  color: var(--text-secondary);
+}
+
+.dapodik-input-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.dapodik-input-table tr:last-child td {
+  border-bottom: none;
+}
+
+.dapodik-input-table input,
+.dapodik-input-table select {
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm, 4px);
+  font-size: 12px;
+  background-color: var(--bg-body);
+  color: var(--text-primary);
+  outline: none;
+  box-sizing: border-box;
+}
+
+.dapodik-input-table input:focus,
+.dapodik-input-table select:focus {
+  border-color: var(--primary);
+}
+
+/* Dark mode overrides */
+.dark .dapodik-section-header {
+  color: var(--gold, #f4c542);
+}
+
+.dark .dapodik-section-header::before {
+  background-color: #ffffff;
+}
+
+.dark .dapodik-table-wrapper {
+  background: #1e293b;
+}
+
+.dark .dapodik-input-table th {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Verification detailed layout in Admin Dashboard */
+.admin-tab-content {
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 480px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.admin-tab-content.active {
+  display: flex;
+}
+
+.admin-detail-card {
+  background: var(--admin-bg);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
+
+.admin-detail-card h5 {
+  margin: 0 0 12px 0;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  text-transform: uppercase;
+  color: var(--admin-primary);
+  border-bottom: 1px solid var(--admin-border);
+  padding-bottom: 6px;
+}
+
+.admin-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 20px;
+}
+
+.admin-detail-item {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+}
+
+.admin-detail-label {
+  color: var(--admin-text-secondary);
+  font-weight: 600;
+  font-size: 11px;
+}
+
+.admin-detail-label::after {
+  content: " :";
+}
+
+.admin-detail-value {
+  font-weight: 700;
+  margin-top: 2px;
+  color: var(--admin-text);
+  word-break: break-word;
+}

@@ -15,6 +15,7 @@
   
   <!-- Styling -->
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style_dapodik.css">
   
   <style>
     :root {
@@ -527,114 +528,6 @@
       </div>
     </section>
 
-    <!-- =============================================
-         PPID CONSULTATIONS MANAGER
-         ============================================= -->
-    <section style="background: var(--admin-card); border: 1px solid var(--admin-border); border-radius: 16px; padding: 28px; box-shadow: var(--shadow-md);">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px; flex-wrap:wrap; gap:12px;">
-        <div>
-          <h2 style="margin:0; font-size:17px; font-weight:800; font-family:'Outfit',sans-serif; display:flex; align-items:center; gap:8px;">
-            🎫 Layanan Antrean Konsultasi PPID
-          </h2>
-          <p style="margin:4px 0 0; font-size:12px; color:var(--admin-text-secondary);">
-            Daftar antrean konsultasi tatap muka calon siswa/orang tua ke sekolah. Panggil dan kelola status pelayanan di sini.
-          </p>
-        </div>
-        <div style="display:flex; gap:10px;">
-          <a href="/display.html" target="_blank" class="btn" style="font-size: 12px; padding: 8px 16px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; background-color: #0ea5e9; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">
-            <i data-lucide="monitor" style="width:14px;height:14px;"></i> Layar Monitor TV
-          </a>
-          <button class="btn btn-outline-primary" id="btn-refresh-ppid" style="font-size: 12px; padding: 8px 16px; display: inline-flex; align-items: center; gap: 6px; cursor:pointer;">
-            <i data-lucide="refresh-cw" style="width:14px;height:14px;"></i> Segarkan Antrean
-          </button>
-          <a href="/api/admin/ppid/export" class="btn btn-gold" style="font-size: 12px; padding: 8px 16px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-            <i data-lucide="file-spreadsheet" style="width:14px;height:14px;"></i> Ekspor Excel
-          </a>
-        </div>
-      </div>
-
-      <!-- Filter Sesi / Tanggal Antrean PPID -->
-      <div style="display:flex; gap:12px; margin-bottom:16px; flex-wrap:wrap; align-items:center;">
-        <div style="display:flex; align-items:center; gap:8px;">
-          <label style="font-size:12px; font-weight:600; color:var(--admin-text-secondary);">Filter Tanggal:</label>
-          <input type="date" id="ppid-filter-date" style="padding:6px 12px; border:1px solid var(--admin-border); border-radius:6px; background:var(--admin-bg); color:var(--admin-text); font-size:12px; outline:none;">
-        </div>
-        <div style="display:flex; align-items:center; gap:8px;">
-          <label style="font-size:12px; font-weight:600; color:var(--admin-text-secondary);">Filter Sesi:</label>
-          <select id="ppid-filter-session" style="padding:6px 12px; border:1px solid var(--admin-border); border-radius:6px; background:var(--admin-bg); color:var(--admin-text); font-size:12px; outline:none;">
-            <option value="all">Semua Sesi</option>
-            <option value="Sesi Pagi (08:00 - 12:00 WIB)">Sesi Pagi (08:00 - 12:00 WIB)</option>
-            <option value="Sesi Siang (13:00 - 14:30 WIB)">Sesi Siang (13:00 - 14:30 WIB)</option>
-          </select>
-        </div>
-        <div style="display:flex; align-items:center; gap:8px;">
-          <label style="font-size:12px; font-weight:600; color:var(--admin-text-secondary);">Filter Status:</label>
-          <select id="ppid-filter-status" style="padding:6px 12px; border:1px solid var(--admin-border); border-radius:6px; background:var(--admin-bg); color:var(--admin-text); font-size:12px; outline:none;">
-            <option value="all">Semua Status</option>
-            <option value="Pending">Pending</option>
-            <option value="Calling">Calling (Dipanggil)</option>
-            <option value="Completed">Completed (Selesai)</option>
-            <option value="No Show">No Show (Absen)</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Consultations Table -->
-      <div style="overflow-x:auto;">
-        <table style="width:100%; border-collapse:collapse; font-size:13px;">
-          <thead>
-            <tr style="border-bottom:2px solid var(--admin-border);">
-              <th style="padding:12px 10px; text-align:left; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700; width:100px;">No Antrean</th>
-              <th style="padding:12px 10px; text-align:left; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700; width:130px;">Tanggal Datang</th>
-              <th style="padding:12px 10px; text-align:left; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700; width:150px;">Nama Lengkap</th>
-              <th style="padding:12px 10px; text-align:left; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700; width:140px;">Kategori / WA</th>
-              <th style="padding:12px 10px; text-align:left; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700;">Topik Konsultasi</th>
-              <th style="padding:12px 10px; text-align:center; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700; width:110px;">Status</th>
-              <th style="padding:12px 10px; text-align:center; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700; width:220px;">Aksi Pelayanan</th>
-            </tr>
-          </thead>
-          <tbody id="ppid-consultations-tbody">
-            <tr><td colspan="7" style="padding:24px; text-align:center; color:var(--admin-text-secondary);">Memuat daftar antrean PPID...</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- =============================================
-         CONTACT MESSAGES MANAGER
-         ============================================= -->
-    <section style="background: var(--admin-card); border: 1px solid var(--admin-border); border-radius: 16px; padding: 28px; box-shadow: var(--shadow-md);">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px; flex-wrap:wrap; gap:12px;">
-        <div>
-          <h2 style="margin:0; font-size:17px; font-weight:800; font-family:'Outfit',sans-serif; display:flex; align-items:center; gap:8px;">
-            📩 Kelola Pertanyaan Masuk
-          </h2>
-          <p style="margin:4px 0 0; font-size:12px; color:var(--admin-text-secondary);">
-            Daftar pertanyaan/pesan kendala dari pengunjung melalui formulir kontak. Balas langsung via email mereka.
-          </p>
-        </div>
-      </div>
-
-      <!-- Messages Table -->
-      <div style="overflow-x:auto;">
-        <table style="width:100%; border-collapse:collapse; font-size:13px;">
-          <thead>
-            <tr style="border-bottom:2px solid var(--admin-border);">
-              <th style="padding:12px 10px; text-align:left; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700; width:50px;">No</th>
-              <th style="padding:12px 10px; text-align:left; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700; width:140px;">Tanggal</th>
-              <th style="padding:12px 10px; text-align:left; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700; width:180px;">Pengirim</th>
-              <th style="padding:12px 10px; text-align:left; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700;">Isi Pertanyaan</th>
-              <th style="padding:12px 10px; text-align:center; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700; width:100px;">Status</th>
-              <th style="padding:12px 10px; text-align:center; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700; width:180px;">Aksi</th>
-            </tr>
-          </thead>
-          <tbody id="contact-messages-tbody">
-            <tr><td colspan="5" style="padding:24px; text-align:center; color:var(--admin-text-secondary);">Memuat daftar pertanyaan...</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
     <!-- TABLE CONTROLS -->
     <section class="table-control-card">
       <div class="search-input-group">
@@ -643,6 +536,9 @@
       </div>
       
       <div class="action-btn-group">
+        <button class="btn btn-primary" id="btn-import-excel" style="font-size: 13px; padding: 10px 18px; display: inline-flex; align-items: center; gap: 8px; background-color: #0c4a6e; border-color: #0c4a6e; color: white;">
+          <i data-lucide="file-up"></i> Impor Kelulusan (Excel)
+        </button>
         <button class="btn btn-outline-primary" id="btn-refresh" style="font-size: 13px; padding: 10px 18px; display: inline-flex; align-items: center; gap: 8px;">
           <i data-lucide="refresh-cw"></i> Segarkan Data
         </button>
@@ -679,69 +575,6 @@
       </table>
     </section>
 
-    <!-- =============================================
-         INSTAGRAM POSTS MANAGER
-         ============================================= -->
-    <section style="background: var(--admin-card); border: 1px solid var(--admin-border); border-radius: 16px; padding: 28px; box-shadow: var(--shadow-md);">
-
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px; flex-wrap:wrap; gap:12px;">
-        <div>
-          <h2 style="margin:0; font-size:17px; font-weight:800; font-family:'Outfit',sans-serif; display:flex; align-items:center; gap:8px;">
-            📸 Kelola Postingan Instagram
-          </h2>
-          <p style="margin:4px 0 0; font-size:12px; color:var(--admin-text-secondary);">
-            Tambahkan URL postingan @smandabandung agar tampil di section Berita website. Foto & caption langsung dari Instagram.
-          </p>
-        </div>
-        <a href="https://www.instagram.com/smandabandung/" target="_blank" rel="noopener noreferrer"
-          style="font-size:12px; color:#E1306C; font-weight:700; text-decoration:none;">
-          🔗 Buka @smandabandung
-        </a>
-      </div>
-
-      <!-- Add Post Form -->
-      <div id="ig-add-alert" style="display:none; padding:10px 16px; border-radius:8px; font-size:13px; font-weight:600; margin-bottom:16px;"></div>
-
-      <form id="ig-add-form" style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom: 24px;">
-        <input type="text" id="ig-post-url" placeholder="https://www.instagram.com/p/XXXXXXXXXXXXX/"
-          style="flex:1; min-width:260px; padding:10px 16px; border:1px solid var(--admin-border); border-radius:8px;
-                 background:var(--admin-bg); color:var(--admin-text); font-size:13px; outline:none;"
-          required>
-        <input type="number" id="ig-post-order" placeholder="Urutan (1=pertama)" min="1" max="99"
-          style="width:180px; padding:10px 16px; border:1px solid var(--admin-border); border-radius:8px;
-                 background:var(--admin-bg); color:var(--admin-text); font-size:13px; outline:none;">
-        <button type="submit" id="ig-add-btn"
-          style="padding:10px 24px; background:linear-gradient(135deg,#E1306C,#F77737); color:white; border:none;
-                 border-radius:8px; font-weight:700; font-size:13px; cursor:pointer; display:inline-flex; align-items:center; gap:8px;">
-          ＋ Tambah Postingan
-        </button>
-      </form>
-
-      <!-- Posts Table -->
-      <div style="overflow-x:auto;">
-        <table style="width:100%; border-collapse:collapse; font-size:13px;">
-          <thead>
-            <tr style="border-bottom:2px solid var(--admin-border);">
-              <th style="padding:10px 12px; text-align:left; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700;">Urutan</th>
-              <th style="padding:10px 12px; text-align:left; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700;">URL Postingan Instagram</th>
-              <th style="padding:10px 12px; text-align:center; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700;">Status</th>
-              <th style="padding:10px 12px; text-align:center; color:var(--admin-text-secondary); font-size:11px; text-transform:uppercase; font-weight:700;">Aksi</th>
-            </tr>
-          </thead>
-          <tbody id="ig-posts-tbody">
-            <tr><td colspan="4" style="padding:24px; text-align:center; color:var(--admin-text-secondary);">Memuat daftar postingan...</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Info Box -->
-      <div style="margin-top: 20px; padding: 14px 16px; background: rgba(225,48,108,0.06); border-radius: 8px; border-left: 3px solid #E1306C;">
-        <p style="margin:0; font-size:12px; color: var(--admin-text-secondary); line-height: 1.6;">
-          <strong style="color:#E1306C;">Cara pakai:</strong> Buka Instagram di browser → pilih postingan @smandabandung → klik ⋯ (titik tiga) → <em>Salin Tautan</em>
-          → paste URL di kotak di atas → klik Tambah. Postingan langsung tampil di website dengan foto & caption asli dari Instagram.
-        </p>
-      </div>
-    </section>
 
   </main>
 
@@ -774,58 +607,320 @@
               </div>
             </div>
           </div>
-          
+
           <!-- Meta data and Verification notes (Right) -->
           <div class="verify-form-panel">
-            <h4 class="form-step-title" style="margin-top: 0;">Biodata Calon Siswa</h4>
+            <h4 class="form-step-title" style="margin-top: 0; display: flex; align-items: center; justify-content: space-between;">
+              <span>Biodata Dapodik F-PD</span>
+              <span id="meta-session" style="font-size: 11px; background: rgba(10, 46, 115, 0.1); color: var(--admin-primary); padding: 4px 8px; border-radius: 4px; font-weight: bold;">-</span>
+            </h4>
             
-            <div class="meta-data-info">
-              <div class="meta-item">
-                <span class="meta-label">Nama Siswa:</span>
-                <span class="meta-value" id="meta-name">-</span>
+            <div class="doc-tabs" style="margin-bottom: 12px; display: flex; border-bottom: 1px solid var(--admin-border);">
+              <button class="doc-tab-btn active" id="admin-tab-pribadi-btn" style="flex: 1; text-align: center; padding: 8px 6px; font-size: 12px;">Pribadi</button>
+              <button class="doc-tab-btn" id="admin-tab-ortu-btn" style="flex: 1; text-align: center; padding: 8px 6px; font-size: 12px;">Orang Tua</button>
+              <button class="doc-tab-btn" id="admin-tab-registrasi-btn" style="flex: 1; text-align: center; padding: 8px 6px; font-size: 12px;">Registrasi & Rincian</button>
+            </div>
+
+            <!-- Tab Content 1: Pribadi -->
+            <div id="admin-tab-pribadi" class="admin-tab-content active" style="margin-bottom: 12px;">
+              <div class="admin-detail-card">
+                <h5>Informasi Diri & Alamat</h5>
+                <div class="admin-detail-grid">
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Nama Lengkap</span>
+                    <span class="admin-detail-value" id="meta-name">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">NISN</span>
+                    <span class="admin-detail-value" id="meta-nisn">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Jenis Kelamin</span>
+                    <span class="admin-detail-value" id="meta-gender">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">NIK Siswa</span>
+                    <span class="admin-detail-value" id="meta-nik">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">No. Kartu Keluarga</span>
+                    <span class="admin-detail-value" id="meta-no-kk">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Tempat, Tgl Lahir</span>
+                    <span class="admin-detail-value" id="meta-birth">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">No. Reg Akta Lahir</span>
+                    <span class="admin-detail-value" id="meta-no-akta">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Agama</span>
+                    <span class="admin-detail-value" id="meta-religion">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Kewarganegaraan</span>
+                    <span class="admin-detail-value" id="meta-citizenship">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Kebutuhan Khusus</span>
+                    <span class="admin-detail-value" id="meta-special-needs">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Anak Ke</span>
+                    <span class="admin-detail-value" id="meta-child-no">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Penerima KIP / PIP</span>
+                    <span class="admin-detail-value" id="meta-kip-status">-</span>
+                  </div>
+                </div>
               </div>
-              <div class="meta-item">
-                <span class="meta-label">NISN:</span>
-                <span class="meta-value" id="meta-nisn">-</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">Alamat Rumah:</span>
-                <span class="meta-value" id="meta-address">-</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">Email:</span>
-                <span class="meta-value" id="meta-email">-</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">No. WhatsApp:</span>
-                <span class="meta-value" id="meta-phone">-</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">Ukuran Baju:</span>
-                <span class="meta-value" id="meta-uniform">-</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">Jadwal Sesi Fisik:</span>
-                <span class="meta-value text-highlight" id="meta-session">-</span>
+              <div class="admin-detail-card" style="margin-top: 10px;">
+                <h5>Alamat Lengkap & Kontak</h5>
+                <div class="admin-detail-grid">
+                  <div class="admin-detail-item" style="grid-column: span 2;">
+                    <span class="admin-detail-label">Alamat Jalan</span>
+                    <span class="admin-detail-value" id="meta-address-street">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">RT / RW</span>
+                    <span class="admin-detail-value" id="meta-rt-rw">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Dusun</span>
+                    <span class="admin-detail-value" id="meta-dusun">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Kelurahan</span>
+                    <span class="admin-detail-value" id="meta-kelurahan">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Kecamatan</span>
+                    <span class="admin-detail-value" id="meta-kecamatan">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Kode Pos</span>
+                    <span class="admin-detail-value" id="meta-kode-pos">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Koordinat</span>
+                    <span class="admin-detail-value" id="meta-coords">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Tempat Tinggal / Transportasi</span>
+                    <span class="admin-detail-value" id="meta-living-transport">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Email</span>
+                    <span class="admin-detail-value" id="meta-email">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">No. HP / WA</span>
+                    <span class="admin-detail-value" id="meta-phone">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Telepon Rumah</span>
+                    <span class="admin-detail-value" id="meta-tel-rumah">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Ukuran Seragam</span>
+                    <span class="admin-detail-value" id="meta-uniform">-</span>
+                  </div>
+                  <div class="admin-detail-item" style="grid-column: span 2;">
+                    <span class="admin-detail-label">Alamat Rumah (Sesuai KK)</span>
+                    <span class="admin-detail-value" id="meta-address">-</span>
+                  </div>
+                </div>
               </div>
             </div>
-            
-            <div class="form-group">
+
+            <!-- Tab Content 2: Orang Tua -->
+            <div id="admin-tab-ortu" class="admin-tab-content" style="margin-bottom: 12px;">
+              <div class="admin-detail-card">
+                <h5>Data Ayah Kandung</h5>
+                <div class="admin-detail-grid">
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Nama Lengkap Ayah</span>
+                    <span class="admin-detail-value" id="meta-ayah-name">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">NIK Ayah</span>
+                    <span class="admin-detail-value" id="meta-ayah-nik">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Tahun Lahir / Pendidikan</span>
+                    <span class="admin-detail-value" id="meta-ayah-birth-edu">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Pekerjaan / Penghasilan</span>
+                    <span class="admin-detail-value" id="meta-ayah-job-income">-</span>
+                  </div>
+                  <div class="admin-detail-item" style="grid-column: span 2;">
+                    <span class="admin-detail-label">Berkebutuhan Khusus Ayah</span>
+                    <span class="admin-detail-value" id="meta-ayah-special">-</span>
+                  </div>
+                </div>
+              </div>
+              <div class="admin-detail-card" style="margin-top: 10px;">
+                <h5>Data Ibu Kandung</h5>
+                <div class="admin-detail-grid">
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Nama Lengkap Ibu</span>
+                    <span class="admin-detail-value" id="meta-ibu-name">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">NIK Ibu</span>
+                    <span class="admin-detail-value" id="meta-ibu-nik">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Tahun Lahir / Pendidikan</span>
+                    <span class="admin-detail-value" id="meta-ibu-birth-edu">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Pekerjaan / Penghasilan</span>
+                    <span class="admin-detail-value" id="meta-ibu-job-income">-</span>
+                  </div>
+                  <div class="admin-detail-item" style="grid-column: span 2;">
+                    <span class="admin-detail-label">Berkebutuhan Khusus Ibu</span>
+                    <span class="admin-detail-value" id="meta-ibu-special">-</span>
+                  </div>
+                </div>
+              </div>
+              <div class="admin-detail-card" style="margin-top: 10px;">
+                <h5>Data Wali (Jika Ada)</h5>
+                <div class="admin-detail-grid">
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Nama Lengkap Wali</span>
+                    <span class="admin-detail-value" id="meta-wali-name">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">NIK Wali</span>
+                    <span class="admin-detail-value" id="meta-wali-nik">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Tahun Lahir / Pendidikan</span>
+                    <span class="admin-detail-value" id="meta-wali-birth-edu">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Pekerjaan / Penghasilan</span>
+                    <span class="admin-detail-value" id="meta-wali-job-income">-</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab Content 3: Periodik & Registrasi -->
+            <div id="admin-tab-registrasi" class="admin-tab-content" style="margin-bottom: 12px;">
+              <div class="admin-detail-card">
+                <h5>Data Periodik & Kesejahteraan</h5>
+                <div class="admin-detail-grid">
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Tinggi / Berat Badan</span>
+                    <span class="admin-detail-value" id="meta-tb-bb">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Lingkar Kepala</span>
+                    <span class="admin-detail-value" id="meta-head-circ">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Jarak ke Sekolah</span>
+                    <span class="admin-detail-value" id="meta-distance">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Waktu Tempuh</span>
+                    <span class="admin-detail-value" id="meta-time-tempuh">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Jumlah Saudara</span>
+                    <span class="admin-detail-value" id="meta-siblings">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Bantuan Kesejahteraan</span>
+                    <span class="admin-detail-value" id="meta-welfare-type">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">No. Kartu Kesejahteraan</span>
+                    <span class="admin-detail-value" id="meta-welfare-card">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Nama Tertera di Kartu</span>
+                    <span class="admin-detail-value" id="meta-welfare-name">-</span>
+                  </div>
+                </div>
+              </div>
+              <div class="admin-detail-card" style="margin-top: 10px;">
+                <h5>Registrasi Sekolah Asal</h5>
+                <div class="admin-detail-grid">
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Jenis Pendaftaran / NIS</span>
+                    <span class="admin-detail-value" id="meta-reg-nis">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Tanggal Masuk Sekolah</span>
+                    <span class="admin-detail-value" id="meta-entry-date">-</span>
+                  </div>
+                  <div class="admin-detail-item" style="grid-column: span 2;">
+                    <span class="admin-detail-label">Sekolah Asal</span>
+                    <span class="admin-detail-value" id="meta-old-school">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">Nomor Peserta UN</span>
+                    <span class="admin-detail-value" id="meta-un-no">-</span>
+                  </div>
+                  <div class="admin-detail-item">
+                    <span class="admin-detail-label">No. Seri Ijazah</span>
+                    <span class="admin-detail-value" id="meta-ijazah-no">-</span>
+                  </div>
+                  <div class="admin-detail-item" style="grid-column: span 2;">
+                    <span class="admin-detail-label">No. Seri SKHUN</span>
+                    <span class="admin-detail-value" id="meta-skhun-no">-</span>
+                  </div>
+                </div>
+              </div>
+              <div class="admin-detail-card" style="margin-top: 10px;">
+                <h5>Prestasi & Beasiswa</h5>
+                <div class="admin-detail-grid">
+                  <div class="admin-detail-item" style="grid-column: span 2;">
+                    <span class="admin-detail-label">Prestasi 1</span>
+                    <span class="admin-detail-value" id="meta-prestasi-1">-</span>
+                  </div>
+                  <div class="admin-detail-item" style="grid-column: span 2;">
+                    <span class="admin-detail-label">Prestasi 2</span>
+                    <span class="admin-detail-value" id="meta-prestasi-2">-</span>
+                  </div>
+                  <div class="admin-detail-item" style="grid-column: span 2;">
+                    <span class="admin-detail-label">Prestasi 3</span>
+                    <span class="admin-detail-value" id="meta-prestasi-3">-</span>
+                  </div>
+                  <div class="admin-detail-item" style="grid-column: span 2;">
+                    <span class="admin-detail-label">Beasiswa 1</span>
+                    <span class="admin-detail-value" id="meta-beasiswa-1">-</span>
+                  </div>
+                  <div class="admin-detail-item" style="grid-column: span 2;">
+                    <span class="admin-detail-label">Beasiswa 2</span>
+                    <span class="admin-detail-value" id="meta-beasiswa-2">-</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Notes and submission actions -->
+            <div class="form-group" style="margin-top: 12px;">
               <label for="verification-notes">Catatan Tambahan Verifikator (Untuk Siswa)</label>
-              <textarea id="verification-notes" class="form-control" rows="4" placeholder="Masukkan instruksi khusus atau alasan penolakan berkas..."></textarea>
+              <textarea id="verification-notes" class="form-control" rows="3" placeholder="Masukkan instruksi khusus atau alasan penolakan berkas..."></textarea>
             </div>
             
-            <div class="form-step-actions" style="margin-top: auto; justify-content: flex-end;">
+            <div class="form-step-actions" style="margin-top: 16px; justify-content: flex-end; gap: 8px; display: flex;">
               <button class="btn btn-outline-primary" id="btn-review-cancel">Batal</button>
-              <button class="btn btn-primary" id="btn-reject" style="background-color: #ef4444; border-color: #ef4444; color: white;">
+              <button class="btn btn-primary" id="btn-reject" style="background-color: #ef4444; border-color: #ef4444; color: white; display: inline-flex; align-items: center; gap: 4px;">
                 Tolak Berkas <i data-lucide="x-circle"></i>
               </button>
-              <button class="btn btn-gold" id="btn-approve" style="background-color: #22c55e; border-color: #22c55e; color: white;">
+              <button class="btn btn-gold" id="btn-approve" style="background-color: #22c55e; border-color: #22c55e; color: white; display: inline-flex; align-items: center; gap: 4px;">
                 Setujui & Verifikasi <i data-lucide="check-circle"></i>
               </button>
             </div>
           </div>
-          
         </div>
       </div>
     </div>
@@ -876,6 +971,61 @@
               Kirim & Balas Jawaban <i data-lucide="send" style="width:14px;height:14px;"></i>
             </button>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMPORT EXCEL MODAL -->
+  <div class="info-modal" id="import-excel-modal">
+    <div class="info-modal-card" style="max-width: 500px; padding: 28px;">
+      <div class="info-modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--admin-border); padding-bottom: 12px;">
+        <h3 style="margin: 0; font-size: 16px; font-weight: 800; font-family: 'Outfit', sans-serif; display: flex; align-items: center; gap: 8px;">
+          <i data-lucide="file-up" style="color: var(--admin-primary);"></i> Impor Data Kelulusan SPMB Pemerintah
+        </h3>
+        <button class="info-modal-close" id="close-import-modal" style="background: none; border: none; color: var(--admin-text-secondary); cursor: pointer;"><i data-lucide="x"></i></button>
+      </div>
+      
+      <div id="import-alert" class="modal-alert hidden" style="padding: 10px 16px; border-radius: 6px; font-size: 13px; font-weight: 600; margin-bottom: 16px;"></div>
+      
+      <div class="info-modal-body" style="display: flex; flex-direction: column; gap: 16px;">
+        <p style="font-size: 12px; color: var(--admin-text-secondary); line-height: 1.5; margin: 0;">
+          Unggah berkas spreadsheet Excel (.xlsx atau .xls) berisi data calon siswa yang diterima dari SPMB/PPDB Pemerintah. 
+          Data ini akan digunakan untuk memverifikasi NISN dan secara otomatis mengisi formulir daftar ulang calon siswa.
+        </p>
+        
+        <div style="background: rgba(10, 46, 115, 0.04); padding: 12px; border-radius: 8px; border: 1px dashed var(--admin-primary); font-size: 11px; line-height: 1.6; color: var(--admin-text);">
+          <strong>Format Kolom Excel yang Didukung:</strong><br>
+          <code style="background: rgba(255,255,255,0.7); padding: 2px 4px; border-radius: 4px;">nisn</code> (Wajib), 
+          <code style="background: rgba(255,255,255,0.7); padding: 2px 4px; border-radius: 4px;">nama</code>, 
+          <code style="background: rgba(255,255,255,0.7); padding: 2px 4px; border-radius: 4px;">jenis_kelamin</code>, 
+          <code style="background: rgba(255,255,255,0.7); padding: 2px 4px; border-radius: 4px;">nik</code>, 
+          <code style="background: rgba(255,255,255,0.7); padding: 2px 4px; border-radius: 4px;">no_kk</code>, 
+          <code style="background: rgba(255,255,255,0.7); padding: 2px 4px; border-radius: 4px;">tempat_lahir</code>, 
+          <code style="background: rgba(255,255,255,0.7); padding: 2px 4px; border-radius: 4px;">tanggal_lahir</code>, 
+          <code style="background: rgba(255,255,255,0.7); padding: 2px 4px; border-radius: 4px;">alamat</code>, 
+          <code style="background: rgba(255,255,255,0.7); padding: 2px 4px; border-radius: 4px;">rt</code>, 
+          <code style="background: rgba(255,255,255,0.7); padding: 2px 4px; border-radius: 4px;">rw</code>, 
+          <code style="background: rgba(255,255,255,0.7); padding: 2px 4px; border-radius: 4px;">kelurahan</code>, 
+          <code style="background: rgba(255,255,255,0.7); padding: 2px 4px; border-radius: 4px;">kecamatan</code>, 
+          <code style="background: rgba(255,255,255,0.7); padding: 2px 4px; border-radius: 4px;">sekolah_asal</code>, 
+          <code style="background: rgba(255,255,255,0.7); padding: 2px 4px; border-radius: 4px;">nama_ayah</code>, 
+          <code style="background: rgba(255,255,255,0.7); padding: 2px 4px; border-radius: 4px;">nama_ibu</code>, 
+          <code style="background: rgba(255,255,255,0.7); padding: 2px 4px; border-radius: 4px;">no_hp</code>, 
+          <code style="background: rgba(255,255,255,0.7); padding: 2px 4px; border-radius: 4px;">email</code>.
+          <br><span style="color: var(--admin-text-secondary);">*Nama kolom tidak sensitif huruf besar/kecil. Kolom yang tidak terisi akan diabaikan (tetap kosong).</span>
+        </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <label for="import-file-field" style="font-size: 12px; font-weight: 700; text-transform: uppercase;">Pilih File Excel:</label>
+          <input type="file" id="import-file-field" accept=".xlsx, .xls" style="font-size: 13px;">
+        </div>
+        
+        <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 8px; border-top: 1px solid var(--admin-border); padding-top: 16px;">
+          <button class="btn btn-outline-primary" id="btn-import-cancel" style="font-size: 13px; padding: 10px 20px;">Batal</button>
+          <button class="btn btn-primary" id="btn-import-submit" style="font-size: 13px; padding: 10px 20px; display: inline-flex; align-items: center; gap: 8px; font-weight: 700; background-color: var(--admin-primary); border-color: var(--admin-primary); color: white;">
+            Mulai Impor <i data-lucide="upload-cloud" style="width: 14px; height: 14px;"></i>
+          </button>
         </div>
       </div>
     </div>
@@ -978,205 +1128,6 @@
       const previewImg = document.getElementById('doc-preview-img');
       const previewPlaceholder = document.getElementById('doc-preview-placeholder');
       
-      // PPID Elements & State
-      const ppidTbody = document.getElementById('ppid-consultations-tbody');
-      const btnRefreshPpid = document.getElementById('btn-refresh-ppid');
-      const ppidFilterDate = document.getElementById('ppid-filter-date');
-      const ppidFilterSession = document.getElementById('ppid-filter-session');
-      const ppidFilterStatus = document.getElementById('ppid-filter-status');
-      let ppidConsultationsList = [];
-
-      // Initial filter date setup: Today's date
-      if (ppidFilterDate) {
-        ppidFilterDate.value = new Date().toISOString().split('T')[0];
-      }
-
-      // Load PPID consultations
-      async function loadPpidConsultations() {
-        if (!ppidTbody) return;
-        ppidTbody.innerHTML = `
-          <tr>
-            <td colspan="7" style="padding: 24px; text-align: center; color: var(--admin-text-secondary);">
-              <div class="loading-spinner" style="margin: 0 auto 10px auto;"></div>
-              <span>Memuat antrean PPID...</span>
-            </td>
-          </tr>
-        `;
-
-        try {
-          const filterDate = ppidFilterDate ? ppidFilterDate.value : '';
-          const response = await fetch(`/api/admin/ppid/consultations?date=${filterDate}`);
-          const result = await response.json();
-
-          if (response.ok && result.success) {
-            ppidConsultationsList = result.consultations;
-            renderPpidConsultations();
-          } else {
-            ppidTbody.innerHTML = `<tr><td colspan="7" style="padding:24px; text-align:center; color:#ef4444;">${result.error || 'Gagal memuat antrean PPID.'}</td></tr>`;
-          }
-        } catch (err) {
-          console.error(err);
-          ppidTbody.innerHTML = `<tr><td colspan="7" style="padding:24px; text-align:center; color:#ef4444;">Kesalahan jaringan saat memuat antrean.</td></tr>`;
-        }
-      }
-
-      // Render PPID consultations
-      function renderPpidConsultations() {
-        if (!ppidTbody) return;
-        const filterDate = ppidFilterDate ? ppidFilterDate.value : '';
-        const filterSession = ppidFilterSession ? ppidFilterSession.value : 'all';
-        const filterStatus = ppidFilterStatus ? ppidFilterStatus.value : 'all';
-
-        const filtered = ppidConsultationsList.filter(item => {
-          const matchDate = !filterDate || item.consultation_date === filterDate;
-          const matchSession = filterSession === 'all' || item.session === filterSession;
-          const matchStatus = filterStatus === 'all' || item.status === filterStatus;
-          return matchDate && matchSession && matchStatus;
-        });
-
-        if (filtered.length === 0) {
-          ppidTbody.innerHTML = `
-            <tr>
-              <td colspan="7" style="padding: 24px; text-align: center; color: var(--admin-text-secondary);">
-                Tidak ada data antrean PPID yang cocok dengan filter.
-              </td>
-            </tr>
-          `;
-          return;
-        }
-
-        ppidTbody.innerHTML = '';
-        filtered.forEach(item => {
-          const tr = document.createElement('tr');
-          tr.style.borderBottom = '1px solid var(--admin-border)';
-
-          let badgeClass = 'badge-pending';
-          let statusText = 'Pending';
-          if (item.status === 'Calling') {
-            badgeClass = 'badge-pending';
-            statusText = 'Dipanggil';
-          } else if (item.status === 'Completed') {
-            badgeClass = 'badge-verified';
-            statusText = 'Selesai';
-          } else if (item.status === 'No Show') {
-            badgeClass = 'badge-rejected';
-            statusText = 'Absen';
-          }
-
-          const formattedDate = new Date(item.consultation_date).toLocaleDateString('id-ID', {
-            weekday: 'short',
-            month: 'short',
-            day: 'numeric'
-          });
-
-          // Format session string for display (Sesi Pagi or Sesi Siang)
-          const shortSession = item.session.includes('Pagi') ? 'Pagi' : 'Siang';
-
-          tr.innerHTML = `
-            <td style="padding: 12px 10px; font-weight: 800; color: var(--admin-primary); font-size:14px;">${escapeHtml(item.queue_number)}</td>
-            <td style="padding: 12px 10px;">${formattedDate}<br><span style="font-size:11px; color:var(--admin-text-secondary); font-weight:600;">Sesi ${shortSession}</span></td>
-            <td style="padding: 12px 10px; font-weight: 700;">${escapeHtml(item.name)}</td>
-            <td style="padding: 12px 10px;">
-              <span style="font-size:11px; display:block; color:var(--admin-text-secondary);">${escapeHtml(item.role)}</span>
-              <a href="https://wa.me/${item.phone.replace(/[^0-9]/g, '')}" target="_blank" style="color:#22c55e; font-weight:600; text-decoration:none; font-size:12px; display:inline-flex; align-items:center; gap:2px;">
-                💬 ${escapeHtml(item.phone)}
-              </a>
-            </td>
-            <td style="padding: 12px 10px; color:var(--admin-text-secondary);">
-              ${escapeHtml(item.topic)}
-              ${item.notes ? `
-                <div style="font-size:11px; margin-top:4px; padding:4px 8px; background:rgba(18,63,156,0.04); border-left:2px solid var(--admin-primary); color:var(--admin-text); border-radius:0 4px 4px 0; max-width: 250px; word-break: break-word;">
-                  <strong>Catatan:</strong> ${escapeHtml(item.notes)}
-                  <button class="btn-edit-ppid-notes" data-id="${item.id}" style="border:none; background:none; color:#0ea5e9; cursor:pointer; font-size:10px; font-weight:bold; margin-left:6px; padding:0; display:inline-flex; align-items:center; gap:2px;">
-                    ✏️ Edit
-                  </button>
-                </div>
-              ` : `
-                <button class="btn-edit-ppid-notes" data-id="${item.id}" style="border:none; background:none; color:var(--admin-primary); cursor:pointer; font-size:11px; font-weight:600; margin-top:4px; display:block; padding:0; display:inline-flex; align-items:center; gap:2px;">
-                  ➕ Tambah Catatan
-                </button>
-              `}
-            </td>
-            <td style="padding: 12px 10px; text-align:center;">
-              <span class="status-badge ${badgeClass}" style="${item.status === 'Calling' ? 'background-color:#0a2e73; color:white;' : ''}">${statusText}</span>
-            </td>
-            <td style="padding: 12px 10px; text-align:center;">
-              <div style="display:flex; gap:6px; justify-content:center;">
-                <button class="btn-call-ppid" data-id="${item.id}" style="padding: 6px 10px; font-size: 11px; background:#0a2e73; border:none; border-radius:4px; color:white; font-weight:700; cursor:pointer;" ${item.status === 'Completed' ? 'disabled style="opacity:0.5; cursor:not-allowed;"' : ''}>
-                  📢 Panggil
-                </button>
-                <button class="btn-complete-ppid" data-id="${item.id}" style="padding: 6px 10px; font-size: 11px; background:#22c55e; border:none; border-radius:4px; color:white; font-weight:700; cursor:pointer;" ${item.status === 'Completed' ? 'disabled style="opacity:0.5; cursor:not-allowed;"' : ''}>
-                  ✓ Selesai
-                </button>
-                <button class="btn-noshow-ppid" data-id="${item.id}" style="padding: 6px 10px; font-size: 11px; background:#ef4444; border:none; border-radius:4px; color:white; font-weight:700; cursor:pointer;" ${item.status === 'Completed' ? 'disabled style="opacity:0.5; cursor:not-allowed;"' : ''}>
-                  ✕ Absen
-                </button>
-              </div>
-            </td>
-          `;
-          ppidTbody.appendChild(tr);
-        });
-
-        // Add event listeners to the generated buttons
-        ppidTbody.querySelectorAll('.btn-call-ppid').forEach(btn => {
-          btn.addEventListener('click', () => updatePpidStatus(btn.dataset.id, 'Calling'));
-        });
-        ppidTbody.querySelectorAll('.btn-complete-ppid').forEach(btn => {
-          btn.addEventListener('click', () => {
-            const notes = prompt("Masukkan Catatan / Keterangan Pelayanan (Opsional - Bisa dikosongkan):", "");
-            if (notes !== null) {
-              updatePpidStatus(btn.dataset.id, 'Completed', notes);
-            }
-          });
-        });
-        ppidTbody.querySelectorAll('.btn-noshow-ppid').forEach(btn => {
-          btn.addEventListener('click', () => {
-            const notes = prompt("Masukkan Keterangan Kenapa Absen (Opsional - Bisa dikosongkan):", "");
-            if (notes !== null) {
-              updatePpidStatus(btn.dataset.id, 'No Show', notes);
-            }
-          });
-        });
-        ppidTbody.querySelectorAll('.btn-edit-ppid-notes').forEach(btn => {
-          btn.addEventListener('click', () => {
-            const id = btn.dataset.id;
-            const item = ppidConsultationsList.find(c => c.id === id);
-            if (!item) return;
-            const currentNotes = item.notes || '';
-            const newNotes = prompt("Catatan / Keterangan Pelayanan (Opsional):", currentNotes);
-            if (newNotes !== null) {
-              updatePpidStatus(id, item.status, newNotes);
-            }
-          });
-        });
-      }
-
-      // Update PPID status
-      async function updatePpidStatus(id, status, notes = '') {
-        try {
-          const response = await fetch(`/api/admin/ppid/update-status/${id}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ status, notes })
-          });
-
-          const result = await response.json();
-          if (response.ok && result.success) {
-            const item = ppidConsultationsList.find(c => c.id === id);
-            if (item) {
-              item.status = status;
-              item.notes = notes;
-            }
-            renderPpidConsultations();
-          } else {
-            alert(result.error || 'Gagal mengubah status antrean.');
-          }
-        } catch (err) {
-          console.error(err);
-          alert('Koneksi server gagal saat memperbarui status.');
-        }
-      }
-
       // Load all records from backend
       async function loadRegistrants() {
         tbody.innerHTML = `
@@ -1307,13 +1258,126 @@
         currentSelectedRegistrant = student;
         
         // Populate metadata
-        document.getElementById('meta-name').textContent = student.name;
-        document.getElementById('meta-nisn').textContent = student.nisn;
-        document.getElementById('meta-address').textContent = student.address;
-        document.getElementById('meta-email').textContent = student.email;
-        document.getElementById('meta-phone').textContent = student.phone;
-        document.getElementById('meta-uniform').textContent = student.uniform_size;
-        document.getElementById('meta-session').textContent = student.queue_session;
+        document.getElementById('meta-name').textContent = student.name || '-';
+        document.getElementById('meta-nisn').textContent = student.nisn || '-';
+        document.getElementById('meta-gender').textContent = student.gender || '-';
+        document.getElementById('meta-nik').textContent = student.nik || '-';
+        document.getElementById('meta-no-kk').textContent = student.no_kk || '-';
+        
+        const birthDate = student.tanggal_lahir ? new Date(student.tanggal_lahir).toLocaleDateString('id-ID') : '';
+        document.getElementById('meta-birth').textContent = (student.tempat_lahir && birthDate) ? `${student.tempat_lahir}, ${birthDate}` : (student.tempat_lahir || birthDate || '-');
+        
+        document.getElementById('meta-no-akta').textContent = student.no_akta || '-';
+        document.getElementById('meta-religion').textContent = student.agama || '-';
+        
+        let citizen = student.kewarganegaraan || '-';
+        if (student.kewarganegaraan === 'WNA' && student.kewarganegaraan_negara) {
+          citizen += ` (${student.kewarganegaraan_negara})`;
+        }
+        document.getElementById('meta-citizenship').textContent = citizen;
+        document.getElementById('meta-special-needs').textContent = student.kebutuhan_khusus || '-';
+        document.getElementById('meta-child-no').textContent = student.anak_ke || '-';
+        
+        let kipStatus = student.penerima_kip || '-';
+        if (student.penerima_kip === 'Ya' && student.tetap_kip) {
+          kipStatus += ` (Tetap Menerima KIP: ${student.tetap_kip})`;
+        } else if (student.penerima_kip === 'Tidak' && student.alasan_tolak_pip) {
+          kipStatus += ` (Menolak PIP: ${student.alasan_tolak_pip})`;
+        }
+        document.getElementById('meta-kip-status').textContent = kipStatus;
+
+        document.getElementById('meta-address-street').textContent = student.alamat_jalan || '-';
+        document.getElementById('meta-rt-rw').textContent = (student.rt && student.rw) ? `RT ${student.rt} / RW ${student.rw}` : '-';
+        document.getElementById('meta-dusun').textContent = student.dusun || '-';
+        document.getElementById('meta-kelurahan').textContent = student.kelurahan || '-';
+        document.getElementById('meta-kecamatan').textContent = student.kecamatan || '-';
+        document.getElementById('meta-kode-pos').textContent = student.kode_pos || '-';
+        document.getElementById('meta-coords').textContent = (student.lintang && student.bujur) ? `${student.lintang}, ${student.bujur}` : '-';
+        document.getElementById('meta-living-transport').textContent = (student.tempat_tinggal && student.transportasi) ? `${student.tempat_tinggal} / ${student.transportasi}` : (student.tempat_tinggal || student.transportasi || '-');
+        document.getElementById('meta-email').textContent = student.email || '-';
+        document.getElementById('meta-phone').textContent = student.phone || '-';
+        document.getElementById('meta-tel-rumah').textContent = student.telepon_rumah || '-';
+        document.getElementById('meta-uniform').textContent = student.uniform_size || '-';
+        document.getElementById('meta-address').textContent = student.address || '-';
+        document.getElementById('meta-session').textContent = student.queue_session || '-';
+
+        // Father
+        document.getElementById('meta-ayah-name').textContent = student.ayah_nama || '-';
+        document.getElementById('meta-ayah-nik').textContent = student.ayah_nik || '-';
+        document.getElementById('meta-ayah-birth-edu').textContent = (student.ayah_tahun_lahir && student.ayah_pendidikan) ? `${student.ayah_tahun_lahir} / ${student.ayah_pendidikan}` : (student.ayah_tahun_lahir || student.ayah_pendidikan || '-');
+        document.getElementById('meta-ayah-job-income').textContent = (student.ayah_pekerjaan && student.ayah_penghasilan) ? `${student.ayah_pekerjaan} / ${student.ayah_penghasilan}` : (student.ayah_pekerjaan || student.ayah_penghasilan || '-');
+        document.getElementById('meta-ayah-special').textContent = student.ayah_kebutuhan_khusus || '-';
+
+        // Mother
+        document.getElementById('meta-ibu-name').textContent = student.ibu_nama || '-';
+        document.getElementById('meta-ibu-nik').textContent = student.ibu_nik || '-';
+        document.getElementById('meta-ibu-birth-edu').textContent = (student.ibu_tahun_lahir && student.ibu_pendidikan) ? `${student.ibu_tahun_lahir} / ${student.ibu_pendidikan}` : (student.ibu_tahun_lahir || student.ibu_pendidikan || '-');
+        document.getElementById('meta-ibu-job-income').textContent = (student.ibu_pekerjaan && student.ibu_penghasilan) ? `${student.ibu_pekerjaan} / ${student.ibu_penghasilan}` : (student.ibu_pekerjaan || student.ibu_penghasilan || '-');
+        document.getElementById('meta-ibu-special').textContent = student.ibu_kebutuhan_khusus || '-';
+
+        // Wali
+        document.getElementById('meta-wali-name').textContent = student.wali_nama || '-';
+        document.getElementById('meta-wali-nik').textContent = student.wali_nik || '-';
+        document.getElementById('meta-wali-birth-edu').textContent = (student.wali_tahun_lahir && student.wali_pendidikan) ? `${student.wali_tahun_lahir} / ${student.wali_pendidikan}` : (student.wali_tahun_lahir || student.wali_pendidikan || '-');
+        document.getElementById('meta-wali-job-income').textContent = (student.wali_pekerjaan && student.wali_penghasilan) ? `${student.wali_pekerjaan} / ${student.wali_penghasilan}` : (student.wali_pekerjaan || student.wali_penghasilan || '-');
+
+        // Periodik
+        document.getElementById('meta-tb-bb').textContent = (student.tinggi_badan && student.berat_badan) ? `${student.tinggi_badan} cm / ${student.berat_badan} kg` : '-';
+        document.getElementById('meta-head-circ').textContent = student.lingkar_kepala ? `${student.lingkar_kepala} cm` : '-';
+        
+        let dist = student.jarak_sekolah || '-';
+        if (student.jarak_sekolah === 'Lebih dari 1 km' && student.jarak_sekolah_km) {
+          dist += ` (${student.jarak_sekolah_km} km)`;
+        }
+        document.getElementById('meta-distance').textContent = dist;
+        document.getElementById('meta-time-tempuh').textContent = (student.waktu_tempuh_jam !== undefined && student.waktu_tempuh_menit !== undefined) ? `${student.waktu_tempuh_jam} Jam ${student.waktu_tempuh_menit} Menit` : '-';
+        document.getElementById('meta-siblings').textContent = student.jumlah_saudara !== undefined ? student.jumlah_saudara : '-';
+
+        // Welfare
+        document.getElementById('meta-welfare-type').textContent = student.kesejahteraan_jenis || '-';
+        document.getElementById('meta-welfare-card').textContent = student.kesejahteraan_no_kartu || '-';
+        document.getElementById('meta-welfare-name').textContent = student.kesejahteraan_nama_kartu || '-';
+
+        // Registration
+        document.getElementById('meta-reg-nis').textContent = (student.jenis_pendaftaran && student.nis) ? `${student.jenis_pendaftaran} / NIS: ${student.nis}` : (student.jenis_pendaftaran || student.nis || '-');
+        document.getElementById('meta-entry-date').textContent = student.tanggal_masuk ? new Date(student.tanggal_masuk).toLocaleDateString('id-ID') : '-';
+        document.getElementById('meta-old-school').textContent = student.sekolah_asal || '-';
+        document.getElementById('meta-un-no').textContent = student.nomor_peserta_un || '-';
+        document.getElementById('meta-ijazah-no').textContent = student.no_seri_ijazah || '-';
+        document.getElementById('meta-skhun-no').textContent = student.no_skhun || '-';
+
+        // Prestasi
+        let p1 = '-';
+        if (student.prestasi_1_jenis) {
+          p1 = `[${student.prestasi_1_jenis} - ${student.prestasi_1_tingkat}] ${student.prestasi_1_nama} (${student.prestasi_1_tahun}) - Peringkat: ${student.prestasi_1_peringkat}`;
+        }
+        document.getElementById('meta-prestasi-1').textContent = p1;
+
+        let p2 = '-';
+        if (student.prestasi_2_jenis) {
+          p2 = `[${student.prestasi_2_jenis} - ${student.prestasi_2_tingkat}] ${student.prestasi_2_nama} (${student.prestasi_2_tahun}) - Peringkat: ${student.prestasi_2_peringkat}`;
+        }
+        document.getElementById('meta-prestasi-2').textContent = p2;
+
+        let p3 = '-';
+        if (student.prestasi_3_jenis) {
+          p3 = `[${student.prestasi_3_jenis} - ${student.prestasi_3_tingkat}] ${student.prestasi_3_nama} (${student.prestasi_3_tahun}) - Peringkat: ${student.prestasi_3_peringkat}`;
+        }
+        document.getElementById('meta-prestasi-3').textContent = p3;
+
+        // Beasiswa
+        let b1 = '-';
+        if (student.beasiswa_1_jenis) {
+          b1 = `[${student.beasiswa_1_jenis}] ${student.beasiswa_1_keterangan} (${student.beasiswa_1_tahun_mulai} s/d ${student.beasiswa_1_tahun_selesai})`;
+        }
+        document.getElementById('meta-beasiswa-1').textContent = b1;
+
+        let b2 = '-';
+        if (student.beasiswa_2_jenis) {
+          b2 = `[${student.beasiswa_2_jenis}] ${student.beasiswa_2_keterangan} (${student.beasiswa_2_tahun_mulai} s/d ${student.beasiswa_2_tahun_selesai})`;
+        }
+        document.getElementById('meta-beasiswa-2').textContent = b2;
+
         notesField.value = student.verification_notes || '';
         
         // Hide review modal alerts
@@ -1323,8 +1387,9 @@
         reviewModal.classList.add('active');
         document.body.style.overflow = 'hidden';
         
-        // Load default tab
+        // Load default tabs
         switchDocTab('kk');
+        switchAdminTab('pribadi');
       }
       
       function closeReviewModal() {
@@ -1363,6 +1428,43 @@
       
       tabKkBtn.addEventListener('click', () => switchDocTab('kk'));
       tabPpdbBtn.addEventListener('click', () => switchDocTab('ppdb'));
+      
+      // Admin tabs switching
+      const adminTabPribadiBtn = document.getElementById('admin-tab-pribadi-btn');
+      const adminTabOrtuBtn = document.getElementById('admin-tab-ortu-btn');
+      const adminTabRegistrasiBtn = document.getElementById('admin-tab-registrasi-btn');
+
+      const adminTabPribadi = document.getElementById('admin-tab-pribadi');
+      const adminTabOrtu = document.getElementById('admin-tab-ortu');
+      const adminTabRegistrasi = document.getElementById('admin-tab-registrasi');
+
+      function switchAdminTab(tabName) {
+        if (!adminTabPribadiBtn || !adminTabOrtuBtn || !adminTabRegistrasiBtn) return;
+        
+        // Remove active class from all buttons and panels
+        adminTabPribadiBtn.classList.remove('active');
+        adminTabOrtuBtn.classList.remove('active');
+        adminTabRegistrasiBtn.classList.remove('active');
+
+        if (adminTabPribadi) adminTabPribadi.classList.remove('active');
+        if (adminTabOrtu) adminTabOrtu.classList.remove('active');
+        if (adminTabRegistrasi) adminTabRegistrasi.classList.remove('active');
+
+        if (tabName === 'pribadi') {
+          adminTabPribadiBtn.classList.add('active');
+          if (adminTabPribadi) adminTabPribadi.classList.add('active');
+        } else if (tabName === 'ortu') {
+          adminTabOrtuBtn.classList.add('active');
+          if (adminTabOrtu) adminTabOrtu.classList.add('active');
+        } else if (tabName === 'registrasi') {
+          adminTabRegistrasiBtn.classList.add('active');
+          if (adminTabRegistrasi) adminTabRegistrasi.classList.add('active');
+        }
+      }
+
+      if (adminTabPribadiBtn) adminTabPribadiBtn.addEventListener('click', () => switchAdminTab('pribadi'));
+      if (adminTabOrtuBtn) adminTabOrtuBtn.addEventListener('click', () => switchAdminTab('ortu'));
+      if (adminTabRegistrasiBtn) adminTabRegistrasiBtn.addEventListener('click', () => switchAdminTab('registrasi'));
       
       // Show file in frame (handles PDF vs Image rendering)
       function showDocumentPreview(filePath) {
@@ -1435,371 +1537,119 @@
       btnApprove.addEventListener('click', () => sendVerification('Verified'));
       btnReject.addEventListener('click', () => sendVerification('Rejected'));
       
+      // ==========================================
+      // IMPORT EXCEL LOGIC
+      // ==========================================
+      const importExcelModal = document.getElementById('import-excel-modal');
+      const btnImportExcel = document.getElementById('btn-import-excel');
+      const btnCloseImportModal = document.getElementById('close-import-modal');
+      const btnImportCancel = document.getElementById('btn-import-cancel');
+      const btnImportSubmit = document.getElementById('btn-import-submit');
+      const importFileField = document.getElementById('import-file-field');
+      const importAlert = document.getElementById('import-alert');
+
+      if (btnImportExcel) {
+        btnImportExcel.addEventListener('click', () => {
+          importAlert.className = 'modal-alert hidden';
+          importAlert.style.display = 'none';
+          importFileField.value = '';
+          importExcelModal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        });
+      }
+
+      const closeImportModal = () => {
+        importExcelModal.classList.remove('active');
+        document.body.style.overflow = '';
+      };
+
+      if (btnCloseImportModal) btnCloseImportModal.addEventListener('click', closeImportModal);
+      if (btnImportCancel) btnImportCancel.addEventListener('click', closeImportModal);
+      if (importExcelModal) {
+        importExcelModal.addEventListener('click', (e) => {
+          if (e.target === importExcelModal) closeImportModal();
+        });
+      }
+
+      if (btnImportSubmit) {
+        btnImportSubmit.addEventListener('click', async () => {
+          const file = importFileField.files[0];
+          if (!file) {
+            importAlert.textContent = 'Silakan pilih berkas Excel terlebih dahulu.';
+            importAlert.className = 'modal-alert';
+            importAlert.style.display = 'block';
+            return;
+          }
+
+          const formData = new FormData();
+          formData.append('excel_file', file);
+
+          btnImportSubmit.disabled = true;
+          btnImportSubmit.innerHTML = 'Memproses... <i class="loading-spinner" style="width:12px;height:12px;display:inline-block;border-color:white transparent white transparent;margin-left:6px;"></i>';
+
+          try {
+            const response = await fetch('/api/admin/import-accepted-students', {
+              method: 'POST',
+              body: formData
+            });
+
+            let result;
+            const contentType = response.headers.get('content-type');
+            if (contentType && contentType.includes('application/json')) {
+              result = await response.json();
+            }
+
+            if (!response.ok) {
+              let errorMsg = (result && result.error) || 'Gagal melakukan impor data.';
+              if (response.status === 404) {
+                errorMsg = 'Rute API tidak ditemukan (404). Silakan restart dev server Anda di terminal (Stop / Ctrl+C, lalu jalankan kembali "npm run dev") agar server memuat kode terbaru.';
+              } else if (response.status === 500) {
+                errorMsg = 'Kesalahan internal server (500). ' + ((result && result.dbError) ? `Keterangan: ${result.dbError}. (Pastikan Anda sudah menyalin dan menjalankan isi file "schema_import.sql" di dashboard SQL Editor Supabase)` : 'Periksa log server Anda.');
+              }
+              if (result && result.details && result.details.length > 0) {
+                errorMsg += ' Detail kesalahan: ' + result.details.slice(0, 3).join(', ') + (result.details.length > 3 ? '...' : '');
+              }
+              importAlert.textContent = errorMsg;
+              importAlert.className = 'modal-alert';
+              importAlert.style.display = 'block';
+              btnImportSubmit.disabled = false;
+              btnImportSubmit.innerHTML = 'Mulai Impor <i data-lucide="upload-cloud"></i>';
+              if (window.lucide) lucide.createIcons();
+            } else {
+              importAlert.textContent = `✓ ${result.message} (Berhasil: ${result.stats.imported}, Gagal: ${result.stats.failed})`;
+              importAlert.className = 'modal-alert success';
+              importAlert.style.display = 'block';
+              
+              setTimeout(() => {
+                closeImportModal();
+                btnImportSubmit.disabled = false;
+                btnImportSubmit.innerHTML = 'Mulai Impor <i data-lucide="upload-cloud"></i>';
+                if (window.lucide) lucide.createIcons();
+              }, 2500);
+            }
+          } catch (err) {
+            console.error(err);
+            importAlert.textContent = 'Kesalahan jaringan. Gagal menghubungi server.';
+            importAlert.className = 'modal-alert';
+            importAlert.style.display = 'block';
+            btnImportSubmit.disabled = false;
+            btnImportSubmit.innerHTML = 'Mulai Impor <i data-lucide="upload-cloud"></i>';
+            if (window.lucide) lucide.createIcons();
+          }
+        });
+      }
+      
       // Initial Load
       loadRegistrants();
 
-      // PPID Event Listeners & Initial Load
-      if (btnRefreshPpid) {
-        btnRefreshPpid.addEventListener('click', loadPpidConsultations);
-      }
-      if (ppidFilterDate) {
-        ppidFilterDate.addEventListener('change', loadPpidConsultations);
-      }
-      if (ppidFilterSession) {
-        ppidFilterSession.addEventListener('change', renderPpidConsultations);
-      }
-      if (ppidFilterStatus) {
-        ppidFilterStatus.addEventListener('change', renderPpidConsultations);
-      }
-      loadPpidConsultations();
+
       
       if (window.lucide) {
         lucide.createIcons();
       }
     });
 
-    // ===== INSTAGRAM POSTS MANAGER =====
-    (function() {
-      const tbody = document.getElementById('ig-posts-tbody');
-      const form  = document.getElementById('ig-add-form');
-      const alertBox = document.getElementById('ig-add-alert');
 
-      function showAlert(msg, ok) {
-        alertBox.textContent = msg;
-        alertBox.style.display = 'block';
-        alertBox.style.background = ok ? 'rgba(34,197,94,0.1)' : 'rgba(239,68,68,0.1)';
-        alertBox.style.color = ok ? '#15803d' : '#dc2626';
-        alertBox.style.border = ok ? '1px solid #86efac' : '1px solid #fca5a5';
-        setTimeout(() => { alertBox.style.display = 'none'; }, 4000);
-      }
-
-      async function loadPosts() {
-        tbody.innerHTML = '<tr><td colspan="4" style="padding:20px;text-align:center;color:#94a3b8;">Memuat...</td></tr>';
-        try {
-          const res = await fetch('/api/admin/instagram-posts');
-          const data = await res.json();
-          renderPosts(data.posts || []);
-        } catch(e) {
-          tbody.innerHTML = '<tr><td colspan="4" style="padding:20px;text-align:center;color:#ef4444;">Gagal memuat data.</td></tr>';
-        }
-      }
-
-      function renderPosts(posts) {
-        if (!posts.length) {
-          tbody.innerHTML = '<tr><td colspan="4" style="padding:24px;text-align:center;color:#94a3b8;">Belum ada postingan. Tambahkan di atas.</td></tr>';
-          return;
-        }
-        tbody.innerHTML = posts.map(p => `
-          <tr style="border-bottom:1px solid var(--admin-border);" data-id="${p.id}">
-            <td style="padding:12px; font-weight:700; text-align:center;">${p.display_order}</td>
-            <td style="padding:12px;">
-              <a href="${p.post_url}" target="_blank" rel="noopener noreferrer"
-                style="color:#E1306C; font-weight:600; font-size:12px; word-break:break-all;">
-                ${p.post_url}
-              </a>
-            </td>
-            <td style="padding:12px; text-align:center;">
-              <button onclick="togglePost(${p.id}, this)"
-                style="padding:4px 12px; border-radius:20px; border:none; font-size:11px; font-weight:700; cursor:pointer;
-                       background:${p.is_active ? 'rgba(34,197,94,0.12)' : 'rgba(148,163,184,0.15)'};
-                       color:${p.is_active ? '#15803d' : '#64748b'};">
-                ${p.is_active ? '✓ Aktif' : '✗ Nonaktif'}
-              </button>
-            </td>
-            <td style="padding:12px; text-align:center;">
-              <button onclick="deletePost(${p.id})"
-                style="padding:4px 12px; border-radius:6px; border:none; font-size:11px; font-weight:700; cursor:pointer;
-                       background:rgba(239,68,68,0.1); color:#dc2626;">
-                🗑 Hapus
-              </button>
-            </td>
-          </tr>
-        `).join('');
-      }
-
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const url   = document.getElementById('ig-post-url').value.trim();
-        const order = parseInt(document.getElementById('ig-post-order').value) || 0;
-        const btn   = document.getElementById('ig-add-btn');
-        btn.disabled = true;
-        btn.textContent = 'Menyimpan...';
-        try {
-          const res = await fetch('/api/admin/instagram-posts', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ post_url: url, display_order: order })
-          });
-          const data = await res.json();
-          if (data.success) {
-            showAlert('✓ Postingan berhasil ditambahkan! Website akan langsung menampilkan embed Instagram.', true);
-            form.reset();
-            loadPosts();
-          } else {
-            showAlert('✗ ' + (data.error || 'Gagal menambah postingan.'), false);
-          }
-        } catch(err) {
-          showAlert('✗ Kesalahan jaringan. Coba lagi.', false);
-        } finally {
-          btn.disabled = false;
-          btn.textContent = '＋ Tambah Postingan';
-        }
-      });
-
-      window.togglePost = async (id, btn) => {
-        try {
-          const res = await fetch(`/api/admin/instagram-posts/${id}/toggle`, { method: 'POST' });
-          const data = await res.json();
-          if (data.success) {
-            btn.textContent = data.is_active ? '✓ Aktif' : '✗ Nonaktif';
-            btn.style.background = data.is_active ? 'rgba(34,197,94,0.12)' : 'rgba(148,163,184,0.15)';
-            btn.style.color = data.is_active ? '#15803d' : '#64748b';
-          }
-        } catch(e) { alert('Gagal mengubah status.'); }
-      };
-
-      window.deletePost = async (id) => {
-        if (!confirm('Hapus postingan ini dari website? Postingan di Instagram tidak terpengaruh.')) return;
-        try {
-          const res = await fetch(`/api/admin/instagram-posts/${id}`, { method: 'DELETE' });
-          const data = await res.json();
-          if (data.success) {
-            showAlert('✓ Postingan berhasil dihapus.', true);
-            loadPosts();
-          } else {
-            showAlert('✗ ' + (data.error || 'Gagal menghapus.'), false);
-          }
-        } catch(e) { alert('Kesalahan jaringan.'); }
-      };
-
-      loadPosts();
-    })();
-
-    // ===== CONTACT MESSAGES MANAGER =====
-    (function() {
-      const tbody = document.getElementById('contact-messages-tbody');
-      
-      const replyModal = document.getElementById('reply-modal');
-      const closeReplyModalBtn = document.getElementById('close-reply-modal');
-      const btnReplyCancel = document.getElementById('btn-reply-cancel');
-      const btnReplySubmit = document.getElementById('btn-reply-submit');
-      const replyTextField = document.getElementById('reply-text-field');
-      const replyAlert = document.getElementById('reply-alert');
-      
-      let currentSelectedMessageId = null;
-
-      async function loadMessages() {
-        if (!tbody) return;
-        tbody.innerHTML = '<tr><td colspan="6" style="padding:20px;text-align:center;color:#94a3b8;">Memuat pesan...</td></tr>';
-        try {
-          const res = await fetch('/api/admin/contact-messages');
-          const data = await res.json();
-          renderMessages(data.messages || []);
-        } catch(e) {
-          tbody.innerHTML = '<tr><td colspan="6" style="padding:20px;text-align:center;color:#ef4444;">Gagal memuat pesan.</td></tr>';
-        }
-      }
-
-      function renderMessages(messages) {
-        if (!tbody) return;
-        if (!messages.length) {
-          tbody.innerHTML = '<tr><td colspan="6" style="padding:24px;text-align:center;color:#94a3b8;">Tidak ada pertanyaan masuk.</td></tr>';
-          return;
-        }
-        
-        // Cache messages list globally in IIFE scope so it can be referenced in openReplyModal
-        window.currentContactMessages = messages;
-
-        tbody.innerHTML = messages.map((m, index) => {
-          const date = new Date(m.created_at).toLocaleString('id-ID');
-          
-          // Badge formatting
-          const isReplied = m.status === 'Replied';
-          const badgeClass = isReplied ? 'status-badge badge-verified' : 'status-badge badge-pending';
-          const badgeLabel = isReplied ? '✓ Dijawab' : '• Baru';
-          
-          let replySnippet = '';
-          if (m.reply_message) {
-            replySnippet = `
-              <div style="font-size: 11px; color: #15803d; margin-top: 6px; font-style: italic; 
-                          background: rgba(34,197,94,0.06); border-left: 2px solid #22c55e; padding: 6px 10px; border-radius: 0 4px 4px 0;">
-                <strong>Jawaban:</strong> ${escapeHtml(m.reply_message)}
-              </div>
-            `;
-          }
-
-          return `
-            <tr style="border-bottom:1px solid var(--admin-border);" data-id="${m.id}">
-              <td style="padding:12px 10px; font-weight:700; text-align:left; color:var(--admin-text-secondary);">${index + 1}</td>
-              <td style="padding:12px 10px; color:var(--admin-text-secondary); font-size:12px;">${date}</td>
-              <td style="padding:12px 10px;">
-                <div style="font-weight:600; color:var(--admin-text);">${escapeHtml(m.name)}</div>
-                <a href="mailto:${m.email}" style="color:var(--admin-primary); font-size:11px; text-decoration:none; font-weight:500;">
-                  ✉ ${escapeHtml(m.email)}
-                </a>
-              </td>
-              <td style="padding:12px 10px; line-height:1.5; color:var(--admin-text); max-width:400px; word-break:break-word; font-family:var(--font-sans);">
-                <div>${escapeHtml(m.message)}</div>
-                ${replySnippet}
-              </td>
-              <td style="padding:12px 10px; text-align:center;">
-                <span class="${badgeClass}" style="padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; white-space:nowrap;">
-                  ${badgeLabel}
-                </span>
-              </td>
-              <td style="padding:12px 10px; text-align:center; white-space:nowrap;">
-                <button onclick="openReplyModal(${m.id})"
-                  style="padding:6px 12px; border-radius:6px; border:none; font-size:11px; font-weight:700; cursor:pointer;
-                         background:rgba(10,46,115,0.08); color:#0a2e73; display:inline-flex; align-items:center; gap:4px; margin-right:6px;">
-                  <i data-lucide="message-square" style="width:12px;height:12px;"></i> ${isReplied ? 'Edit Jawab' : 'Jawab'}
-                </button>
-                <button onclick="deleteMessage(${m.id})"
-                  style="padding:6px 12px; border-radius:6px; border:none; font-size:11px; font-weight:700; cursor:pointer;
-                         background:rgba(239,68,68,0.1); color:#dc2626; display:inline-flex; align-items:center; gap:4px;">
-                  🗑 Hapus
-                </button>
-              </td>
-            </tr>
-          `;
-        }).join('');
-        
-        if (window.lucide) lucide.createIcons();
-      }
-
-      function escapeHtml(text) {
-        if (!text) return '';
-        return text
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;')
-          .replace(/'/g, '&#039;');
-      }
-
-      window.openReplyModal = (id) => {
-        const msg = window.currentContactMessages.find(m => m.id === id);
-        if (!msg) return;
-
-        currentSelectedMessageId = id;
-        
-        // Populate modal data
-        document.getElementById('reply-meta-name').textContent = msg.name;
-        document.getElementById('reply-meta-email').textContent = msg.email;
-        document.getElementById('reply-meta-message').textContent = msg.message;
-        replyTextField.value = msg.reply_message || '';
-        
-        // Reset alert
-        replyAlert.className = 'modal-alert hidden';
-        replyAlert.style.display = 'none';
-
-        // Open modal
-        replyModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      };
-
-      const closeReplyModal = () => {
-        replyModal.classList.remove('active');
-        document.body.style.overflow = '';
-        currentSelectedMessageId = null;
-        replyTextField.value = '';
-      };
-
-      if (closeReplyModalBtn) closeReplyModalBtn.addEventListener('click', closeReplyModal);
-      if (btnReplyCancel) btnReplyCancel.addEventListener('click', closeReplyModal);
-      if (replyModal) {
-        replyModal.addEventListener('click', (e) => {
-          if (e.target === replyModal) closeReplyModal();
-        });
-      }
-
-      if (btnReplySubmit) {
-        btnReplySubmit.addEventListener('click', async () => {
-          const replyText = replyTextField.value.trim();
-          if (!replyText) {
-            alert('Jawaban tidak boleh kosong.');
-            return;
-          }
-
-          const msg = window.currentContactMessages.find(m => m.id === currentSelectedMessageId);
-          if (!msg) return;
-
-          btnReplySubmit.disabled = true;
-          btnReplySubmit.textContent = 'Menyimpan...';
-
-          try {
-            // 1. Save reply to local DB
-            const response = await fetch(`/api/admin/contact-messages/${currentSelectedMessageId}/reply`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ reply_message: replyText })
-            });
-
-            const result = await response.json();
-
-            if (!response.ok) {
-              replyAlert.textContent = result.error || 'Gagal menyimpan jawaban.';
-              replyAlert.className = 'modal-alert';
-              replyAlert.style.display = 'block';
-              btnReplySubmit.disabled = false;
-              btnReplySubmit.innerHTML = 'Kirim & Balas Jawaban <i data-lucide="send"></i>';
-              if (window.lucide) lucide.createIcons();
-            } else {
-              // 2. Open pre-populated mailto link in new tab to send Gmail
-              const email = msg.email;
-              const name = msg.name;
-              const originalMessage = msg.message;
-              
-              const mailSubject = "Jawaban Layanan SPMB SMAN 2 Bandung 2026";
-              const mailBody = `Halo ${name},\n\nTerima kasih telah menghubungi kami.\n\nBerikut jawaban atas pertanyaan Anda:\n--------------------------------------------------\nPertanyaan:\n"${originalMessage}"\n--------------------------------------------------\n\nJawaban:\n${replyText}\n\nSalam,\nPanitia SPMB SMAN 2 Bandung 2026`;
-              
-              const mailtoUrl = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
-              
-              // Open mailto link
-              window.location.href = mailtoUrl;
-
-              // Reload list and close modal
-              closeReplyModal();
-              loadMessages();
-              
-              btnReplySubmit.disabled = false;
-              btnReplySubmit.innerHTML = 'Kirim & Balas Jawaban <i data-lucide="send"></i>';
-              if (window.lucide) lucide.createIcons();
-            }
-          } catch (err) {
-            console.error(err);
-            replyAlert.textContent = 'Kesalahan jaringan. Gagal menyimpan ke server.';
-            replyAlert.className = 'modal-alert';
-            replyAlert.style.display = 'block';
-            btnReplySubmit.disabled = false;
-            btnReplySubmit.innerHTML = 'Kirim & Balas Jawaban <i data-lucide="send"></i>';
-            if (window.lucide) lucide.createIcons();
-          }
-        });
-      }
-
-      window.deleteMessage = async (id) => {
-        if (!confirm('Hapus pesan pertanyaan ini secara permanen dari database?')) return;
-        try {
-          const res = await fetch(`/api/admin/contact-messages/${id}`, { method: 'DELETE' });
-          const data = await res.json();
-          if (data.success) {
-            loadMessages();
-          } else {
-            alert('Gagal menghapus pesan: ' + (data.error || ''));
-          }
-        } catch(e) {
-          alert('Kesalahan jaringan.');
-        }
-      };
-
-      loadMessages();
-
-      // Hook into the main Refresh button so it refreshes messages too!
-      const btnRefresh = document.getElementById('btn-refresh');
-      if (btnRefresh) {
-        btnRefresh.addEventListener('click', loadMessages);
-      }
-    })();
   </script>
 </body>
 </html>

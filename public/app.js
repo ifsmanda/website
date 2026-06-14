@@ -796,13 +796,89 @@ document.addEventListener('DOMContentLoaded', () => {
   const formSteps = document.querySelectorAll('.form-step-content');
   const indicators = document.querySelectorAll('.step-indicator-item');
   
-  // Form Inputs
+  // Form Inputs (Basic & Pribadi)
   const inputNisn = document.getElementById('du-nisn');
   const inputName = document.getElementById('du-name');
+  const inputGender = document.getElementById('du-gender');
+  const inputNik = document.getElementById('du-nik');
+  const inputNoKk = document.getElementById('du-nokk');
+  const inputTempatLahir = document.getElementById('du-tempat-lahir');
+  const inputTanggalLahir = document.getElementById('du-tanggal-lahir');
+  const inputNoAkta = document.getElementById('du-no-akta');
+  const inputAgama = document.getElementById('du-agama');
+  const inputKewarganegaraan = document.getElementById('du-kewarganegaraan');
+  const inputKewarganegaraanNegara = document.getElementById('du-kewarganegaraan-negara');
+  const inputKebutuhanKhusus = document.getElementById('du-kebutuhan-khusus');
+  
+  // Address & Contact
+  const inputAlamatJalan = document.getElementById('du-alamat-jalan');
+  const inputRt = document.getElementById('du-rt');
+  const inputRw = document.getElementById('du-rw');
+  const inputDusun = document.getElementById('du-dusun');
+  const inputKelurahan = document.getElementById('du-kelurahan');
+  const inputKecamatan = document.getElementById('du-kecamatan');
+  const inputKodePos = document.getElementById('du-kode-pos');
+  const inputLintang = document.getElementById('du-lintang');
+  const inputBujur = document.getElementById('du-bujur');
+  const inputTempatTinggal = document.getElementById('du-tempat-tinggal');
+  const inputTransportasi = document.getElementById('du-transportasi');
+  const inputAnakKe = document.getElementById('du-anak-ke');
+  const inputPenerimaKip = document.getElementById('du-penerima-kip');
+  const inputTetapKip = document.getElementById('du-tetap-kip');
+  const inputAlasanTolakPip = document.getElementById('du-alasan-tolak-pip');
   const inputEmail = document.getElementById('du-email');
   const inputPhone = document.getElementById('du-phone');
+  const inputTeleponRumah = document.getElementById('du-telepon-rumah');
   const inputUniform = document.getElementById('du-uniform');
   const inputAddress = document.getElementById('du-address');
+  
+  // Father Candidate
+  const inputAyahNama = document.getElementById('du-ayah-nama');
+  const inputAyahNik = document.getElementById('du-ayah-nik');
+  const inputAyahTahunLahir = document.getElementById('du-ayah-tahun-lahir');
+  const inputAyahPendidikan = document.getElementById('du-ayah-pendidikan');
+  const inputAyahPekerjaan = document.getElementById('du-ayah-pekerjaan');
+  const inputAyahPenghasilan = document.getElementById('du-ayah-penghasilan');
+  const inputAyahKebutuhanKhusus = document.getElementById('du-ayah-kebutuhan-khusus');
+  
+  // Mother Candidate
+  const inputIbuNama = document.getElementById('du-ibu-nama');
+  const inputIbuNik = document.getElementById('du-ibu-nik');
+  const inputIbuTahunLahir = document.getElementById('du-ibu-tahun-lahir');
+  const inputIbuPendidikan = document.getElementById('du-ibu-pendidikan');
+  const inputIbuPekerjaan = document.getElementById('du-ibu-pekerjaan');
+  const inputIbuPenghasilan = document.getElementById('du-ibu-penghasilan');
+  const inputIbuKebutuhanKhusus = document.getElementById('du-ibu-kebutuhan-khusus');
+  
+  // Wali Candidate
+  const inputWaliNama = document.getElementById('du-wali-nama');
+  const inputWaliNik = document.getElementById('du-wali-nik');
+  const inputWaliTahunLahir = document.getElementById('du-wali-tahun-lahir');
+  const inputWaliPendidikan = document.getElementById('du-wali-pendidikan');
+  const inputWaliPekerjaan = document.getElementById('du-wali-pekerjaan');
+  const inputWaliPenghasilan = document.getElementById('du-wali-penghasilan');
+  
+  // Periodik & Registrasi
+  const inputTinggiBadan = document.getElementById('du-tinggi-badan');
+  const inputBeratBadan = document.getElementById('du-berat-badan');
+  const inputLingkarKepala = document.getElementById('du-lingkar-kepala');
+  const inputJumlahSaudara = document.getElementById('du-jumlah-saudara');
+  const inputJarakSekolah = document.getElementById('du-jarak-sekolah');
+  const inputJarakSekolahKm = document.getElementById('du-jarak-sekolah-km');
+  const inputWaktuTempuhJam = document.getElementById('du-waktu-tempuh-jam');
+  const inputWaktuTempuhMenit = document.getElementById('du-waktu-tempuh-menit');
+  
+  const inputJenisPendaftaran = document.getElementById('du-jenis-pendaftaran');
+  const inputNis = document.getElementById('du-nis');
+  const inputTanggalMasuk = document.getElementById('du-tanggal-masuk');
+  const inputSekolahAsal = document.getElementById('du-sekolah-asal');
+  const inputNomorPesertaUn = document.getElementById('du-nomor-peserta-un');
+  const inputNoSeriIjazah = document.getElementById('du-no-seri-ijazah');
+  const inputNoSkhun = document.getElementById('du-no-skhun');
+  
+  const inputKesejahteraanJenis = document.getElementById('du-kesejahteraan-jenis');
+  const inputKesejahteraanNoKartu = document.getElementById('du-kesejahteraan-no-kartu');
+  const inputKesejahteraanNamaKartu = document.getElementById('du-kesejahteraan-nama-kartu');
   
   // File inputs & Drag boxes
   const fileKk = document.getElementById('du-kk-file');
@@ -817,12 +893,55 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnStep2Prev = document.getElementById('btn-step2-prev');
   const btnStep2Next = document.getElementById('btn-step2-next');
   const btnStep3Prev = document.getElementById('btn-step3-prev');
-  const btnStep3Submit = document.getElementById('btn-step3-submit');
+  const btnStep3Next = document.getElementById('btn-step3-next');
+  const btnStep4Prev = document.getElementById('btn-step4-prev');
+  const btnStep4Next = document.getElementById('btn-step4-next');
+  const btnStep5Prev = document.getElementById('btn-step5-prev');
+  const btnStep5Submit = document.getElementById('btn-step5-submit');
   const btnPrintReceipt = document.getElementById('btn-print-receipt');
   const btnCloseReceipt = document.getElementById('btn-close-receipt');
   
   let currentStep = 1;
   let verifiedNisn = '';
+  
+  // Setup Conditional Visibility triggers
+  if (inputKewarganegaraan) {
+    inputKewarganegaraan.addEventListener('change', () => {
+      const gr = document.getElementById('du-group-kewarganegaraan-negara');
+      if (gr) gr.style.display = inputKewarganegaraan.value === 'WNA' ? 'block' : 'none';
+      if (inputKewarganegaraanNegara) {
+        inputKewarganegaraanNegara.required = inputKewarganegaraan.value === 'WNA';
+        if (inputKewarganegaraan.value !== 'WNA') inputKewarganegaraanNegara.value = '';
+      }
+    });
+  }
+
+  if (inputPenerimaKip) {
+    inputPenerimaKip.addEventListener('change', () => {
+      const gTetap = document.getElementById('du-group-tetap-kip');
+      const gTolak = document.getElementById('du-group-alasan-tolak-pip');
+      if (inputPenerimaKip.value === 'Ya') {
+        if (gTetap) gTetap.style.display = 'block';
+        if (gTolak) gTolak.style.display = 'none';
+        if (inputAlasanTolakPip) inputAlasanTolakPip.selectedIndex = 0;
+      } else {
+        if (gTetap) gTetap.style.display = 'none';
+        if (gTolak) gTolak.style.display = 'block';
+        if (inputTetapKip) inputTetapKip.selectedIndex = 0;
+      }
+    });
+  }
+
+  if (inputJarakSekolah) {
+    inputJarakSekolah.addEventListener('change', () => {
+      const gJarakKm = document.getElementById('du-group-jarak-sekolah-km');
+      if (gJarakKm) gJarakKm.style.display = inputJarakSekolah.value === 'Lebih dari 1 km' ? 'block' : 'none';
+      if (inputJarakSekolahKm) {
+        inputJarakSekolahKm.required = inputJarakSekolah.value === 'Lebih dari 1 km';
+        if (inputJarakSekolah.value !== 'Lebih dari 1 km') inputJarakSekolahKm.value = '';
+      }
+    });
+  }
   
   // Helper to show alert in modal
   function showModalAlert(message, type = 'error') {
@@ -838,7 +957,7 @@ document.addEventListener('DOMContentLoaded', () => {
       duAlert.textContent = '';
     }
   }
-
+  
   // Helper to switch steps
   function goToStep(stepNum) {
     currentStep = stepNum;
@@ -862,7 +981,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-
+  
   // Reset all states
   function resetDaftarUlangForm() {
     goToStep(1);
@@ -871,17 +990,34 @@ document.addEventListener('DOMContentLoaded', () => {
       inputNisn.value = '';
       inputNisn.disabled = false;
     }
-    if (inputName) inputName.value = '';
-    if (inputEmail) inputEmail.value = '';
-    if (inputPhone) inputPhone.value = '';
-    if (inputUniform) inputUniform.selectedIndex = 0;
-    if (inputAddress) inputAddress.value = '';
-    if (fileKk) fileKk.value = '';
-    if (filePpdb) filePpdb.value = '';
+    
+    // Reset all input values
+    const allInputs = daftarUlangModal.querySelectorAll('input, select, textarea');
+    allInputs.forEach(input => {
+      if (input.id === 'du-nisn' || input.id === 'du-name') return;
+      if (input.type === 'file') {
+        input.value = '';
+      } else if (input.tagName === 'SELECT') {
+        input.selectedIndex = 0;
+      } else {
+        input.value = '';
+      }
+    });
+    
+    // Hidden groups reset
+    const gNegara = document.getElementById('du-group-kewarganegaraan-negara');
+    if (gNegara) gNegara.style.display = 'none';
+    const gTetap = document.getElementById('du-group-tetap-kip');
+    if (gTetap) gTetap.style.display = 'none';
+    const gTolak = document.getElementById('du-group-alasan-tolak-pip');
+    if (gTolak) gTolak.style.display = 'none';
+    const gJarakKm = document.getElementById('du-group-jarak-sekolah-km');
+    if (gJarakKm) gJarakKm.style.display = 'none';
+    
     if (nameKk) nameKk.textContent = 'Belum ada file terpilih';
     if (namePpdb) namePpdb.textContent = 'Belum ada file terpilih';
   }
-
+  
   // Open modal
   if (btnsOpenDaftarUlang && daftarUlangModal) {
     btnsOpenDaftarUlang.forEach(btn => {
@@ -892,7 +1028,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
-
+  
   // Close modal
   const closeModalDU = () => {
     if (daftarUlangModal) {
@@ -901,29 +1037,29 @@ document.addEventListener('DOMContentLoaded', () => {
       resetDaftarUlangForm();
     }
   };
-
+  
   if (btnCloseDaftarUlang) btnCloseDaftarUlang.addEventListener('click', closeModalDU);
   if (daftarUlangModal) {
     daftarUlangModal.addEventListener('click', (e) => {
       if (e.target === daftarUlangModal) closeModalDU();
     });
   }
-
+  
   // Drag & drop handlers helper
   function setupDragDrop(dragEl, inputEl, nameEl) {
     if (!dragEl || !inputEl || !nameEl) return;
-
+    
     dragEl.addEventListener('click', () => inputEl.click());
-
+    
     dragEl.addEventListener('dragover', (e) => {
       e.preventDefault();
       dragEl.classList.add('dragover');
     });
-
+    
     dragEl.addEventListener('dragleave', () => {
       dragEl.classList.remove('dragover');
     });
-
+    
     dragEl.addEventListener('drop', (e) => {
       e.preventDefault();
       dragEl.classList.remove('dragover');
@@ -932,12 +1068,12 @@ document.addEventListener('DOMContentLoaded', () => {
         handleFileChange(inputEl, nameEl);
       }
     });
-
+    
     inputEl.addEventListener('change', () => {
       handleFileChange(inputEl, nameEl);
     });
   }
-
+  
   function handleFileChange(inputEl, nameEl) {
     if (inputEl.files.length > 0) {
       const file = inputEl.files[0];
@@ -954,34 +1090,106 @@ document.addEventListener('DOMContentLoaded', () => {
       nameEl.textContent = 'Belum ada file terpilih';
     }
   }
-
+  
   setupDragDrop(dragKk, fileKk, nameKk);
   setupDragDrop(dragPpdb, filePpdb, namePpdb);
+  
+  function prefillFormFields(data) {
+    if (!data) return;
+
+    const setVal = (id, value) => {
+      const el = document.getElementById(id);
+      if (el && value !== undefined && value !== null) {
+        el.value = value.toString().trim();
+        el.dispatchEvent(new Event('input', { bubbles: true }));
+        el.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+    };
+
+    // Data Pribadi
+    if (data.name) setVal('du-name', data.name);
+    if (data.gender) setVal('du-gender', data.gender);
+    if (data.nik) setVal('du-nik', data.nik);
+    if (data.no_kk) setVal('du-nokk', data.no_kk);
+
+    // Tempat Lahir (mapping dropdown)
+    if (data.tempat_lahir) {
+      const el = document.getElementById('du-tempat-lahir');
+      if (el) {
+        let exists = false;
+        for (let i = 0; i < el.options.length; i++) {
+          if (el.options[i].value === data.tempat_lahir) {
+            exists = true;
+            break;
+          }
+        }
+        if (!exists && data.tempat_lahir.trim() !== '') {
+          const opt = document.createElement('option');
+          opt.value = data.tempat_lahir;
+          opt.textContent = data.tempat_lahir;
+          el.appendChild(opt);
+        }
+        el.value = data.tempat_lahir;
+        el.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+    }
+
+    // Tanggal Lahir (formatted YYYY-MM-DD)
+    if (data.tanggal_lahir) {
+      const dateStr = data.tanggal_lahir.split('T')[0];
+      setVal('du-tanggal-lahir', dateStr);
+    }
+
+    // Alamat & Kontak
+    if (data.alamat_jalan) setVal('du-alamat-jalan', data.alamat_jalan);
+    if (data.rt) setVal('du-rt', data.rt);
+    if (data.rw) setVal('du-rw', data.rw);
+    if (data.dusun) setVal('du-dusun', data.dusun);
+    if (data.kelurahan) setVal('du-kelurahan', data.kelurahan);
+    if (data.kecamatan) setVal('du-kecamatan', data.kecamatan);
+    if (data.kode_pos) setVal('du-kode-pos', data.kode_pos);
+    if (data.lintang) setVal('du-lintang', data.lintang);
+    if (data.bujur) setVal('du-bujur', data.bujur);
+    if (data.email) setVal('du-email', data.email);
+    if (data.phone) setVal('du-phone', data.phone);
+    if (data.sekolah_asal) setVal('du-sekolah-asal', data.sekolah_asal);
+
+    // Orang Tua
+    if (data.ayah_nama) setVal('du-ayah-nama', data.ayah_nama);
+    if (data.ibu_nama) setVal('du-ibu-nama', data.ibu_nama);
+  }
 
   // STEP 1 Action: Verify NISN
   if (btnStep1Next) {
     btnStep1Next.addEventListener('click', async () => {
-      const nisnVal = inputNisn.value.trim();
+      let nisnVal = inputNisn.value.trim();
       if (!nisnVal) {
         showModalAlert('Silakan masukkan NISN Anda terlebih dahulu.');
         return;
       }
+      
+      // Auto-pad leading zero if 9 digits
+      if (/^\d{9}$/.test(nisnVal)) {
+        nisnVal = '0' + nisnVal;
+        inputNisn.value = nisnVal;
+      }
+      
       if (!/^\d{10}$/.test(nisnVal)) {
         showModalAlert('NISN harus tepat berisi 10 digit angka.');
         return;
       }
-
+      
       btnStep1Next.disabled = true;
       btnStep1Next.innerHTML = 'Memverifikasi...';
-
+      
       try {
         const response = await fetch(`/api/check-nisn/${nisnVal}`);
         const result = await response.json();
-
+        
         if (!response.ok) {
           showModalAlert(result.error || 'Terjadi kesalahan verifikasi.');
         } else if (result.alreadyRegistered) {
-          // If already registered, fetch receipt data and display Step 4 directly!
+          // If already registered, fetch receipt data and display Step 6 directly!
           showModalAlert('Anda sudah melakukan daftar ulang sebelumnya. Memuat tanda bukti...', 'success');
           
           setTimeout(async () => {
@@ -994,7 +1202,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('receipt-nisn').textContent = reg.nisn;
                 document.getElementById('receipt-session').textContent = reg.queue_session;
                 document.getElementById('receipt-qr-img').src = reg.qr_code;
-                goToStep(4);
+                goToStep(6); // Final success receipt step
               } else {
                 showModalAlert('Gagal memuat tanda bukti pendaftaran ulang.');
               }
@@ -1007,6 +1215,11 @@ document.addEventListener('DOMContentLoaded', () => {
           // Success: save NISN and fill student name
           verifiedNisn = nisnVal;
           inputName.value = result.name;
+          
+          if (result.studentData) {
+            prefillFormFields(result.studentData);
+          }
+          
           goToStep(2);
         }
       } catch (err) {
@@ -1019,93 +1232,347 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-
-  // STEP 2 Actions
+  
+  // STEP 2 Actions: Data Pribadi
   if (btnStep2Prev) {
     btnStep2Prev.addEventListener('click', () => {
       goToStep(1);
     });
   }
-
+  
   if (btnStep2Next) {
     btnStep2Next.addEventListener('click', () => {
+      // Basic validations
+      const gender = inputGender.value;
+      const nik = inputNik.value.trim();
+      const noKk = inputNoKk.value.trim();
+      const tempatLahir = inputTempatLahir.value.trim();
+      const tanggalLahir = inputTanggalLahir.value;
+      const noAkta = inputNoAkta.value.trim();
+      const agama = inputAgama.value;
+      const kewarganegaraan = inputKewarganegaraan.value;
+      const kewarganegaraanNegara = inputKewarganegaraanNegara.value.trim();
+      const kebutuhanKhusus = inputKebutuhanKhusus.value;
+      
+      const alamatJalan = inputAlamatJalan.value.trim();
+      const rt = inputRt.value.trim();
+      const rw = inputRw.value.trim();
+      const kelurahan = inputKelurahan.value.trim();
+      const kecamatan = inputKecamatan.value.trim();
+      const kodePos = inputKodePos.value.trim();
+      const tempatTinggal = inputTempatTinggal.value;
+      const transportasi = inputTransportasi.value;
+      const anakKe = inputAnakKe.value;
       const email = inputEmail.value.trim();
       const phone = inputPhone.value.trim();
       const uniform = inputUniform.value;
       const address = inputAddress.value.trim();
-
-      if (!email || !phone || !uniform || !address) {
-        showModalAlert('Semua isian formulir biodata wajib diisi.');
+      
+      if (!gender || !nik || !noKk || !tempatLahir || !tanggalLahir || !noAkta || !agama || !kewarganegaraan || 
+          !alamatJalan || !rt || !rw || !kelurahan || !kecamatan || !kodePos || !tempatTinggal || !transportasi || 
+          !anakKe || !email || !phone) {
+        showModalAlert('Mohon lengkapi seluruh isian data pribadi wajib yang diberi tanda bintang.');
         return;
       }
-
+      
+      if (kewarganegaraan === 'WNA' && !kewarganegaraanNegara) {
+        showModalAlert('Silakan isi nama negara kewarganegaraan WNA Anda.');
+        return;
+      }
+      
+      if (!/^\d{16}$/.test(nik)) {
+        showModalAlert('NIK harus tepat berisi 16 digit angka.');
+        return;
+      }
+      
+      if (!/^\d{16}$/.test(noKk)) {
+        showModalAlert('Nomor KK harus tepat berisi 16 digit angka.');
+        return;
+      }
+      
+      if (!/^\d+$/.test(rt) || !/^\d+$/.test(rw)) {
+        showModalAlert('Nomor RT/RW harus berupa angka.');
+        return;
+      }
+      
+      if (!/^\d{5}$/.test(kodePos)) {
+        showModalAlert('Kode Pos harus tepat berisi 5 digit angka.');
+        return;
+      }
+      
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         showModalAlert('Format alamat email tidak valid.');
         return;
       }
-
+      
       if (!/^\+?\d{9,15}$/.test(phone)) {
-        showModalAlert('Format nomor WhatsApp tidak valid. Masukkan minimal 9-15 digit angka.');
+        showModalAlert('Format nomor WhatsApp/HP tidak valid. Gunakan 9-15 digit angka.');
         return;
       }
-
+      
       hideModalAlert();
       goToStep(3);
     });
   }
-
-  // STEP 3 Actions
+  
+  // STEP 3 Actions: Data Orang Tua & Wali
   if (btnStep3Prev) {
     btnStep3Prev.addEventListener('click', () => {
       goToStep(2);
     });
   }
-
-  if (btnStep3Submit) {
-    btnStep3Submit.addEventListener('click', async () => {
+  
+  if (btnStep3Next) {
+    btnStep3Next.addEventListener('click', () => {
+      // Validate Father
+      const ayahNama = inputAyahNama.value.trim();
+      const ayahNik = inputAyahNik.value.trim();
+      const ayahTahunLahir = inputAyahTahunLahir.value;
+      const ayahPendidikan = inputAyahPendidikan.value;
+      const ayahPekerjaan = inputAyahPekerjaan.value;
+      const ayahPenghasilan = inputAyahPenghasilan.value;
+      
+      // Validate Mother
+      const ibuNama = inputIbuNama.value.trim();
+      const ibuNik = inputIbuNik.value.trim();
+      const ibuTahunLahir = inputIbuTahunLahir.value;
+      const ibuPendidikan = inputIbuPendidikan.value;
+      const ibuPekerjaan = inputIbuPekerjaan.value;
+      const ibuPenghasilan = inputIbuPenghasilan.value;
+      
+      // Validate Wali (if filled)
+      const waliNama = inputWaliNama.value.trim();
+      const waliNik = inputWaliNik.value.trim();
+      const waliTahunLahir = inputWaliTahunLahir.value;
+      const waliPendidikan = inputWaliPendidikan.value;
+      const waliPekerjaan = inputWaliPekerjaan.value;
+      const waliPenghasilan = inputWaliPenghasilan.value;
+      
+      if (!ayahNama || !ayahNik || !ayahTahunLahir || !ayahPendidikan || !ayahPekerjaan || !ayahPenghasilan ||
+          !ibuNama || !ibuNik || !ibuTahunLahir || !ibuPendidikan || !ibuPekerjaan || !ibuPenghasilan) {
+        showModalAlert('Seluruh isian data wajib Ayah Kandung dan Ibu Kandung harus dilengkapi.');
+        return;
+      }
+      
+      if (!/^\d{16}$/.test(ayahNik) || !/^\d{16}$/.test(ibuNik)) {
+        showModalAlert('NIK Ayah dan Ibu harus berisi 16 digit angka.');
+        return;
+      }
+      
+      if (waliNama) {
+        if (!waliNik || !waliTahunLahir || !waliPendidikan || !waliPekerjaan || !waliPenghasilan) {
+          showModalAlert('Jika mengisi data Wali, maka seluruh detail data Wali wajib dilengkapi.');
+          return;
+        }
+        if (!/^\d{16}$/.test(waliNik)) {
+          showModalAlert('NIK Wali harus berisi 16 digit angka.');
+          return;
+        }
+      }
+      
+      hideModalAlert();
+      goToStep(4);
+    });
+  }
+  
+  // STEP 4 Actions: Rincian & Registrasi
+  if (btnStep4Prev) {
+    btnStep4Prev.addEventListener('click', () => {
+      goToStep(3);
+    });
+  }
+  
+  if (btnStep4Next) {
+    btnStep4Next.addEventListener('click', () => {
+      const tb = inputTinggiBadan.value;
+      const bb = inputBeratBadan.value;
+      const lk = inputLingkarKepala.value;
+      const saudara = inputJumlahSaudara.value;
+      const jarak = inputJarakSekolah.value;
+      const jarakKm = inputJarakSekolahKm.value;
+      
+      const pendaftaran = inputJenisPendaftaran.value;
+      const tglMasuk = inputTanggalMasuk.value;
+      const sekolahAsal = inputSekolahAsal.value.trim();
+      const un = inputNomorPesertaUn.value.trim();
+      const ijazah = inputNoSeriIjazah.value.trim();
+      
+      if (!tb || !bb || !lk || !saudara || !jarak || !pendaftaran || !tglMasuk || !sekolahAsal) {
+        showModalAlert('Seluruh isian data periodik dan registrasi wajib harus dilengkapi.');
+        return;
+      }
+      
+      if (jarak === 'Lebih dari 1 km' && !jarakKm) {
+        showModalAlert('Harap sebutkan jarak tempat tinggal dalam kilometer.');
+        return;
+      }
+      
+      hideModalAlert();
+      goToStep(5);
+    });
+  }
+  
+  // STEP 5 Actions: Upload Berkas
+  if (btnStep5Prev) {
+    btnStep5Prev.addEventListener('click', () => {
+      goToStep(4);
+    });
+  }
+  
+  if (btnStep5Submit) {
+    btnStep5Submit.addEventListener('click', async () => {
       if (!fileKk.files.length || !filePpdb.files.length) {
         showModalAlert('Unggahan dokumen Kartu Keluarga dan Bukti Kelulusan PPDB wajib diunggah.');
         return;
       }
-
-      btnStep3Submit.disabled = true;
-      btnStep3Submit.innerHTML = 'Mengirim berkas...';
-
+      
+      btnStep5Submit.disabled = true;
+      btnStep5Submit.innerHTML = 'Mengirim berkas pendaftaran...';
+      
       const formData = new FormData();
       formData.append('nisn', verifiedNisn);
       formData.append('name', inputName.value);
+      formData.append('gender', inputGender.value);
+      formData.append('nik', inputNik.value.trim());
+      formData.append('no_kk', inputNoKk.value.trim());
+      formData.append('tempat_lahir', inputTempatLahir.value.trim());
+      formData.append('tanggal_lahir', inputTanggalLahir.value);
+      formData.append('no_akta', inputNoAkta.value.trim());
+      formData.append('agama', inputAgama.value);
+      formData.append('kewarganegaraan', inputKewarganegaraan.value);
+      formData.append('kewarganegaraan_negara', inputKewarganegaraanNegara.value.trim());
+      formData.append('kebutuhan_khusus', inputKebutuhanKhusus.value);
+      
+      formData.append('alamat_jalan', inputAlamatJalan.value.trim());
+      formData.append('rt', inputRt.value.trim());
+      formData.append('rw', inputRw.value.trim());
+      formData.append('dusun', inputDusun.value.trim());
+      formData.append('kelurahan', inputKelurahan.value.trim());
+      formData.append('kecamatan', inputKecamatan.value.trim());
+      formData.append('kode_pos', inputKodePos.value.trim());
+      formData.append('lintang', inputLintang.value.trim());
+      formData.append('bujur', inputBujur.value.trim());
+      formData.append('tempat_tinggal', inputTempatTinggal.value);
+      formData.append('transportasi', inputTransportasi.value);
+      formData.append('anak_ke', inputAnakKe.value);
+      formData.append('penerima_kip', inputPenerimaKip.value);
+      formData.append('tetap_kip', inputTetapKip.value);
+      formData.append('alasan_tolak_pip', inputAlasanTolakPip.value);
       formData.append('email', inputEmail.value.trim());
       formData.append('phone', inputPhone.value.trim());
+      formData.append('telepon_rumah', inputTeleponRumah.value.trim());
       formData.append('uniform_size', inputUniform.value);
       formData.append('address', inputAddress.value.trim());
+      
+      // Father
+      formData.append('ayah_nama', inputAyahNama.value.trim());
+      formData.append('ayah_nik', inputAyahNik.value.trim());
+      formData.append('ayah_tahun_lahir', inputAyahTahunLahir.value);
+      formData.append('ayah_pendidikan', inputAyahPendidikan.value);
+      formData.append('ayah_pekerjaan', inputAyahPekerjaan.value);
+      formData.append('ayah_penghasilan', inputAyahPenghasilan.value);
+      formData.append('ayah_kebutuhan_khusus', inputAyahKebutuhanKhusus.value);
+      
+      // Mother
+      formData.append('ibu_nama', inputIbuNama.value.trim());
+      formData.append('ibu_nik', inputIbuNik.value.trim());
+      formData.append('ibu_tahun_lahir', inputIbuTahunLahir.value);
+      formData.append('ibu_pendidikan', inputIbuPendidikan.value);
+      formData.append('ibu_pekerjaan', inputIbuPekerjaan.value);
+      formData.append('ibu_penghasilan', inputIbuPenghasilan.value);
+      formData.append('ibu_kebutuhan_khusus', inputIbuKebutuhanKhusus.value);
+      
+      // Wali
+      formData.append('wali_nama', inputWaliNama.value.trim());
+      formData.append('wali_nik', inputWaliNik.value.trim());
+      formData.append('wali_tahun_lahir', inputWaliTahunLahir.value);
+      formData.append('wali_pendidikan', inputWaliPendidikan.value);
+      formData.append('wali_pekerjaan', inputWaliPekerjaan.value);
+      formData.append('wali_penghasilan', inputWaliPenghasilan.value);
+      
+      // Periodik & Registrasi
+      formData.append('tinggi_badan', inputTinggiBadan.value);
+      formData.append('berat_badan', inputBeratBadan.value);
+      formData.append('lingkar_kepala', inputLingkarKepala.value);
+      formData.append('jumlah_saudara', inputJumlahSaudara.value);
+      formData.append('jarak_sekolah', inputJarakSekolah.value);
+      formData.append('jarak_sekolah_km', inputJarakSekolahKm.value);
+      formData.append('waktu_tempuh_jam', inputWaktuTempuhJam.value || '0');
+      formData.append('waktu_tempuh_menit', inputWaktuTempuhMenit.value || '0');
+      
+      formData.append('jenis_pendaftaran', inputJenisPendaftaran.value);
+      formData.append('nis', inputNis.value.trim());
+      formData.append('tanggal_masuk', inputTanggalMasuk.value);
+      formData.append('sekolah_asal', inputSekolahAsal.value.trim());
+      formData.append('nomor_peserta_un', inputNomorPesertaUn.value.trim());
+      formData.append('no_seri_ijazah', inputNoSeriIjazah.value.trim());
+      formData.append('no_skhun', inputNoSkhun.value.trim());
+      
+      formData.append('kesejahteraan_jenis', inputKesejahteraanJenis.value);
+      formData.append('kesejahteraan_no_kartu', inputKesejahteraanNoKartu.value.trim());
+      formData.append('kesejahteraan_nama_kartu', inputKesejahteraanNamaKartu.value.trim());
+      
+      // Prestasi 1-3
+      formData.append('prestasi_1_jenis', document.getElementById('du-prestasi-1-jenis').value);
+      formData.append('prestasi_1_tingkat', document.getElementById('du-prestasi-1-tingkat').value);
+      formData.append('prestasi_1_nama', document.getElementById('du-prestasi-1-nama').value.trim());
+      formData.append('prestasi_1_tahun', document.getElementById('du-prestasi-1-tahun').value);
+      formData.append('prestasi_1_penyelenggara', document.getElementById('du-prestasi-1-penyelenggara').value.trim());
+      formData.append('prestasi_1_peringkat', document.getElementById('du-prestasi-1-peringkat').value.trim());
+      
+      formData.append('prestasi_2_jenis', document.getElementById('du-prestasi-2-jenis').value);
+      formData.append('prestasi_2_tingkat', document.getElementById('du-prestasi-2-tingkat').value);
+      formData.append('prestasi_2_nama', document.getElementById('du-prestasi-2-nama').value.trim());
+      formData.append('prestasi_2_tahun', document.getElementById('du-prestasi-2-tahun').value);
+      formData.append('prestasi_2_penyelenggara', document.getElementById('du-prestasi-2-penyelenggara').value.trim());
+      formData.append('prestasi_2_peringkat', document.getElementById('du-prestasi-2-peringkat').value.trim());
+      
+      formData.append('prestasi_3_jenis', document.getElementById('du-prestasi-3-jenis').value);
+      formData.append('prestasi_3_tingkat', document.getElementById('du-prestasi-3-tingkat').value);
+      formData.append('prestasi_3_nama', document.getElementById('du-prestasi-3-nama').value.trim());
+      formData.append('prestasi_3_tahun', document.getElementById('du-prestasi-3-tahun').value);
+      formData.append('prestasi_3_penyelenggara', document.getElementById('du-prestasi-3-penyelenggara').value.trim());
+      formData.append('prestasi_3_peringkat', document.getElementById('du-prestasi-3-peringkat').value.trim());
+      
+      // Beasiswa 1-2
+      formData.append('beasiswa_1_jenis', document.getElementById('du-beasiswa-1-jenis').value);
+      formData.append('beasiswa_1_keterangan', document.getElementById('du-beasiswa-1-keterangan').value.trim());
+      formData.append('beasiswa_1_tahun_mulai', document.getElementById('du-beasiswa-1-tahun-mulai').value);
+      formData.append('beasiswa_1_tahun_selesai', document.getElementById('du-beasiswa-1-tahun-selesai').value);
+      
+      formData.append('beasiswa_2_jenis', document.getElementById('du-beasiswa-2-jenis').value);
+      formData.append('beasiswa_2_keterangan', document.getElementById('du-beasiswa-2-keterangan').value.trim());
+      formData.append('beasiswa_2_tahun_mulai', document.getElementById('du-beasiswa-2-tahun-mulai').value);
+      formData.append('beasiswa_2_tahun_selesai', document.getElementById('du-beasiswa-2-tahun-selesai').value);
+      
       formData.append('kk_file', fileKk.files[0]);
       formData.append('ppdb_file', filePpdb.files[0]);
-
+      
       try {
         const response = await fetch('/api/register', {
           method: 'POST',
           body: formData
         });
-
+        
         const result = await response.json();
-
+        
         if (!response.ok) {
           showModalAlert(result.error || 'Gagal mengirim berkas pendaftaran ulang.');
         } else {
-          // Display Step 4 Receipt
+          // Display Step 6 Receipt
           const reg = result.data;
           document.getElementById('receipt-name').textContent = reg.name;
           document.getElementById('receipt-nisn').textContent = reg.nisn;
           document.getElementById('receipt-session').textContent = reg.queue_session;
           document.getElementById('receipt-qr-img').src = reg.qr_code;
-          goToStep(4);
+          goToStep(6);
         }
       } catch (err) {
         console.error(err);
         showModalAlert('Terjadi kesalahan jaringan dalam mengirim berkas.');
       } finally {
-        btnStep3Submit.disabled = false;
-        btnStep3Submit.innerHTML = 'Kirim Pendaftaran Ulang <i data-lucide="send"></i>';
+        btnStep5Submit.disabled = false;
+        btnStep5Submit.innerHTML = 'Kirim Pendaftaran Ulang <i data-lucide="send"></i>';
         if (window.lucide) lucide.createIcons();
       }
     });

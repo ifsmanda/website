@@ -22,6 +22,7 @@
 
   <!-- CSS Stylesheet -->
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style_dapodik.css">
 </head>
 
 <body>
@@ -1387,16 +1388,26 @@
         <div class="step-indicator-line"></div>
         <div class="step-indicator-item" id="indicator-step-2">
           <div class="step-indicator-num">2</div>
-          <span>Biodata</span>
+          <span>Pribadi</span>
         </div>
         <div class="step-indicator-line"></div>
         <div class="step-indicator-item" id="indicator-step-3">
           <div class="step-indicator-num">3</div>
-          <span>Berkas</span>
+          <span>Orang Tua</span>
         </div>
         <div class="step-indicator-line"></div>
         <div class="step-indicator-item" id="indicator-step-4">
           <div class="step-indicator-num">4</div>
+          <span>Rincian</span>
+        </div>
+        <div class="step-indicator-line"></div>
+        <div class="step-indicator-item" id="indicator-step-5">
+          <div class="step-indicator-num">5</div>
+          <span>Berkas</span>
+        </div>
+        <div class="step-indicator-line"></div>
+        <div class="step-indicator-item" id="indicator-step-6">
+          <div class="step-indicator-num">6</div>
           <span>Bukti</span>
         </div>
       </div>
@@ -1425,54 +1436,732 @@
           </div>
         </div>
 
-        <!-- STEP 2: BIODATA FORM -->
+        <!-- STEP 2: PRIBADI (DATA PRIBADI & ALAMAT) -->
         <div class="form-step-content" id="form-step-2">
-          <h4 class="form-step-title">Formulir Biodata Konfirmasi</h4>
-          <p class="form-step-desc">Silakan lengkapi data kontak dan konfirmasi di bawah ini dengan benar.</p>
+          <h4 class="form-step-title">Formulir Data Pribadi & Alamat</h4>
+          <p class="form-step-desc">Silakan lengkapi data pribadi dan alamat sesuai dengan Kartu Keluarga (KK).</p>
+          
+          <div class="dapodik-section-header first">Identitas Calon Siswa</div>
           <div class="form-grid">
             <div class="form-group">
               <label for="du-name">Nama Lengkap (Sesuai PPDB Dinas)</label>
               <input type="text" id="du-name" class="form-control" readonly>
             </div>
             <div class="form-group">
-              <label for="du-email">Alamat Email Aktif</label>
-              <input type="email" id="du-email" class="form-control" placeholder="nama@email.com" required>
+              <label for="du-gender">Jenis Kelamin <span class="text-danger">*</span></label>
+              <select id="du-gender" class="form-control" required>
+                <option value="" disabled selected>Pilih Jenis Kelamin</option>
+                <option value="Laki-laki">Laki-laki</option>
+                <option value="Perempuan">Perempuan</option>
+              </select>
             </div>
             <div class="form-group">
-              <label for="du-phone">Nomor WhatsApp/Telepon</label>
-              <input type="tel" id="du-phone" class="form-control" placeholder="Contoh: 0812XXXXXXXX" required>
+              <label for="du-nik">NIK (Nomor Induk Kependudukan) <span class="text-danger">*</span></label>
+              <input type="text" id="du-nik" class="form-control" placeholder="16 digit angka NIK" maxlength="16" required>
             </div>
             <div class="form-group">
-              <label for="du-uniform">Ukuran Baju Seragam</label>
-              <select id="du-uniform" class="form-control" required>
-                <option value="" disabled selected>Pilih Ukuran Baju</option>
-                <option value="S">S (Small)</option>
-                <option value="M">M (Medium)</option>
-                <option value="L">L (Large)</option>
-                <option value="XL">XL (Extra Large)</option>
-                <option value="XXL">XXL (Double Extra Large)</option>
+              <label for="du-nokk">Nomor Kartu Keluarga (KK) <span class="text-danger">*</span></label>
+              <input type="text" id="du-nokk" class="form-control" placeholder="16 digit nomor KK" maxlength="16" required>
+            </div>
+            <div class="form-group">
+              <label for="du-tempat-lahir">Tempat Lahir <span class="text-danger">*</span></label>
+              <select id="du-tempat-lahir" class="form-control" required>
+                <option value="" disabled selected>Pilih Kota/Kabupaten</option>
+                <option value="Kota Bandung">Kota Bandung</option>
+                <option value="Kabupaten Bandung">Kabupaten Bandung</option>
+                <option value="Kabupaten Bandung Barat">Kabupaten Bandung Barat</option>
+                <option value="Kota Cimahi">Kota Cimahi</option>
+                <option value="Kabupaten Sumedang">Kabupaten Sumedang</option>
+                <option value="Kabupaten Garut">Kabupaten Garut</option>
+                <option value="Kota Tasikmalaya">Kota Tasikmalaya</option>
+                <option value="Kabupaten Tasikmalaya">Kabupaten Tasikmalaya</option>
+                <option value="Kota Banjar">Kota Banjar</option>
+                <option value="Kabupaten Ciamis">Kabupaten Ciamis</option>
+                <option value="Kabupaten Pangandaran">Kabupaten Pangandaran</option>
+                <option value="Kabupaten Kuningan">Kabupaten Kuningan</option>
+                <option value="Kota Cirebon">Kota Cirebon</option>
+                <option value="Kabupaten Cirebon">Kabupaten Cirebon</option>
+                <option value="Kabupaten Majalengka">Kabupaten Majalengka</option>
+                <option value="Kabupaten Indramayu">Kabupaten Indramayu</option>
+                <option value="Kabupaten Subang">Kabupaten Subang</option>
+                <option value="Kabupaten Purwakarta">Kabupaten Purwakarta</option>
+                <option value="Kabupaten Karawang">Kabupaten Karawang</option>
+                <option value="Kabupaten Bekasi">Kabupaten Bekasi</option>
+                <option value="Kota Bekasi">Kota Bekasi</option>
+                <option value="Kota Depok">Kota Depok</option>
+                <option value="Kota Bogor">Kota Bogor</option>
+                <option value="Kabupaten Bogor">Kabupaten Bogor</option>
+                <option value="Kota Sukabumi">Kota Sukabumi</option>
+                <option value="Kabupaten Sukabumi">Kabupaten Sukabumi</option>
+                <option value="Kabupaten Cianjur">Kabupaten Cianjur</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="du-tanggal-lahir">Tanggal Lahir <span class="text-danger">*</span></label>
+              <input type="date" id="du-tanggal-lahir" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="du-no-akta">No. Registrasi Akta Lahir <span class="text-danger">*</span></label>
+              <input type="text" id="du-no-akta" class="form-control" placeholder="Contoh: 3273-LU-01022010-0001" required>
+            </div>
+            <div class="form-group">
+              <label for="du-agama">Agama <span class="text-danger">*</span></label>
+              <select id="du-agama" class="form-control" required>
+                <option value="" disabled selected>Pilih Agama</option>
+                <option value="Islam">Islam</option>
+                <option value="Kristen">Kristen</option>
+                <option value="Katolik">Katolik</option>
+                <option value="Hindu">Hindu</option>
+                <option value="Buddha">Buddha</option>
+                <option value="Khonghucu">Khonghucu</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="du-kewarganegaraan">Kewarganegaraan <span class="text-danger">*</span></label>
+              <select id="du-kewarganegaraan" class="form-control" required>
+                <option value="WNI" selected>WNI (Warga Negara Indonesia)</option>
+                <option value="WNA">WNA (Warga Negara Asing)</option>
+              </select>
+            </div>
+            <div class="form-group" id="du-group-kewarganegaraan-negara" style="display: none;">
+              <label for="du-kewarganegaraan-negara">Nama Negara Asal <span class="text-danger">*</span></label>
+              <input type="text" id="du-kewarganegaraan-negara" class="form-control" placeholder="Nama Negara">
+            </div>
+            <div class="form-group">
+              <label for="du-kebutuhan-khusus">Berkebutuhan Khusus <span class="text-danger">*</span></label>
+              <select id="du-kebutuhan-khusus" class="form-control" required>
+                <option value="Tidak" selected>Tidak</option>
+                <option value="Netra (A)">Netra (A)</option>
+                <option value="Rungu (B)">Rungu (B)</option>
+                <option value="Grahita Ringan (C)">Grahita Ringan (C)</option>
+                <option value="Grahita Sedang (C1)">Grahita Sedang (C1)</option>
+                <option value="Daksa Ringan (D)">Daksa Ringan (D)</option>
+                <option value="Daksa Sedang (D1)">Daksa Sedang (D1)</option>
+                <option value="Laras (E)">Laras (E)</option>
+                <option value="Wicara (F)">Wicara (F)</option>
+                <option value="Tuna Ganda (G)">Tuna Ganda (G)</option>
+                <option value="Hiper Aktif (H)">Hiper Aktif (H)</option>
+                <option value="Cerdas Istimewa (I)">Cerdas Istimewa (I)</option>
+                <option value="Bakat Istimewa (J)">Bakat Istimewa (J)</option>
+                <option value="Kesulitan Belajar (K)">Kesulitan Belajar (K)</option>
+                <option value="Narkobe (N)">Narkobe (N)</option>
+                <option value="Indigo (O)">Indigo (O)</option>
+                <option value="Down Syndrome (P)">Down Syndrome (P)</option>
+                <option value="Autis (Q)">Autis (Q)</option>
               </select>
             </div>
           </div>
-          <div class="form-group" style="margin-top: 15px;">
-            <label for="du-address">Alamat Rumah Lengkap</label>
-            <textarea id="du-address" class="form-control" rows="3"
-              placeholder="Masukkan alamat lengkap rumah Anda sesuai Kartu Keluarga..." required></textarea>
+
+          <div class="dapodik-section-header">Alamat Tempat Tinggal</div>
+          <div class="form-group">
+            <label for="du-alamat-jalan">Alamat Rumah (Nama Jalan / Kampung) <span class="text-danger">*</span></label>
+            <input type="text" id="du-alamat-jalan" class="form-control" placeholder="Contoh: Jl. Belitung No. 8" required>
           </div>
-          <div class="form-step-actions" style="margin-top: 20px;">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="du-rt">RT <span class="text-danger">*</span></label>
+              <input type="text" id="du-rt" class="form-control" placeholder="RT" required>
+            </div>
+            <div class="form-group">
+              <label for="du-rw">RW <span class="text-danger">*</span></label>
+              <input type="text" id="du-rw" class="form-control" placeholder="RW" required>
+            </div>
+            <div class="form-group">
+              <label for="du-dusun">Nama Dusun</label>
+              <input type="text" id="du-dusun" class="form-control" placeholder="Nama Dusun (Opsional)">
+            </div>
+            <div class="form-group">
+              <label for="du-kelurahan">Kelurahan / Desa <span class="text-danger">*</span></label>
+              <input type="text" id="du-kelurahan" class="form-control" placeholder="Kelurahan" required>
+            </div>
+            <div class="form-group">
+              <label for="du-kecamatan">Kecamatan <span class="text-danger">*</span></label>
+              <input type="text" id="du-kecamatan" class="form-control" placeholder="Kecamatan" required>
+            </div>
+            <div class="form-group">
+              <label for="du-kode-pos">Kode Pos <span class="text-danger">*</span></label>
+              <input type="text" id="du-kode-pos" class="form-control" placeholder="5 digit Kode Pos" maxlength="5" required>
+            </div>
+            <div class="form-group">
+              <label for="du-lintang">Lintang (Latitude)</label>
+              <input type="text" id="du-lintang" class="form-control" placeholder="Contoh: -6.9015">
+            </div>
+            <div class="form-group">
+              <label for="du-bujur">Bujur (Longitude)</label>
+              <input type="text" id="du-bujur" class="form-control" placeholder="Contoh: 107.6186">
+            </div>
+            <div class="form-group">
+              <label for="du-tempat-tinggal">Tempat Tinggal <span class="text-danger">*</span></label>
+              <select id="du-tempat-tinggal" class="form-control" required>
+                <option value="" disabled selected>Pilih Tempat Tinggal</option>
+                <option value="Bersama Orang Tua">Bersama Orang Tua</option>
+                <option value="Wali">Wali</option>
+                <option value="Kos">Kos</option>
+                <option value="Asrama">Asrama</option>
+                <option value="Panti Asuhan">Panti Asuhan</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="du-transportasi">Moda Transportasi <span class="text-danger">*</span></label>
+              <select id="du-transportasi" class="form-control" required>
+                <option value="" disabled selected>Pilih Transportasi</option>
+                <option value="Jalan Kaki">Jalan Kaki</option>
+                <option value="Kendaraan Pribadi">Kendaraan Pribadi</option>
+                <option value="Kendaraan Umum">Kendaraan Umum</option>
+                <option value="Jemputan Sekolah">Jemputan Sekolah</option>
+                <option value="Kereta Api">Kereta Api</option>
+                <option value="Ojek">Ojek</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="dapodik-section-header">Kontak & Kesejahteraan</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="du-anak-ke">Anak Ke- <span class="text-danger">*</span></label>
+              <input type="number" id="du-anak-ke" class="form-control" placeholder="Contoh: 1" min="1" required>
+            </div>
+            <div class="form-group">
+              <label for="du-penerima-kip">Penerima KIP (Kartu Indonesia Pintar) <span class="text-danger">*</span></label>
+              <select id="du-penerima-kip" class="form-control" required>
+                <option value="Tidak" selected>Tidak</option>
+                <option value="Ya">Ya</option>
+              </select>
+            </div>
+            <div class="form-group" id="du-group-tetap-kip" style="display: none;">
+              <label for="du-tetap-kip">Layak Mendapatkan KIP? <span class="text-danger">*</span></label>
+              <select id="du-tetap-kip" class="form-control">
+                <option value="Tidak" selected>Tidak</option>
+                <option value="Ya">Ya</option>
+              </select>
+            </div>
+            <div class="form-group" id="du-group-alasan-tolak-pip" style="display: none;">
+              <label for="du-alasan-tolak-pip">Alasan Menolak PIP/KIP</label>
+              <select id="du-alasan-tolak-pip" class="form-control">
+                <option value="" selected>Pilih Alasan (Jika Ada)</option>
+                <option value="Sudah Mampu">Sudah Mampu</option>
+                <option value="Anggota Keluarga Lain Sudah Dapat">Anggota Keluarga Lain Sudah Dapat</option>
+                <option value="Tidak Butuh">Tidak Butuh</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="du-email">Alamat Email Aktif <span class="text-danger">*</span></label>
+              <input type="email" id="du-email" class="form-control" placeholder="nama@email.com" required>
+            </div>
+            <div class="form-group">
+              <label for="du-phone">Nomor WhatsApp / HP Calon Siswa <span class="text-danger">*</span></label>
+              <input type="tel" id="du-phone" class="form-control" placeholder="Contoh: 0812XXXXXXXX" required>
+            </div>
+            <div class="form-group">
+              <label for="du-telepon-rumah">Nomor Telepon Rumah</label>
+              <input type="text" id="du-telepon-rumah" class="form-control" placeholder="Nomor Telepon (Opsional)">
+            </div>
+          </div>
+          
+          <!-- Hidden Uniform and Address fields to avoid JS errors while removing from UI -->
+          <div style="display: none;">
+            <select id="du-uniform" class="form-control">
+              <option value="" selected>Pilih Ukuran Baju</option>
+            </select>
+            <textarea id="du-address" class="form-control"></textarea>
+          </div>
+
+          <div class="form-step-actions" style="margin-top: 24px;">
             <button class="btn btn-outline-primary" id="btn-step2-prev">Kembali</button>
             <button class="btn btn-primary" id="btn-step2-next">Lanjutkan <i data-lucide="arrow-right"></i></button>
           </div>
         </div>
 
-        <!-- STEP 3: FILE UPLOAD -->
+        <!-- STEP 3: ORANG TUA (DATA ORANG TUA / WALI) -->
         <div class="form-step-content" id="form-step-3">
+          <h4 class="form-step-title">Formulir Data Orang Tua & Wali</h4>
+          <p class="form-step-desc">Isi data ayah kandung dan ibu kandung sesuai dokumen akta kelahiran / KK. Data Wali bersifat opsional.</p>
+          
+          <div class="dapodik-section-header first">Data Ayah Kandung</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="du-ayah-nama">Nama Lengkap Ayah Kandung <span class="text-danger">*</span></label>
+              <input type="text" id="du-ayah-nama" class="form-control" placeholder="Nama Lengkap Ayah" required>
+            </div>
+            <div class="form-group">
+              <label for="du-ayah-nik">NIK Ayah <span class="text-danger">*</span></label>
+              <input type="text" id="du-ayah-nik" class="form-control" placeholder="16 digit NIK Ayah" maxlength="16" required>
+            </div>
+            <div class="form-group">
+              <label for="du-ayah-tahun-lahir">Tahun Lahir Ayah <span class="text-danger">*</span></label>
+              <input type="number" id="du-ayah-tahun-lahir" class="form-control" placeholder="Contoh: 1975" required>
+            </div>
+            <div class="form-group">
+              <label for="du-ayah-pendidikan">Pendidikan Terakhir Ayah <span class="text-danger">*</span></label>
+              <select id="du-ayah-pendidikan" class="form-control" required>
+                <option value="" disabled selected>Pilih Pendidikan</option>
+                <option value="Tidak Sekolah">Tidak Sekolah</option>
+                <option value="SD / Sederajat">SD / Sederajat</option>
+                <option value="SMP / Sederajat">SMP / Sederajat</option>
+                <option value="SMA / Sederajat">SMA / Sederajat</option>
+                <option value="D1">D1</option>
+                <option value="D2">D2</option>
+                <option value="D3">D3</option>
+                <option value="D4/S1">D4/S1</option>
+                <option value="S2">S2</option>
+                <option value="S3">S3</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="du-ayah-pekerjaan">Pekerjaan Ayah <span class="text-danger">*</span></label>
+              <select id="du-ayah-pekerjaan" class="form-control" required>
+                <option value="" disabled selected>Pilih Pekerjaan</option>
+                <option value="Tidak bekerja">Tidak bekerja</option>
+                <option value="PNS">PNS (Pegawai Negeri Sipil)</option>
+                <option value="TNI">TNI (Tentara Nasional Indonesia)</option>
+                <option value="POLRI">POLRI (Kepolisian RI)</option>
+                <option value="Karyawan Swasta">Karyawan Swasta</option>
+                <option value="Karyawan BUMN/BUMD">Karyawan BUMN/BUMD</option>
+                <option value="Guru / Dosen">Guru / Dosen</option>
+                <option value="Tenaga Medis">Tenaga Medis (Dokter/Perawat/Bidan)</option>
+                <option value="Wiraswasta">Wiraswasta</option>
+                <option value="Petani / Peternak">Petani / Peternak</option>
+                <option value="Nelayan">Nelayan</option>
+                <option value="Buruh Tani / Pabrik">Buruh Tani / Pabrik</option>
+                <option value="Pensiunan">Pensiunan</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="du-ayah-penghasilan">Penghasilan Bulanan Ayah (Nominal Sebenarnya) <span class="text-danger">*</span></label>
+              <input type="text" id="du-ayah-penghasilan" class="form-control" placeholder="Contoh: 4500000" required>
+              <small class="form-helper">Tuliskan nominal bersih per bulan tanpa titik/koma (Tulis 0 jika tidak berpenghasilan).</small>
+            </div>
+            <div class="form-group">
+              <label for="du-ayah-kebutuhan-khusus">Berkebutuhan Khusus Ayah <span class="text-danger">*</span></label>
+              <select id="du-ayah-kebutuhan-khusus" class="form-control" required>
+                <option value="Tidak" selected>Tidak</option>
+                <option value="Netra (A)">Netra (A)</option>
+                <option value="Rungu (B)">Rungu (B)</option>
+                <option value="Grahita Ringan (C)">Grahita Ringan (C)</option>
+                <option value="Grahita Sedang (C1)">Grahita Sedang (C1)</option>
+                <option value="Daksa Ringan (D)">Daksa Ringan (D)</option>
+                <option value="Daksa Sedang (D1)">Daksa Sedang (D1)</option>
+                <option value="Laras (E)">Laras (E)</option>
+                <option value="Wicara (F)">Wicara (F)</option>
+                <option value="Tuna Ganda (G)">Tuna Ganda (G)</option>
+                <option value="Hiper Aktif (H)">Hiper Aktif (H)</option>
+                <option value="Cerdas Istimewa (I)">Cerdas Istimewa (I)</option>
+                <option value="Bakat Istimewa (J)">Bakat Istimewa (J)</option>
+                <option value="Kesulitan Belajar (K)">Kesulitan Belajar (K)</option>
+                <option value="Narkobe (N)">Narkobe (N)</option>
+                <option value="Indigo (O)">Indigo (O)</option>
+                <option value="Down Syndrome (P)">Down Syndrome (P)</option>
+                <option value="Autis (Q)">Autis (Q)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="dapodik-section-header">Data Ibu Kandung</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="du-ibu-nama">Nama Lengkap Ibu Kandung <span class="text-danger">*</span></label>
+              <input type="text" id="du-ibu-nama" class="form-control" placeholder="Nama Lengkap Ibu" required>
+            </div>
+            <div class="form-group">
+              <label for="du-ibu-nik">NIK Ibu <span class="text-danger">*</span></label>
+              <input type="text" id="du-ibu-nik" class="form-control" placeholder="16 digit NIK Ibu" maxlength="16" required>
+            </div>
+            <div class="form-group">
+              <label for="du-ibu-tahun-lahir">Tahun Lahir Ibu <span class="text-danger">*</span></label>
+              <input type="number" id="du-ibu-tahun-lahir" class="form-control" placeholder="Contoh: 1980" required>
+            </div>
+            <div class="form-group">
+              <label for="du-ibu-pendidikan">Pendidikan Terakhir Ibu <span class="text-danger">*</span></label>
+              <select id="du-ibu-pendidikan" class="form-control" required>
+                <option value="" disabled selected>Pilih Pendidikan</option>
+                <option value="Tidak Sekolah">Tidak Sekolah</option>
+                <option value="SD / Sederajat">SD / Sederajat</option>
+                <option value="SMP / Sederajat">SMP / Sederajat</option>
+                <option value="SMA / Sederajat">SMA / Sederajat</option>
+                <option value="D1">D1</option>
+                <option value="D2">D2</option>
+                <option value="D3">D3</option>
+                <option value="D4/S1">D4/S1</option>
+                <option value="S2">S2</option>
+                <option value="S3">S3</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="du-ibu-pekerjaan">Pekerjaan Ibu <span class="text-danger">*</span></label>
+              <select id="du-ibu-pekerjaan" class="form-control" required>
+                <option value="" disabled selected>Pilih Pekerjaan</option>
+                <option value="Tidak bekerja">Tidak bekerja</option>
+                <option value="Ibu Rumah Tangga">Ibu Rumah Tangga</option>
+                <option value="PNS">PNS (Pegawai Negeri Sipil)</option>
+                <option value="TNI">TNI (Tentara Nasional Indonesia)</option>
+                <option value="POLRI">POLRI (Kepolisian RI)</option>
+                <option value="Karyawan Swasta">Karyawan Swasta</option>
+                <option value="Karyawan BUMN/BUMD">Karyawan BUMN/BUMD</option>
+                <option value="Guru / Dosen">Guru / Dosen</option>
+                <option value="Tenaga Medis">Tenaga Medis (Dokter/Perawat/Bidan)</option>
+                <option value="Wiraswasta">Wiraswasta</option>
+                <option value="Petani / Peternak">Petani / Peternak</option>
+                <option value="Nelayan">Nelayan</option>
+                <option value="Buruh Tani / Pabrik">Buruh Tani / Pabrik</option>
+                <option value="Pensiunan">Pensiunan</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="du-ibu-penghasilan">Penghasilan Bulanan Ibu (Nominal Sebenarnya) <span class="text-danger">*</span></label>
+              <input type="text" id="du-ibu-penghasilan" class="form-control" placeholder="Contoh: 3000000" required>
+              <small class="form-helper">Tuliskan nominal bersih per bulan tanpa titik/koma (Tulis 0 jika tidak berpenghasilan).</small>
+            </div>
+            <div class="form-group">
+              <label for="du-ibu-kebutuhan-khusus">Berkebutuhan Khusus Ibu <span class="text-danger">*</span></label>
+              <select id="du-ibu-kebutuhan-khusus" class="form-control" required>
+                <option value="Tidak" selected>Tidak</option>
+                <option value="Netra (A)">Netra (A)</option>
+                <option value="Rungu (B)">Rungu (B)</option>
+                <option value="Grahita Ringan (C)">Grahita Ringan (C)</option>
+                <option value="Grahita Sedang (C1)">Grahita Sedang (C1)</option>
+                <option value="Daksa Ringan (D)">Daksa Ringan (D)</option>
+                <option value="Daksa Sedang (D1)">Daksa Sedang (D1)</option>
+                <option value="Laras (E)">Laras (E)</option>
+                <option value="Wicara (F)">Wicara (F)</option>
+                <option value="Tuna Ganda (G)">Tuna Ganda (G)</option>
+                <option value="Hiper Aktif (H)">Hiper Aktif (H)</option>
+                <option value="Cerdas Istimewa (I)">Cerdas Istimewa (I)</option>
+                <option value="Bakat Istimewa (J)">Bakat Istimewa (J)</option>
+                <option value="Kesulitan Belajar (K)">Kesulitan Belajar (K)</option>
+                <option value="Narkobe (N)">Narkobe (N)</option>
+                <option value="Indigo (O)">Indigo (O)</option>
+                <option value="Down Syndrome (P)">Down Syndrome (P)</option>
+                <option value="Autis (Q)">Autis (Q)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="dapodik-section-header">Data Wali (Opsional / Jika Tinggal dengan Wali)</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="du-wali-nama">Nama Lengkap Wali</label>
+              <input type="text" id="du-wali-nama" class="form-control" placeholder="Nama Lengkap Wali (Jika ada)">
+            </div>
+            <div class="form-group">
+              <label for="du-wali-nik">NIK Wali</label>
+              <input type="text" id="du-wali-nik" class="form-control" placeholder="16 digit NIK Wali" maxlength="16">
+            </div>
+            <div class="form-group">
+              <label for="du-wali-tahun-lahir">Tahun Lahir Wali</label>
+              <input type="number" id="du-wali-tahun-lahir" class="form-control" placeholder="Contoh: 1970">
+            </div>
+            <div class="form-group">
+              <label for="du-wali-pendidikan">Pendidikan Terakhir Wali</label>
+              <select id="du-wali-pendidikan" class="form-control">
+                <option value="" disabled selected>Pilih Pendidikan</option>
+                <option value="Tidak Sekolah">Tidak Sekolah</option>
+                <option value="SD / Sederajat">SD / Sederajat</option>
+                <option value="SMP / Sederajat">SMP / Sederajat</option>
+                <option value="SMA / Sederajat">SMA / Sederajat</option>
+                <option value="D1">D1</option>
+                <option value="D2">D2</option>
+                <option value="D3">D3</option>
+                <option value="D4/S1">D4/S1</option>
+                <option value="S2">S2</option>
+                <option value="S3">S3</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="du-wali-pekerjaan">Pekerjaan Wali</label>
+              <select id="du-wali-pekerjaan" class="form-control">
+                <option value="" disabled selected>Pilih Pekerjaan</option>
+                <option value="Tidak bekerja">Tidak bekerja</option>
+                <option value="PNS">PNS (Pegawai Negeri Sipil)</option>
+                <option value="TNI">TNI (Tentara Nasional Indonesia)</option>
+                <option value="POLRI">POLRI (Kepolisian RI)</option>
+                <option value="Karyawan Swasta">Karyawan Swasta</option>
+                <option value="Karyawan BUMN/BUMD">Karyawan BUMN/BUMD</option>
+                <option value="Guru / Dosen">Guru / Dosen</option>
+                <option value="Tenaga Medis">Tenaga Medis (Dokter/Perawat/Bidan)</option>
+                <option value="Wiraswasta">Wiraswasta</option>
+                <option value="Petani / Peternak">Petani / Peternak</option>
+                <option value="Nelayan">Nelayan</option>
+                <option value="Buruh Tani / Pabrik">Buruh Tani / Pabrik</option>
+                <option value="Pensiunan">Pensiunan</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="du-wali-penghasilan">Penghasilan Bulanan Wali (Nominal Sebenarnya)</label>
+              <input type="text" id="du-wali-penghasilan" class="form-control" placeholder="Contoh: 5000000">
+              <small class="form-helper">Tuliskan nominal bersih per bulan tanpa titik/koma (Tulis 0 jika tidak berpenghasilan).</small>
+            </div>
+          </div>
+
+          <div class="form-step-actions" style="margin-top: 24px;">
+            <button class="btn btn-outline-primary" id="btn-step3-prev">Kembali</button>
+            <button class="btn btn-primary" id="btn-step3-next">Lanjutkan <i data-lucide="arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- STEP 4: RINCIAN (PERIODIK, REGISTRASI & PRESTASI) -->
+        <div class="form-step-content" id="form-step-4">
+          <h4 class="form-step-title">Formulir Rincian Periodik & Registrasi</h4>
+          <p class="form-step-desc">Lengkapi data kesehatan fisik, riwayat pendaftaran sekolah, data kesejahteraan, prestasi, dan beasiswa.</p>
+          
+          <div class="dapodik-section-header first">Data Periodik Calon Siswa</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="du-tinggi-badan">Tinggi Badan (cm) <span class="text-danger">*</span></label>
+              <input type="number" id="du-tinggi-badan" class="form-control" placeholder="Tinggi badan (angka saja)" min="50" max="250" required>
+            </div>
+            <div class="form-group">
+              <label for="du-berat-badan">Berat Badan (kg) <span class="text-danger">*</span></label>
+              <input type="number" id="du-berat-badan" class="form-control" placeholder="Berat badan (angka saja)" min="10" max="200" required>
+            </div>
+            <div class="form-group">
+              <label for="du-lingkar-kepala">Lingkar Kepala (cm) <span class="text-danger">*</span></label>
+              <input type="number" id="du-lingkar-kepala" class="form-control" placeholder="Lingkar kepala (angka saja)" min="30" max="80" required>
+            </div>
+            <div class="form-group">
+              <label for="du-jumlah-saudara">Jumlah Saudara Kandung <span class="text-danger">*</span></label>
+              <input type="number" id="du-jumlah-saudara" class="form-control" placeholder="Jumlah saudara" min="0" required>
+            </div>
+            <div class="form-group">
+              <label for="du-jarak-sekolah">Jarak ke Sekolah <span class="text-danger">*</span></label>
+              <select id="du-jarak-sekolah" class="form-control" required>
+                <option value="Kurang dari 1 km" selected>Kurang dari 1 km</option>
+                <option value="Lebih dari 1 km">Lebih dari 1 km</option>
+              </select>
+            </div>
+            <div class="form-group" id="du-group-jarak-sekolah-km" style="display: none;">
+              <label for="du-jarak-sekolah-km">Jarak Sebenarnya (dalam Kilometer) <span class="text-danger">*</span></label>
+              <input type="number" id="du-jarak-sekolah-km" class="form-control" placeholder="Contoh: 3.5" step="0.1" min="1">
+            </div>
+            <div class="form-group">
+              <label>Waktu Tempuh Perjalanan (Jam : Menit) <span class="text-danger">*</span></label>
+              <div style="display: flex; gap: 8px;">
+                <input type="number" id="du-waktu-tempuh-jam" class="form-control" placeholder="Jam" min="0" max="24" required style="flex: 1;">
+                <input type="number" id="du-waktu-tempuh-menit" class="form-control" placeholder="Menit" min="0" max="59" required style="flex: 1;">
+              </div>
+            </div>
+          </div>
+
+          <div class="dapodik-section-header">Registrasi Masuk & Sekolah Asal</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="du-jenis-pendaftaran">Jenis Pendaftaran <span class="text-danger">*</span></label>
+              <select id="du-jenis-pendaftaran" class="form-control" required>
+                <option value="Siswa Baru" selected>Siswa Baru</option>
+                <option value="Pindahan">Pindahan</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="du-nis">NIS (Nomor Induk Siswa - Opsional)</label>
+              <input type="text" id="du-nis" class="form-control" placeholder="NIS dari Sekolah Asal (Jika Ada)">
+            </div>
+            <div class="form-group">
+              <label for="du-tanggal-masuk">Tanggal Masuk Sekolah <span class="text-danger">*</span></label>
+              <input type="date" id="du-tanggal-masuk" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="du-sekolah-asal">Sekolah Asal (SMP / MTs) <span class="text-danger">*</span></label>
+              <input type="text" id="du-sekolah-asal" class="form-control" placeholder="Nama SMP Asal" required>
+            </div>
+            <div class="form-group">
+              <label for="du-nomor-peserta-un">Nomor Peserta UN (Opsional)</label>
+              <input type="text" id="du-nomor-peserta-un" class="form-control" placeholder="Format: 1-15-XXX-XXX-X">
+            </div>
+            <div class="form-group">
+              <label for="du-no-seri-ijazah">No. Seri Ijazah SMP (Opsional)</label>
+              <input type="text" id="du-no-seri-ijazah" class="form-control" placeholder="Contoh: DN-02/DI-06/0000001">
+            </div>
+            <div class="form-group">
+              <label for="du-no-skhun">No. Seri SKHUN (Opsional)</label>
+              <input type="text" id="du-no-skhun" class="form-control" placeholder="Contoh: DN-02/DI-06/0000001">
+            </div>
+          </div>
+
+          <div class="dapodik-section-header">Program Bantuan Kesejahteraan (Jika Ada)</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="du-kesejahteraan-jenis">Jenis Bantuan / Program</label>
+              <select id="du-kesejahteraan-jenis" class="form-control">
+                <option value="" selected>Pilih Jenis Bantuan (Jika Ada)</option>
+                <option value="KKS (Kartu Keluarga Sejahtera)">KKS (Kartu Keluarga Sejahtera)</option>
+                <option value="KPS (Kartu Perlindungan Sosial)">KPS (Kartu Perlindungan Sosial)</option>
+                <option value="PKH (Program Keluarga Harapan)">PKH (Program Keluarga Harapan)</option>
+                <option value="KIP (Kartu Indonesia Pintar)">KIP (Kartu Indonesia Pintar)</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="du-kesejahteraan-no-kartu">Nomor Kartu Kesejahteraan</label>
+              <input type="text" id="du-kesejahteraan-no-kartu" class="form-control" placeholder="Nomor Kartu Bantuan">
+            </div>
+            <div class="form-group">
+              <label for="du-kesejahteraan-nama-kartu">Nama Tertera di Kartu</label>
+              <input type="text" id="du-kesejahteraan-nama-kartu" class="form-control" placeholder="Nama Pemegang Kartu">
+            </div>
+          </div>
+
+          <div class="dapodik-section-header">Data Prestasi Siswa (Maksimal 3 Prestasi - Opsional)</div>
+          <div class="dapodik-table-wrapper">
+            <table class="dapodik-input-table">
+              <thead>
+                <tr>
+                  <th style="width: 20%;">Jenis</th>
+                  <th style="width: 15%;">Tingkat</th>
+                  <th style="width: 25%;">Nama Prestasi</th>
+                  <th style="width: 12%;">Tahun</th>
+                  <th style="width: 18%;">Penyelenggara</th>
+                  <th style="width: 10%;">Juara</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <select id="du-prestasi-1-jenis">
+                      <option value="" selected>Pilih Jenis</option>
+                      <option value="Sains/Olimpiade">Sains/Olimpiade</option>
+                      <option value="Seni/Budaya">Seni/Budaya</option>
+                      <option value="Olahraga">Olahraga</option>
+                      <option value="Keagamaan/MTQ">Keagamaan/MTQ</option>
+                      <option value="Pramuka/Paskibra">Pramuka/Paskibra</option>
+                      <option value="Lainnya">Lainnya</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select id="du-prestasi-1-tingkat">
+                      <option value="" selected>Tingkat</option>
+                      <option value="Kecamatan">Kecamatan</option>
+                      <option value="Kabupaten/Kota">Kabupaten/Kota</option>
+                      <option value="Provinsi">Provinsi</option>
+                      <option value="Nasional">Nasional</option>
+                      <option value="Internasional">Internasional</option>
+                    </select>
+                  </td>
+                  <td><input type="text" id="du-prestasi-1-nama" placeholder="Misal: OSN Fisika"></td>
+                  <td><input type="number" id="du-prestasi-1-tahun" placeholder="2025" min="2010" max="2026"></td>
+                  <td><input type="text" id="du-prestasi-1-penyelenggara" placeholder="Kemendikbud"></td>
+                  <td><input type="text" id="du-prestasi-1-peringkat" placeholder="Juara 1"></td>
+                </tr>
+                <tr>
+                  <td>
+                    <select id="du-prestasi-2-jenis">
+                      <option value="" selected>Pilih Jenis</option>
+                      <option value="Sains/Olimpiade">Sains/Olimpiade</option>
+                      <option value="Seni/Budaya">Seni/Budaya</option>
+                      <option value="Olahraga">Olahraga</option>
+                      <option value="Keagamaan/MTQ">Keagamaan/MTQ</option>
+                      <option value="Pramuka/Paskibra">Pramuka/Paskibra</option>
+                      <option value="Lainnya">Lainnya</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select id="du-prestasi-2-tingkat">
+                      <option value="" selected>Tingkat</option>
+                      <option value="Kecamatan">Kecamatan</option>
+                      <option value="Kabupaten/Kota">Kabupaten/Kota</option>
+                      <option value="Provinsi">Provinsi</option>
+                      <option value="Nasional">Nasional</option>
+                      <option value="Internasional">Internasional</option>
+                    </select>
+                  </td>
+                  <td><input type="text" id="du-prestasi-2-nama" placeholder="Nama Prestasi"></td>
+                  <td><input type="number" id="du-prestasi-2-tahun" placeholder="2025" min="2010" max="2026"></td>
+                  <td><input type="text" id="du-prestasi-2-penyelenggara" placeholder="Penyelenggara"></td>
+                  <td><input type="text" id="du-prestasi-2-peringkat" placeholder="Juara"></td>
+                </tr>
+                <tr>
+                  <td>
+                    <select id="du-prestasi-3-jenis">
+                      <option value="" selected>Pilih Jenis</option>
+                      <option value="Sains/Olimpiade">Sains/Olimpiade</option>
+                      <option value="Seni/Budaya">Seni/Budaya</option>
+                      <option value="Olahraga">Olahraga</option>
+                      <option value="Keagamaan/MTQ">Keagamaan/MTQ</option>
+                      <option value="Pramuka/Paskibra">Pramuka/Paskibra</option>
+                      <option value="Lainnya">Lainnya</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select id="du-prestasi-3-tingkat">
+                      <option value="" selected>Tingkat</option>
+                      <option value="Kecamatan">Kecamatan</option>
+                      <option value="Kabupaten/Kota">Kabupaten/Kota</option>
+                      <option value="Provinsi">Provinsi</option>
+                      <option value="Nasional">Nasional</option>
+                      <option value="Internasional">Internasional</option>
+                    </select>
+                  </td>
+                  <td><input type="text" id="du-prestasi-3-nama" placeholder="Nama Prestasi"></td>
+                  <td><input type="number" id="du-prestasi-3-tahun" placeholder="2025" min="2010" max="2026"></td>
+                  <td><input type="text" id="du-prestasi-3-penyelenggara" placeholder="Penyelenggara"></td>
+                  <td><input type="text" id="du-prestasi-3-peringkat" placeholder="Juara"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="dapodik-section-header">Riwayat Beasiswa Siswa (Maksimal 2 Beasiswa - Opsional)</div>
+          <div class="dapodik-table-wrapper">
+            <table class="dapodik-input-table">
+              <thead>
+                <tr>
+                  <th style="width: 25%;">Jenis Beasiswa</th>
+                  <th style="width: 45%;">Keterangan</th>
+                  <th style="width: 15%;">Tahun Mulai</th>
+                  <th style="width: 15%;">Tahun Selesai</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <select id="du-beasiswa-1-jenis">
+                      <option value="" selected>Pilih Jenis</option>
+                      <option value="Anak Berprestasi">Anak Berprestasi</option>
+                      <option value="Keluarga Miskin/Gakin">Keluarga Miskin/Gakin</option>
+                      <option value="Pendidikan (PIP/KIP)">Pendidikan (PIP/KIP)</option>
+                      <option value="Lainnya">Lainnya</option>
+                    </select>
+                  </td>
+                  <td><input type="text" id="du-beasiswa-1-keterangan" placeholder="Keterangan beasiswa"></td>
+                  <td><input type="number" id="du-beasiswa-1-tahun-mulai" placeholder="Mulai" min="2010" max="2026"></td>
+                  <td><input type="number" id="du-beasiswa-1-tahun-selesai" placeholder="Selesai" min="2010" max="2026"></td>
+                </tr>
+                <tr>
+                  <td>
+                    <select id="du-beasiswa-2-jenis">
+                      <option value="" selected>Pilih Jenis</option>
+                      <option value="Anak Berprestasi">Anak Berprestasi</option>
+                      <option value="Keluarga Miskin/Gakin">Keluarga Miskin/Gakin</option>
+                      <option value="Pendidikan (PIP/KIP)">Pendidikan (PIP/KIP)</option>
+                      <option value="Lainnya">Lainnya</option>
+                    </select>
+                  </td>
+                  <td><input type="text" id="du-beasiswa-2-keterangan" placeholder="Keterangan beasiswa"></td>
+                  <td><input type="number" id="du-beasiswa-2-tahun-mulai" placeholder="Mulai" min="2010" max="2026"></td>
+                  <td><input type="number" id="du-beasiswa-2-tahun-selesai" placeholder="Selesai" min="2010" max="2026"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="form-step-actions" style="margin-top: 24px;">
+            <button class="btn btn-outline-primary" id="btn-step4-prev">Kembali</button>
+            <button class="btn btn-primary" id="btn-step4-next">Lanjutkan <i data-lucide="arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- STEP 5: FILE UPLOAD -->
+        <div class="form-step-content" id="form-step-5">
           <h4 class="form-step-title">Unggah Dokumen Persyaratan Fisik</h4>
-          <p class="form-step-desc">Unggah salinan dokumen dalam format gambar (JPG, JPEG, PNG) atau PDF (Maksimal 2MB
-            per berkas).</p>
+          <p class="form-step-desc">Unggah salinan dokumen dalam format gambar (JPG, JPEG, PNG) atau PDF (Maksimal 2MB per berkas).</p>
 
           <div class="form-group">
-            <label for="du-kk-file">Scan Kartu Keluarga (KK) Asli</label>
+            <label for="du-kk-file">Scan Kartu Keluarga (KK) Asli <span class="text-danger">*</span></label>
             <div class="file-upload-drag" id="drag-kk">
               <i data-lucide="upload-cloud" class="upload-icon"></i>
               <span>Tarik & lepas file di sini atau <strong>pilih file</strong></span>
@@ -1482,7 +2171,7 @@
           </div>
 
           <div class="form-group" style="margin-top: 15px;">
-            <label for="du-ppdb-file">Bukti Kelulusan PPDB (Portal Dinas Jabar)</label>
+            <label for="du-ppdb-file">Bukti Kelulusan PPDB (Portal Dinas Jabar) <span class="text-danger">*</span></label>
             <div class="file-upload-drag" id="drag-ppdb">
               <i data-lucide="upload-cloud" class="upload-icon"></i>
               <span>Tarik & lepas file di sini atau <strong>pilih file</strong></span>
@@ -1492,21 +2181,20 @@
           </div>
 
           <div class="form-step-actions" style="margin-top: 24px;">
-            <button class="btn btn-outline-primary" id="btn-step3-prev">Kembali</button>
-            <button class="btn btn-gold" id="btn-step3-submit">
+            <button class="btn btn-outline-primary" id="btn-step5-prev">Kembali</button>
+            <button class="btn btn-gold" id="btn-step5-submit">
               Kirim Pendaftaran Ulang <i data-lucide="send"></i>
             </button>
           </div>
         </div>
 
-        <!-- STEP 4: RECEIPT GENERATION -->
-        <div class="form-step-content" id="form-step-4">
+        <!-- STEP 6: RECEIPT GENERATION -->
+        <div class="form-step-content" id="form-step-6">
           <div class="receipt-success-icon" style="text-align: center; margin-bottom: 10px;">
             <i data-lucide="check-circle" style="width: 54px; height: 54px; color: var(--success);"></i>
           </div>
           <h4 class="receipt-success-title"
-            style="text-align: center; font-family: var(--font-display); color: var(--primary);">Pendaftaran Ulang
-            Online Berhasil!</h4>
+            style="text-align: center; font-family: var(--font-display); color: var(--primary);">Pendaftaran Ulang Online Berhasil!</h4>
           <p class="receipt-success-desc"
             style="text-align: center; font-size: 13px; color: var(--text-secondary); margin-bottom: 20px;">Data Anda
             telah disimpan dalam antrean verifikator SMAN 2 Bandung. Simpan bukti pendaftaran ini untuk diperlihatkan
@@ -1538,8 +2226,7 @@
                 </div>
                 <div>
                   <span class="receipt-label">Status Awal:</span>
-                  <span class="receipt-value" style="color: var(--gold); font-weight: 600;">Pending Verifikasi
-                    Berkas</span>
+                  <span class="receipt-value" style="color: var(--gold); font-weight: 600;">Pending Verifikasi Berkas</span>
                 </div>
               </div>
 
@@ -1562,11 +2249,7 @@
           </div>
         </div>
 
-      </div>
-    </div>
-  </div>
-
-  <!-- PPID Consultation (Antrean Konsultasi) Modal -->
+      </div>  <!-- PPID Consultation (Antrean Konsultasi) Modal -->
   <div class="info-modal" id="ppid-modal">
     <div class="info-modal-card ppid-card">
       <div class="info-modal-header">
