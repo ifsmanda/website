@@ -580,7 +580,7 @@
             <div class="step-node">4</div>
             <div class="step-info">
               <span class="step-title">Daftar Ulang</span>
-              <span class="step-date">1 - 10 Juli 2026</span>
+              <span class="step-date">26, 29 Juni & 8 - 10 Juli 2026</span>
             </div>
           </div>
         </div>
@@ -601,7 +601,7 @@
         <p class="timeline-details-text">
           Pendaftaran daring dan verifikasi dokumen persyaratan untuk Jalur Prestasi (Nilai Rapor & Kejuaraan), Jalur
           Afirmasi (KETM & Disabilitas), serta Jalur Perpindahan Tugas Orang Tua/Wali/Anak Guru. Pengumuman hasil
-          seleksi Tahap 1 dilaksanakan pada 1 Juli 2026, dilanjutkan dengan daftar ulang pada 1 – 7 Juli 2026.
+          seleksi Tahap 1 dilaksanakan pada 1 Juli 2026, dilanjutkan dengan daftar ulang pada 26 dan 29 Juni 2026.
         </p>
       </div>
 
@@ -615,12 +615,9 @@
       </div>
 
       <div class="timeline-details-box" id="details-step-3">
-        <h3 class="timeline-details-title">Daftar Ulang & Penyelesaian (1 – 10 Juli 2026)</h3>
+        <h3 class="timeline-details-title">Daftar Ulang & Penyelesaian (26 & 29 Juni & 8 – 10 Juli 2026)</h3>
         <p class="timeline-details-text">
-          Calon siswa yang dinyatakan diterima wajib melakukan proses daftar ulang. Bagi Tahap 1 dilaksanakan pada 1 – 7
-          Juli 2026, sedangkan bagi Tahap 2 dilaksanakan pada 8 – 10 Juli 2026. Proses daftar ulang dapat diakses secara
-          daring terlebih dahulu melalui portal ini (fitur Daftar Ulang), dilanjutkan dengan penyerahan berkas fisik
-          asli ke sekolah.
+          Calon siswa yang dinyatakan diterima wajib melakukan proses daftar ulang. Bagi Tahap 1 dilaksanakan luring/langsung di sekolah pada tanggal 26 dan 29 Juni 2026, sedangkan bagi Tahap 2 dilaksanakan pada 8 – 10 Juli 2026. Silakan lihat flyer informasi daftar ulang untuk detail berkas persyaratan.
         </p>
       </div>
     </div>
@@ -1373,10 +1370,65 @@
 
   <!-- Re-registration (Daftar Ulang) Modal -->
   <div class="info-modal" id="daftar-ulang-modal">
-    <div class="info-modal-card daftar-ulang-card">
+    <div class="info-modal-card daftar-ulang-card" style="max-width: 600px; width: 90%; border-radius: var(--radius-lg); overflow: hidden; padding: 0;">
+      
+      <!-- ANNOUNCEMENT CONTENT (Visible) -->
+      <div id="daftar-ulang-announcement-container" style="display: block; width: 100%;">
+        <div class="info-modal-header" style="padding: 20px 24px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; display: flex; justify-content: space-between; align-items: center; border-bottom: none;">
+          <h3 style="color: white; margin: 0; font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+            <i data-lucide="bell" style="color: var(--accent-gold); width: 22px; height: 22px;"></i>
+            Pengumuman Daftar Ulang
+          </h3>
+          <button class="info-modal-close" id="close-daftar-ulang-modal" style="color: white; background: rgba(255,255,255,0.1); border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border: none; cursor: pointer; transition: all 0.2s;"><i data-lucide="x" style="width: 18px; height: 18px;"></i></button>
+        </div>
+
+        <div class="info-modal-body" style="padding: 24px; display: flex; flex-direction: column; gap: 20px; max-height: 80vh; overflow-y: auto;">
+          <!-- Status Badge / Alert Box -->
+          <div style="background: rgba(244, 197, 66, 0.1); border-left: 4px solid var(--accent-gold); padding: 16px; border-radius: var(--radius-sm); display: flex; gap: 12px; align-items: flex-start;">
+            <i data-lucide="info" style="color: var(--accent-gold); width: 24px; height: 24px; flex-shrink: 0; margin-top: 2px;"></i>
+            <div>
+              <h4 style="margin: 0 0 6px 0; font-size: 14px; font-weight: 700; color: var(--text-primary);">Daftar Ulang Tahap 1</h4>
+              <p style="margin: 0; font-size: 13px; line-height: 1.5; color: var(--text-secondary);">
+                Formulir daftar ulang online dinonaktifkan sementara. Daftar ulang luring/penyerahan berkas Tahap 1 dilaksanakan langsung di SMAN 2 Bandung pada:
+              </p>
+              <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 6px;">
+                <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--text-primary);">
+                  <i data-lucide="calendar" style="width: 16px; height: 16px; color: var(--secondary);"></i>
+                  <span>Jumat, 26 Juni 2026 & Senin, 29 Juni 2026</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--text-primary);">
+                  <i data-lucide="clock" style="width: 16px; height: 16px; color: var(--secondary);"></i>
+                  <span>Pukul 08.00 - 14.00 WIB</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Flyer Preview Container -->
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <span style="font-size: 12px; font-weight: 600; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px;">Flyer Informasi Teknis Daftar Ulang:</span>
+            <div style="position: relative; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); transition: transform 0.2s; cursor: zoom-in;" id="flyer-container">
+              <img src="assets/flyer_daftar_ulang_tahap_1.jpg" alt="Flyer Teknis Daftar Ulang SPMB Tahap 1 SMAN 2 Bandung" style="width: 100%; height: auto; display: block;" id="btn-zoom-flyer">
+              <div style="position: absolute; bottom: 12px; right: 12px; background: rgba(0,0,0,0.6); color: white; padding: 6px 12px; border-radius: var(--radius-full); font-size: 11px; display: flex; align-items: center; gap: 6px; backdrop-filter: blur(4px);">
+                <i data-lucide="zoom-in" style="width: 14px; height: 14px;"></i>
+                Klik untuk memperbesar
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Button -->
+          <div style="display: flex; justify-content: flex-end; margin-top: 8px;">
+            <button class="btn btn-secondary" id="btn-close-announcement" style="padding: 10px 20px; font-size: 13px;">Tutup</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ORIGINAL FORM (Deactivated / Hidden) -->
+      <div id="original-daftar-ulang-form-container" style="display: none;">
+        
       <div class="info-modal-header">
         <h3>Daftar Ulang Online SPMB 2026</h3>
-        <button class="info-modal-close" id="close-daftar-ulang-modal"><i data-lucide="x"></i></button>
+        <button class="info-modal-close" id="close-daftar-ulang-modal-hidden"><i data-lucide="x"></i></button>
       </div>
 
       <!-- Multi-step Progress Bar -->
@@ -2247,9 +2299,33 @@
             </button>
             <button class="btn btn-outline-primary" id="btn-close-receipt">Tutup</button>
           </div>
-        </div>
+        
+      </div>
 
-      </div>  <!-- PPID Consultation (Antrean Konsultasi) Modal -->
+    </div>
+  </div>
+  <script>
+    document.getElementById('flyer-container').addEventListener('click', () => {
+      const lModal = document.getElementById('lightbox-modal');
+      const lImg = document.getElementById('lightbox-img');
+      const lTitle = document.getElementById('lightbox-title');
+      if (lModal && lImg && lTitle) {
+        lImg.setAttribute('src', 'assets/flyer_daftar_ulang_tahap_1.jpg');
+        lTitle.textContent = 'Flyer Teknis Daftar Ulang SPMB Tahap 1';
+        lModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    });
+    document.getElementById('btn-close-announcement').addEventListener('click', () => {
+      const duModal = document.getElementById('daftar-ulang-modal');
+      if (duModal) {
+        duModal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  </script>
+
+  <!-- PPID Consultation (Antrean Konsultasi) Modal -->
   <div class="info-modal" id="ppid-modal">
     <div class="info-modal-card ppid-card">
       <div class="info-modal-header">
