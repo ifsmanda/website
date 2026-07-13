@@ -1411,7 +1411,9 @@
         }
         document.getElementById('meta-beasiswa-2').textContent = b2;
 
-        notesField.value = student.verification_notes || '';
+        if (notesField) {
+          notesField.value = student.verification_notes || '';
+        }
         
         // Hide review modal alerts
         document.getElementById('review-alert').className = 'modal-alert hidden';
@@ -1527,53 +1529,7 @@
         }
       }
       
-      // API call: Send verification
-      async function sendVerification(status) {
-        if (!currentSelectedRegistrant) return;
-        
-        const notesVal = notesField.value.trim();
-        const alertBox = document.getElementById('review-alert');
-        
-        btnApprove.disabled = true;
-        btnReject.disabled = true;
-        
-        try {
-          const response = await fetch(`/api/admin/verify/${currentSelectedRegistrant.nisn}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ status: status, notes: notesVal })
-          });
-          
-          const result = await response.json();
-          
-          if (!response.ok) {
-            alertBox.textContent = result.error || 'Gagal mengubah status verifikasi.';
-            alertBox.className = 'modal-alert';
-            btnApprove.disabled = false;
-            btnReject.disabled = false;
-          } else {
-            alertBox.textContent = result.message;
-            alertBox.className = 'modal-alert success';
-            
-            // Reload list and close modal shortly
-            setTimeout(() => {
-              closeReviewModal();
-              loadRegistrants();
-              btnApprove.disabled = false;
-              btnReject.disabled = false;
-            }, 1000);
-          }
-        } catch (err) {
-          console.error(err);
-          alertBox.textContent = 'Kesalahan jaringan. Gagal menghubungi server verifikasi.';
-          alertBox.className = 'modal-alert';
-          btnApprove.disabled = false;
-          btnReject.disabled = false;
-        }
-      }
-      
-      btnApprove.addEventListener('click', () => sendVerification('Verified'));
-      btnReject.addEventListener('click', () => sendVerification('Rejected'));
+
       
       // ==========================================
       // IMPORT EXCEL LOGIC
