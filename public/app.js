@@ -1198,9 +1198,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 const reg = receiptData.data;
                 document.getElementById('receipt-name').textContent = reg.name;
                 document.getElementById('receipt-nisn').textContent = reg.nisn;
-                document.getElementById('receipt-session').textContent = reg.queue_session;
-                document.getElementById('receipt-qr-img').src = reg.qr_code;
-                goToStep(6); // Final success receipt step
+                document.getElementById('receipt-reg-number').textContent = reg.registration_number || `SMANDA-PPDB-2026-${reg.nisn}`;
+                
+                const formattedDate = new Date(reg.registration_date).toLocaleDateString('id-ID', {
+                  day: 'numeric',
+                  month: 'long',
+                  year: 'numeric'
+                });
+                document.getElementById('receipt-titimangsa').textContent = `Bandung, ${formattedDate}`;
+                
+                goToStep(5);
               } else {
                 showModalAlert('Gagal memuat tanda bukti pendaftaran ulang.');
               }

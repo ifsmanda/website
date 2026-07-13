@@ -557,7 +557,7 @@
             <th>Nama Siswa</th>
             <th>Email & No. WA</th>
             <th>Ukuran Baju</th>
-            <th>Jadwal Sesi Fisik</th>
+            <th>Nomor Pendaftaran</th>
             <th>Tanggal Daftar</th>
             <th>Status</th>
             <th>Catatan</th>
@@ -1208,7 +1208,7 @@
               <div style="font-size: 11px; color: var(--admin-text-secondary); margin-top: 2px;">WA: ${row.phone}</div>
             </td>
             <td style="text-align: center; font-weight: 700;">${row.uniform_size}</td>
-            <td style="font-size: 12px; font-weight: 600;">${row.queue_session}</td>
+            <td style="font-size: 12px; font-weight: 600;">${row.registration_number || `SMANDA-PPDB-2026-${row.nisn}`}</td>
             <td>${regDate}</td>
             <td>
               <span class="status-badge ${badgeClass}">${row.status}</span>
@@ -1299,7 +1299,7 @@
         document.getElementById('meta-tel-rumah').textContent = student.telepon_rumah || '-';
         document.getElementById('meta-uniform').textContent = student.uniform_size || '-';
         document.getElementById('meta-address').textContent = student.address || '-';
-        document.getElementById('meta-session').textContent = student.queue_session || '-';
+        document.getElementById('meta-session').textContent = student.registration_number || `SMANDA-PPDB-2026-${student.nisn}`;
 
         // Father
         document.getElementById('meta-ayah-name').textContent = student.ayah_nama || '-';
@@ -1473,7 +1473,12 @@
         previewPlaceholder.style.display = 'none';
         
         if (!filePath) {
+          previewPlaceholder.innerHTML = `
+            <i data-lucide="file-x" style="width: 48px; height: 48px; margin-bottom: 8px; color: var(--admin-text-secondary);"></i>
+            <p>Tidak ada berkas yang diunggah<br><span style="font-size: 11px; opacity: 0.8;">(Persyaratan upload berkas ditiadakan)</span></p>
+          `;
           previewPlaceholder.style.display = 'block';
+          if (window.lucide) lucide.createIcons();
           return;
         }
         

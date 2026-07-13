@@ -657,6 +657,7 @@ app.get('/api/receipt/:nisn', async (req, res) => {
       success: true,
       data: {
         ...reg,
+        registration_number: `SMANDA-PPDB-2026-${nisn}`,
         qr_code: qrBase64
       }
     });
@@ -677,7 +678,11 @@ app.get('/api/admin/registrants', requireDaftarUlang, async (req, res) => {
       .order('registration_date', { ascending: false });
 
     if (regError) throw regError;
-    return res.status(200).json(registrants);
+    const formatted = registrants.map(r => ({
+      ...r,
+      registration_number: `SMANDA-PPDB-2026-${r.nisn}`
+    }));
+    return res.status(200).json(formatted);
   } catch (err) {
     console.error('Admin Registrants Error:', err.message);
     return res.status(500).json({ error: 'Gagal mengambil database pendaftar.' });
@@ -769,7 +774,7 @@ app.get('/api/admin/export', requireDaftarUlang, async (req, res) => {
       { header: 'Telepon Rumah', key: 'telepon_rumah', width: 18 },
       { header: 'Ukuran Baju', key: 'uniform_size', width: 12 },
       { header: 'Alamat Rumah Lengkap', key: 'address', width: 40 },
-      { header: 'Sesi Verifikasi Fisik', key: 'queue_session', width: 45 },
+      { header: 'Nomor Pendaftaran', key: 'registration_number', width: 25 },
       { header: 'Tanggal Daftar', key: 'registration_date', width: 25 },
       { header: 'Status Verifikasi', key: 'status', width: 15 },
       { header: 'Catatan Verifikator', key: 'verification_notes', width: 30 },
@@ -906,7 +911,7 @@ app.get('/api/admin/export', requireDaftarUlang, async (req, res) => {
         telepon_rumah: student.telepon_rumah || '',
         uniform_size: student.uniform_size,
         address: student.address,
-        queue_session: student.queue_session,
+        registration_number: student.registration_number || `SMANDA-PPDB-2026-${student.nisn}`,
         registration_date: new Date(student.registration_date).toLocaleString('id-ID'),
         status: student.status || '',
         verification_notes: student.verification_notes || '',
