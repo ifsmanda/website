@@ -582,7 +582,7 @@
   <div class="info-modal" id="review-modal">
     <div class="info-modal-card" style="max-width: 1000px;">
       <div class="info-modal-header">
-        <h3>Tinjau Dokumen & Verifikasi Pendaftaran</h3>
+        <h3>Detail Lengkap Pendaftaran Siswa</h3>
         <button class="info-modal-close" id="close-review-modal"><i data-lucide="x"></i></button>
       </div>
       
@@ -905,20 +905,9 @@
               </div>
             </div>
 
-            <!-- Notes and submission actions -->
-            <div class="form-group" style="margin-top: 12px;">
-              <label for="verification-notes">Catatan Tambahan Verifikator (Untuk Siswa)</label>
-              <textarea id="verification-notes" class="form-control" rows="3" placeholder="Masukkan instruksi khusus atau alasan penolakan berkas..."></textarea>
-            </div>
-            
-            <div class="form-step-actions" style="margin-top: 16px; justify-content: flex-end; gap: 8px; display: flex;">
-              <button class="btn btn-outline-primary" id="btn-review-cancel">Batal</button>
-              <button class="btn btn-primary" id="btn-reject" style="background-color: #ef4444; border-color: #ef4444; color: white; display: inline-flex; align-items: center; gap: 4px;">
-                Tolak Berkas <i data-lucide="x-circle"></i>
-              </button>
-              <button class="btn btn-gold" id="btn-approve" style="background-color: #22c55e; border-color: #22c55e; color: white; display: inline-flex; align-items: center; gap: 4px;">
-                Setujui & Verifikasi <i data-lucide="check-circle"></i>
-              </button>
+            <!-- Modal Close Action -->
+            <div class="form-step-actions" style="margin-top: 24px; justify-content: flex-end; display: flex;">
+              <button class="btn btn-primary" id="btn-review-cancel" style="padding: 10px 24px; font-weight: bold; background-color: var(--admin-primary); border-color: var(--admin-primary); color: white;">Tutup</button>
             </div>
           </div>
         </div>
@@ -1217,8 +1206,11 @@
               ${row.verification_notes || '-'}
             </td>
             <td>
-              <button class="btn btn-danger btn-delete-row" data-nisn="${row.nisn}" style="padding: 6px 12px; font-size: 11px; background-color: #ef4444; border-color: #ef4444; color: white;">
-                <i data-lucide="trash-2" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i> Hapus
+              <button class="btn btn-primary btn-view-row" data-nisn="${row.nisn}" style="padding: 6px 12px; font-size: 11px; margin-right: 4px; display: inline-flex; align-items: center; gap: 4px;">
+                <i data-lucide="eye" style="width: 12px; height: 12px;"></i> Lihat
+              </button>
+              <button class="btn btn-danger btn-delete-row" data-nisn="${row.nisn}" style="padding: 6px 12px; font-size: 11px; background-color: #ef4444; border-color: #ef4444; color: white; display: inline-flex; align-items: center; gap: 4px;">
+                <i data-lucide="trash-2" style="width: 12px; height: 12px;"></i> Hapus
               </button>
             </td>
           `;
@@ -1263,6 +1255,17 @@
               btn.disabled = false;
               btn.innerHTML = '<i data-lucide="trash-2" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i> Hapus';
               if (window.lucide) lucide.createIcons();
+            }
+          });
+        });
+
+        // Add row view button listeners
+        document.querySelectorAll('.btn-view-row').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const nisn = btn.getAttribute('data-nisn');
+            const student = registrantsList.find(r => r.nisn === nisn);
+            if (student) {
+              openReviewModal(student);
             }
           });
         });
