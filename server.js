@@ -273,10 +273,7 @@ app.get('/api/check-nisn/:nisn', async (req, res) => {
 // ==========================================
 // 2. API: SUBMIT RE-REGISTRATION (POST /api/register)
 // ==========================================
-app.post('/api/register', upload.fields([
-  { name: 'kk_file', maxCount: 1 },
-  { name: 'ppdb_file', maxCount: 1 }
-]), async (req, res) => {
+app.post('/api/register', async (req, res) => {
   const {
     nisn,
     name,
@@ -404,10 +401,6 @@ app.post('/api/register', upload.fields([
     return res.status(400).json({ error: 'Semua isian formulir wajib diisi!' });
   }
 
-  // File uploads validation
-  if (!req.files || !req.files['kk_file'] || !req.files['ppdb_file']) {
-    return res.status(400).json({ error: 'Unggahan dokumen Kartu Keluarga dan Bukti Kelulusan PPDB wajib diunggah!' });
-  }
 
   try {
     // Check eligibility again
@@ -450,9 +443,9 @@ app.post('/api/register', upload.fields([
       return res.status(400).json({ error: 'NISN ini sudah didaftarkan sebelumnya!' });
     }
 
-    // Upload files to Supabase Storage
-    const kkPath = await uploadToSupabaseStorage('registrations', req.files['kk_file'][0], nisn);
-    const ppdbPath = await uploadToSupabaseStorage('registrations', req.files['ppdb_file'][0], nisn);
+    // No files uploaded anymore
+    const kkPath = "";
+    const ppdbPath = "";
     const regDate = new Date().toISOString();
 
     // Auto-allocate queue session based on registration count
@@ -622,6 +615,7 @@ app.post('/api/register', upload.fields([
         uniform_size,
         queue_session: queueSession,
         registration_date: regDate,
+        registration_number: `SMANDA-PPDB-2026-${nisn}`,
         qr_code: qrBase64
       }
     });

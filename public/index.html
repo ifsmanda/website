@@ -1455,11 +1455,6 @@
         <div class="step-indicator-line"></div>
         <div class="step-indicator-item" id="indicator-step-5">
           <div class="step-indicator-num">5</div>
-          <span>Berkas</span>
-        </div>
-        <div class="step-indicator-line"></div>
-        <div class="step-indicator-item" id="indicator-step-6">
-          <div class="step-indicator-num">6</div>
           <span>Bukti</span>
         </div>
       </div>
@@ -2203,99 +2198,60 @@
 
           <div class="form-step-actions" style="margin-top: 24px;">
             <button class="btn btn-outline-primary" id="btn-step4-prev">Kembali</button>
-            <button class="btn btn-primary" id="btn-step4-next">Lanjutkan <i data-lucide="arrow-right"></i></button>
-          </div>
-        </div>
-
-        <!-- STEP 5: FILE UPLOAD -->
-        <div class="form-step-content" id="form-step-5">
-          <h4 class="form-step-title">Unggah Dokumen Persyaratan Fisik</h4>
-          <p class="form-step-desc">Unggah salinan dokumen dalam format gambar (JPG, JPEG, PNG) atau PDF (Maksimal 2MB per berkas).</p>
-
-          <div class="form-group">
-            <label for="du-kk-file">Scan Kartu Keluarga (KK) Asli <span class="text-danger">*</span></label>
-            <div class="file-upload-drag" id="drag-kk">
-              <i data-lucide="upload-cloud" class="upload-icon"></i>
-              <span>Tarik & lepas file di sini atau <strong>pilih file</strong></span>
-              <input type="file" id="du-kk-file" accept=".pdf,.jpg,.jpeg,.png" required style="display:none;">
-              <div class="file-selected-name" id="name-kk">Belum ada file terpilih</div>
-            </div>
-          </div>
-
-          <div class="form-group" style="margin-top: 15px;">
-            <label for="du-ppdb-file">Bukti Kelulusan PPDB (Portal Dinas Jabar) <span class="text-danger">*</span></label>
-            <div class="file-upload-drag" id="drag-ppdb">
-              <i data-lucide="upload-cloud" class="upload-icon"></i>
-              <span>Tarik & lepas file di sini atau <strong>pilih file</strong></span>
-              <input type="file" id="du-ppdb-file" accept=".pdf,.jpg,.jpeg,.png" required style="display:none;">
-              <div class="file-selected-name" id="name-ppdb">Belum ada file terpilih</div>
-            </div>
-          </div>
-
-          <div class="form-step-actions" style="margin-top: 24px;">
-            <button class="btn btn-outline-primary" id="btn-step5-prev">Kembali</button>
-            <button class="btn btn-gold" id="btn-step5-submit">
+            <button class="btn btn-gold" id="btn-step4-submit">
               Kirim Pendaftaran Ulang <i data-lucide="send"></i>
             </button>
           </div>
         </div>
 
-        <!-- STEP 6: RECEIPT GENERATION -->
-        <div class="form-step-content" id="form-step-6">
-          <div class="receipt-success-icon" style="text-align: center; margin-bottom: 10px;">
-            <i data-lucide="check-circle" style="width: 54px; height: 54px; color: var(--success);"></i>
+        <!-- STEP 5: RECEIPT GENERATION -->
+        <div class="form-step-content" id="form-step-5">
+          <div class="receipt-success-icon" style="text-align: center; margin-bottom: 5px;">
+            <i data-lucide="check-circle" style="width: 60px; height: 60px; color: var(--success);"></i>
           </div>
-          <h4 class="receipt-success-title"
-            style="text-align: center; font-family: var(--font-display); color: var(--primary);">Pendaftaran Ulang Online Berhasil!</h4>
-          <p class="receipt-success-desc"
-            style="text-align: center; font-size: 13px; color: var(--text-secondary); margin-bottom: 20px;">Data Anda
-            telah disimpan dalam antrean verifikator SMAN 2 Bandung. Simpan bukti pendaftaran ini untuk diperlihatkan
-            saat verifikasi berkas fisik.</p>
+          <h2 style="text-align: center; font-family: var(--font-heading); color: var(--success); font-weight: 800; font-size: 26px; margin: 15px 0 5px 0; letter-spacing: 0.5px;">Pengisian Data Berhasil</h2>
+          <p style="text-align: center; font-size: 13.5px; color: var(--text-secondary); margin-bottom: 25px; line-height: 1.5;">
+            Data pendaftaran ulang online Anda telah berhasil disimpan di database SMAN 2 Bandung.
+          </p>
 
           <!-- Receipt Card Layout -->
-          <div class="receipt-card" id="print-receipt-area">
-            <div class="receipt-header">
-              <img src="assets/logo_smanda.png" alt="Logo SMAN 2 Bandung" class="receipt-logo">
+          <div class="receipt-card" id="print-receipt-area" style="border: 2px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; background: var(--bg-card);">
+            <div class="receipt-header" style="display: flex; align-items: center; gap: 15px; border-bottom: 2px solid var(--border-color); padding-bottom: 15px; margin-bottom: 20px;">
+              <img src="assets/logo_smanda.png" alt="Logo SMAN 2 Bandung" class="receipt-logo" style="width: 50px; height: 50px;">
               <div class="receipt-header-text">
-                <h5>SMAN 2 BANDUNG</h5>
-                <span>TANDA BUKTI PRA-DAFTAR ULANG 2026</span>
+                <h5 style="margin: 0; font-size: 16px; font-weight: 700; color: var(--text-primary);">SMAN 2 BANDUNG</h5>
+                <span style="font-size: 11px; font-weight: 600; color: var(--text-light); letter-spacing: 0.5px;">TANDA BUKTI PRA-DAFTAR ULANG 2026</span>
               </div>
             </div>
 
             <div class="receipt-body">
-              <div class="receipt-info-grid">
-                <div>
-                  <span class="receipt-label">Nama Siswa:</span>
-                  <span class="receipt-value" id="receipt-name">-</span>
+              <div class="receipt-info-grid" style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 25px;">
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border-color); padding-bottom: 8px;">
+                  <span class="receipt-label" style="font-size: 13px; color: var(--text-secondary);">Nama Siswa:</span>
+                  <span class="receipt-value" id="receipt-name" style="font-size: 13px; font-weight: 600; color: var(--text-primary); text-align: right;">-</span>
                 </div>
-                <div>
-                  <span class="receipt-label">NISN:</span>
-                  <span class="receipt-value" id="receipt-nisn">-</span>
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border-color); padding-bottom: 8px;">
+                  <span class="receipt-label" style="font-size: 13px; color: var(--text-secondary);">NISN:</span>
+                  <span class="receipt-value" id="receipt-nisn" style="font-size: 13px; font-weight: 600; color: var(--text-primary); text-align: right;">-</span>
                 </div>
-                <div>
-                  <span class="receipt-label">Jadwal Sesi Verifikasi Fisik:</span>
-                  <span class="receipt-value text-highlight" id="receipt-session">-</span>
-                </div>
-                <div>
-                  <span class="receipt-label">Status Awal:</span>
-                  <span class="receipt-value" style="color: var(--gold); font-weight: 600;">Pending Verifikasi Berkas</span>
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border-color); padding-bottom: 8px;">
+                  <span class="receipt-label" style="font-size: 13px; color: var(--text-secondary);">Nomor Pendaftaran:</span>
+                  <span class="receipt-value text-highlight" id="receipt-reg-number" style="font-size: 13px; font-weight: 700; color: var(--secondary); text-align: right;">-</span>
                 </div>
               </div>
-
-              <div class="receipt-qr-block">
-                <img id="receipt-qr-img" src="" alt="QR Code Bukti Daftar Ulang">
-                <span class="qr-info-text">Pindai saat tiba di sekolah</span>
+              
+              <!-- Titimangsa at bottom right -->
+              <div style="margin-top: 30px; display: flex; flex-direction: column; align-items: flex-end;">
+                <div id="receipt-titimangsa" style="font-size: 13.5px; font-weight: 600; color: var(--text-primary); margin-bottom: 45px;">Bandung, -</div>
+                <div style="font-size: 12.5px; font-weight: 600; color: var(--text-primary);">Panitia SPMB</div>
+                <div style="font-size: 11px; color: var(--text-light);">SMAN 2 Bandung</div>
               </div>
-            </div>
-
-            <div class="receipt-footer">
-              *Harap datang tepat waktu 15 menit sebelum sesi Anda dimulai untuk mencocokkan dokumen fisik asli.
             </div>
           </div>
 
-          <div class="form-step-actions" style="margin-top: 24px; justify-content: center;">
+          <div class="form-step-actions" style="margin-top: 24px; justify-content: center; gap: 12px;">
             <button class="btn btn-primary" id="btn-print-receipt">
-              Simpan Gambar Tiket <i data-lucide="download"></i>
+              Simpan Bukti Pendaftaran <i data-lucide="download"></i>
             </button>
             <button class="btn btn-outline-primary" id="btn-close-receipt">Tutup</button>
           </div>

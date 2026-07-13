@@ -895,9 +895,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnStep3Prev = document.getElementById('btn-step3-prev');
   const btnStep3Next = document.getElementById('btn-step3-next');
   const btnStep4Prev = document.getElementById('btn-step4-prev');
-  const btnStep4Next = document.getElementById('btn-step4-next');
-  const btnStep5Prev = document.getElementById('btn-step5-prev');
-  const btnStep5Submit = document.getElementById('btn-step5-submit');
+  const btnStep4Submit = document.getElementById('btn-step4-submit');
   const btnPrintReceipt = document.getElementById('btn-print-receipt');
   const btnCloseReceipt = document.getElementById('btn-close-receipt');
   
@@ -1382,8 +1380,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   
-  if (btnStep4Next) {
-    btnStep4Next.addEventListener('click', () => {
+  if (btnStep4Submit) {
+    btnStep4Submit.addEventListener('click', async () => {
       const tb = inputTinggiBadan.value;
       const bb = inputBeratBadan.value;
       const lk = inputLingkarKepala.value;
@@ -1408,150 +1406,135 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       
       hideModalAlert();
-      goToStep(5);
-    });
-  }
-  
-  // STEP 5 Actions: Upload Berkas
-  if (btnStep5Prev) {
-    btnStep5Prev.addEventListener('click', () => {
-      goToStep(4);
-    });
-  }
-  
-  if (btnStep5Submit) {
-    btnStep5Submit.addEventListener('click', async () => {
-      if (!fileKk.files.length || !filePpdb.files.length) {
-        showModalAlert('Unggahan dokumen Kartu Keluarga dan Bukti Kelulusan PPDB wajib diunggah.');
-        return;
-      }
-      
-      btnStep5Submit.disabled = true;
-      btnStep5Submit.innerHTML = 'Mengirim berkas pendaftaran...';
-      
-      const formData = new FormData();
-      formData.append('nisn', verifiedNisn);
-      formData.append('name', inputName.value);
-      formData.append('gender', inputGender.value);
-      formData.append('nik', inputNik.value.trim());
-      formData.append('no_kk', inputNoKk.value.trim());
-      formData.append('tempat_lahir', inputTempatLahir.value.trim());
-      formData.append('tanggal_lahir', inputTanggalLahir.value);
-      formData.append('no_akta', inputNoAkta.value.trim());
-      formData.append('agama', inputAgama.value);
-      formData.append('kewarganegaraan', inputKewarganegaraan.value);
-      formData.append('kewarganegaraan_negara', inputKewarganegaraanNegara.value.trim());
-      formData.append('kebutuhan_khusus', inputKebutuhanKhusus.value);
-      
-      formData.append('alamat_jalan', inputAlamatJalan.value.trim());
-      formData.append('rt', inputRt.value.trim());
-      formData.append('rw', inputRw.value.trim());
-      formData.append('dusun', inputDusun.value.trim());
-      formData.append('kelurahan', inputKelurahan.value.trim());
-      formData.append('kecamatan', inputKecamatan.value.trim());
-      formData.append('kode_pos', inputKodePos.value.trim());
-      formData.append('lintang', inputLintang.value.trim());
-      formData.append('bujur', inputBujur.value.trim());
-      formData.append('tempat_tinggal', inputTempatTinggal.value);
-      formData.append('transportasi', inputTransportasi.value);
-      formData.append('anak_ke', inputAnakKe.value);
-      formData.append('penerima_kip', inputPenerimaKip.value);
-      formData.append('tetap_kip', inputTetapKip.value);
-      formData.append('alasan_tolak_pip', inputAlasanTolakPip.value);
-      formData.append('email', inputEmail.value.trim());
-      formData.append('phone', inputPhone.value.trim());
-      formData.append('telepon_rumah', inputTeleponRumah.value.trim());
-      formData.append('uniform_size', inputUniform.value);
-      formData.append('address', inputAddress.value.trim());
-      
-      // Father
-      formData.append('ayah_nama', inputAyahNama.value.trim());
-      formData.append('ayah_nik', inputAyahNik.value.trim());
-      formData.append('ayah_tahun_lahir', inputAyahTahunLahir.value);
-      formData.append('ayah_pendidikan', inputAyahPendidikan.value);
-      formData.append('ayah_pekerjaan', inputAyahPekerjaan.value);
-      formData.append('ayah_penghasilan', inputAyahPenghasilan.value);
-      formData.append('ayah_kebutuhan_khusus', inputAyahKebutuhanKhusus.value);
-      
-      // Mother
-      formData.append('ibu_nama', inputIbuNama.value.trim());
-      formData.append('ibu_nik', inputIbuNik.value.trim());
-      formData.append('ibu_tahun_lahir', inputIbuTahunLahir.value);
-      formData.append('ibu_pendidikan', inputIbuPendidikan.value);
-      formData.append('ibu_pekerjaan', inputIbuPekerjaan.value);
-      formData.append('ibu_penghasilan', inputIbuPenghasilan.value);
-      formData.append('ibu_kebutuhan_khusus', inputIbuKebutuhanKhusus.value);
-      
-      // Wali
-      formData.append('wali_nama', inputWaliNama.value.trim());
-      formData.append('wali_nik', inputWaliNik.value.trim());
-      formData.append('wali_tahun_lahir', inputWaliTahunLahir.value);
-      formData.append('wali_pendidikan', inputWaliPendidikan.value);
-      formData.append('wali_pekerjaan', inputWaliPekerjaan.value);
-      formData.append('wali_penghasilan', inputWaliPenghasilan.value);
-      
-      // Periodik & Registrasi
-      formData.append('tinggi_badan', inputTinggiBadan.value);
-      formData.append('berat_badan', inputBeratBadan.value);
-      formData.append('lingkar_kepala', inputLingkarKepala.value);
-      formData.append('jumlah_saudara', inputJumlahSaudara.value);
-      formData.append('jarak_sekolah', inputJarakSekolah.value);
-      formData.append('jarak_sekolah_km', inputJarakSekolahKm.value);
-      formData.append('waktu_tempuh_jam', inputWaktuTempuhJam.value || '0');
-      formData.append('waktu_tempuh_menit', inputWaktuTempuhMenit.value || '0');
-      
-      formData.append('jenis_pendaftaran', inputJenisPendaftaran.value);
-      formData.append('nis', inputNis.value.trim());
-      formData.append('tanggal_masuk', inputTanggalMasuk.value);
-      formData.append('sekolah_asal', inputSekolahAsal.value.trim());
-      formData.append('nomor_peserta_un', inputNomorPesertaUn.value.trim());
-      formData.append('no_seri_ijazah', inputNoSeriIjazah.value.trim());
-      formData.append('no_skhun', inputNoSkhun.value.trim());
-      
-      formData.append('kesejahteraan_jenis', inputKesejahteraanJenis.value);
-      formData.append('kesejahteraan_no_kartu', inputKesejahteraanNoKartu.value.trim());
-      formData.append('kesejahteraan_nama_kartu', inputKesejahteraanNamaKartu.value.trim());
-      
-      // Prestasi 1-3
-      formData.append('prestasi_1_jenis', document.getElementById('du-prestasi-1-jenis').value);
-      formData.append('prestasi_1_tingkat', document.getElementById('du-prestasi-1-tingkat').value);
-      formData.append('prestasi_1_nama', document.getElementById('du-prestasi-1-nama').value.trim());
-      formData.append('prestasi_1_tahun', document.getElementById('du-prestasi-1-tahun').value);
-      formData.append('prestasi_1_penyelenggara', document.getElementById('du-prestasi-1-penyelenggara').value.trim());
-      formData.append('prestasi_1_peringkat', document.getElementById('du-prestasi-1-peringkat').value.trim());
-      
-      formData.append('prestasi_2_jenis', document.getElementById('du-prestasi-2-jenis').value);
-      formData.append('prestasi_2_tingkat', document.getElementById('du-prestasi-2-tingkat').value);
-      formData.append('prestasi_2_nama', document.getElementById('du-prestasi-2-nama').value.trim());
-      formData.append('prestasi_2_tahun', document.getElementById('du-prestasi-2-tahun').value);
-      formData.append('prestasi_2_penyelenggara', document.getElementById('du-prestasi-2-penyelenggara').value.trim());
-      formData.append('prestasi_2_peringkat', document.getElementById('du-prestasi-2-peringkat').value.trim());
-      
-      formData.append('prestasi_3_jenis', document.getElementById('du-prestasi-3-jenis').value);
-      formData.append('prestasi_3_tingkat', document.getElementById('du-prestasi-3-tingkat').value);
-      formData.append('prestasi_3_nama', document.getElementById('du-prestasi-3-nama').value.trim());
-      formData.append('prestasi_3_tahun', document.getElementById('du-prestasi-3-tahun').value);
-      formData.append('prestasi_3_penyelenggara', document.getElementById('du-prestasi-3-penyelenggara').value.trim());
-      formData.append('prestasi_3_peringkat', document.getElementById('du-prestasi-3-peringkat').value.trim());
-      
-      // Beasiswa 1-2
-      formData.append('beasiswa_1_jenis', document.getElementById('du-beasiswa-1-jenis').value);
-      formData.append('beasiswa_1_keterangan', document.getElementById('du-beasiswa-1-keterangan').value.trim());
-      formData.append('beasiswa_1_tahun_mulai', document.getElementById('du-beasiswa-1-tahun-mulai').value);
-      formData.append('beasiswa_1_tahun_selesai', document.getElementById('du-beasiswa-1-tahun-selesai').value);
-      
-      formData.append('beasiswa_2_jenis', document.getElementById('du-beasiswa-2-jenis').value);
-      formData.append('beasiswa_2_keterangan', document.getElementById('du-beasiswa-2-keterangan').value.trim());
-      formData.append('beasiswa_2_tahun_mulai', document.getElementById('du-beasiswa-2-tahun-mulai').value);
-      formData.append('beasiswa_2_tahun_selesai', document.getElementById('du-beasiswa-2-tahun-selesai').value);
-      
-      formData.append('kk_file', fileKk.files[0]);
-      formData.append('ppdb_file', filePpdb.files[0]);
-      
+
+      btnStep4Submit.disabled = true;
+      const originalBtnText = btnStep4Submit.innerHTML;
+      btnStep4Submit.innerHTML = 'Mengirim data pendaftaran... <i class="spinner"></i>';
+
+      const payload = {
+        nisn: verifiedNisn,
+        name: inputName.value,
+        gender: inputGender.value,
+        nik: inputNik.value.trim(),
+        no_kk: inputNoKk.value.trim(),
+        tempat_lahir: inputTempatLahir.value.trim(),
+        tanggal_lahir: inputTanggalLahir.value,
+        no_akta: inputNoAkta.value.trim(),
+        agama: inputAgama.value,
+        kewarganegaraan: inputKewarganegaraan.value,
+        kewarganegaraan_negara: inputKewarganegaraanNegara.value.trim(),
+        kebutuhan_khusus: inputKebutuhanKhusus.value,
+        
+        alamat_jalan: inputAlamatJalan.value.trim(),
+        rt: inputRt.value.trim(),
+        rw: inputRw.value.trim(),
+        dusun: inputDusun.value.trim(),
+        kelurahan: inputKelurahan.value.trim(),
+        kecamatan: inputKecamatan.value.trim(),
+        kode_pos: inputKodePos.value.trim(),
+        lintang: inputLintang.value.trim(),
+        bujur: inputBujur.value.trim(),
+        tempat_tinggal: inputTempatTinggal.value,
+        transportasi: inputTransportasi.value,
+        anak_ke: inputAnakKe.value,
+        penerima_kip: inputPenerimaKip.value,
+        tetap_kip: inputTetapKip.value,
+        alasan_tolak_pip: inputAlasanTolakPip.value,
+        email: inputEmail.value.trim(),
+        phone: inputPhone.value.trim(),
+        telepon_rumah: inputTeleponRumah.value.trim(),
+        uniform_size: inputUniform.value,
+        address: inputAddress.value.trim(),
+        
+        // Father
+        ayah_nama: inputAyahNama.value.trim(),
+        ayah_nik: inputAyahNik.value.trim(),
+        ayah_tahun_lahir: inputAyahTahunLahir.value,
+        ayah_pendidikan: inputAyahPendidikan.value,
+        ayah_pekerjaan: inputAyahPekerjaan.value,
+        ayah_penghasilan: inputAyahPenghasilan.value,
+        ayah_kebutuhan_khusus: inputAyahKebutuhanKhusus.value,
+        
+        // Mother
+        ibu_nama: inputIbuNama.value.trim(),
+        ibu_nik: inputIbuNik.value.trim(),
+        ibu_tahun_lahir: inputIbuTahunLahir.value,
+        ibu_pendidikan: inputIbuPendidikan.value,
+        ibu_pekerjaan: inputIbuPekerjaan.value,
+        ibu_penghasilan: inputIbuPenghasilan.value,
+        ibu_kebutuhan_khusus: inputIbuKebutuhanKhusus.value,
+        
+        // Wali
+        wali_nama: inputWaliNama.value.trim(),
+        wali_nik: inputWaliNik.value.trim(),
+        wali_tahun_lahir: inputWaliTahunLahir.value,
+        wali_pendidikan: inputWaliPendidikan.value,
+        wali_pekerjaan: inputWaliPekerjaan.value,
+        wali_penghasilan: inputWaliPenghasilan.value,
+        
+        // Periodik & Registrasi
+        tinggi_badan: inputTinggiBadan.value,
+        berat_badan: inputBeratBadan.value,
+        lingkar_kepala: inputLingkarKepala.value,
+        jumlah_saudara: inputJumlahSaudara.value,
+        jarak_sekolah: inputJarakSekolah.value,
+        jarak_sekolah_km: inputJarakSekolahKm.value,
+        waktu_tempuh_jam: inputWaktuTempuhJam.value || '0',
+        waktu_tempuh_menit: inputWaktuTempuhMenit.value || '0',
+        
+        jenis_pendaftaran: inputJenisPendaftaran.value,
+        nis: inputNis.value.trim(),
+        tanggal_masuk: inputTanggalMasuk.value,
+        sekolah_asal: inputSekolahAsal.value.trim(),
+        nomor_peserta_un: inputNomorPesertaUn.value.trim(),
+        no_seri_ijazah: inputNoSeriIjazah.value.trim(),
+        no_skhun: inputNoSkhun.value.trim(),
+        
+        kesejahteraan_jenis: inputKesejahteraanJenis.value,
+        kesejahteraan_no_kartu: inputKesejahteraanNoKartu.value.trim(),
+        kesejahteraan_nama_kartu: inputKesejahteraanNamaKartu.value.trim(),
+        
+        // Prestasi 1-3
+        prestasi_1_jenis: document.getElementById('du-prestasi-1-jenis').value,
+        prestasi_1_tingkat: document.getElementById('du-prestasi-1-tingkat').value,
+        prestasi_1_nama: document.getElementById('du-prestasi-1-nama').value.trim(),
+        prestasi_1_tahun: document.getElementById('du-prestasi-1-tahun').value,
+        prestasi_1_penyelenggara: document.getElementById('du-prestasi-1-penyelenggara').value.trim(),
+        prestasi_1_peringkat: document.getElementById('du-prestasi-1-peringkat').value.trim(),
+        
+        prestasi_2_jenis: document.getElementById('du-prestasi-2-jenis').value,
+        prestasi_2_tingkat: document.getElementById('du-prestasi-2-tingkat').value,
+        prestasi_2_nama: document.getElementById('du-prestasi-2-nama').value.trim(),
+        prestasi_2_tahun: document.getElementById('du-prestasi-2-tahun').value,
+        prestasi_2_penyelenggara: document.getElementById('du-prestasi-2-penyelenggara').value.trim(),
+        prestasi_2_peringkat: document.getElementById('du-prestasi-2-peringkat').value.trim(),
+        
+        prestasi_3_jenis: document.getElementById('du-prestasi-3-jenis').value,
+        prestasi_3_tingkat: document.getElementById('du-prestasi-3-tingkat').value,
+        prestasi_3_nama: document.getElementById('du-prestasi-3-nama').value.trim(),
+        prestasi_3_tahun: document.getElementById('du-prestasi-3-tahun').value,
+        prestasi_3_penyelenggara: document.getElementById('du-prestasi-3-penyelenggara').value.trim(),
+        prestasi_3_peringkat: document.getElementById('du-prestasi-3-peringkat').value.trim(),
+        
+        // Beasiswa 1-2
+        beasiswa_1_jenis: document.getElementById('du-beasiswa-1-jenis').value,
+        beasiswa_1_keterangan: document.getElementById('du-beasiswa-1-keterangan').value.trim(),
+        beasiswa_1_tahun_mulai: document.getElementById('du-beasiswa-1-tahun-mulai').value,
+        beasiswa_1_tahun_selesai: document.getElementById('du-beasiswa-1-tahun-selesai').value,
+        
+        beasiswa_2_jenis: document.getElementById('du-beasiswa-2-jenis').value,
+        beasiswa_2_keterangan: document.getElementById('du-beasiswa-2-keterangan').value.trim(),
+        beasiswa_2_tahun_mulai: document.getElementById('du-beasiswa-2-tahun-mulai').value,
+        beasiswa_2_tahun_selesai: document.getElementById('du-beasiswa-2-tahun-selesai').value
+      };
+
       try {
         const response = await fetch('/api/register', {
           method: 'POST',
-          body: formData
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
         });
         
         const result = await response.json();
@@ -1559,20 +1542,27 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!response.ok) {
           showModalAlert(result.error || 'Gagal mengirim berkas pendaftaran ulang.');
         } else {
-          // Display Step 6 Receipt
+          // Display Step 5 Receipt
           const reg = result.data;
           document.getElementById('receipt-name').textContent = reg.name;
           document.getElementById('receipt-nisn').textContent = reg.nisn;
-          document.getElementById('receipt-session').textContent = reg.queue_session;
-          document.getElementById('receipt-qr-img').src = reg.qr_code;
-          goToStep(6);
+          document.getElementById('receipt-reg-number').textContent = reg.registration_number || `SMANDA-PPDB-2026-${reg.nisn}`;
+          
+          const formattedDate = new Date(reg.registration_date).toLocaleDateString('id-ID', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+          });
+          document.getElementById('receipt-titimangsa').textContent = `Bandung, ${formattedDate}`;
+          
+          goToStep(5);
         }
       } catch (err) {
         console.error(err);
         showModalAlert('Terjadi kesalahan jaringan dalam mengirim berkas.');
       } finally {
-        btnStep5Submit.disabled = false;
-        btnStep5Submit.innerHTML = 'Kirim Pendaftaran Ulang <i data-lucide="send"></i>';
+        btnStep4Submit.disabled = false;
+        btnStep4Submit.innerHTML = originalBtnText;
         if (window.lucide) lucide.createIcons();
       }
     });
