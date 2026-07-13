@@ -274,15 +274,7 @@
     
     /* verification Modal stylesheet */
     .verify-modal-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 24px;
-    }
-    
-    @media (max-width: 900px) {
-      .verify-modal-grid {
-        grid-template-columns: 1fr;
-      }
+      display: block;
     }
     
     .doc-preview-panel {
@@ -580,7 +572,7 @@
 
   <!-- INTERACTIVE REVIEW MODAL -->
   <div class="info-modal" id="review-modal">
-    <div class="info-modal-card" style="max-width: 1000px;">
+    <div class="info-modal-card" style="max-width: 800px;">
       <div class="info-modal-header">
         <h3>Detail Lengkap Pendaftaran Siswa</h3>
         <button class="info-modal-close" id="close-review-modal"><i data-lucide="x"></i></button>
@@ -591,23 +583,6 @@
       <div class="info-modal-body" style="max-height: 80vh;">
         <div class="verify-modal-grid">
           
-          <!-- Document Preview Tab Panel (Left) -->
-          <div class="doc-preview-panel">
-            <div class="doc-tabs">
-              <button class="doc-tab-btn active" id="tab-kk-btn">Kartu Keluarga (KK)</button>
-              <button class="doc-tab-btn" id="tab-ppdb-btn">Bukti PPDB Dinas</button>
-            </div>
-            
-            <div class="doc-preview-frame">
-              <iframe id="doc-preview-iframe" src="" style="display:none;"></iframe>
-              <img id="doc-preview-img" src="" alt="Pratinjau Berkas" style="display:none;">
-              <div id="doc-preview-placeholder" style="color: var(--admin-text-secondary); text-align: center;">
-                <i data-lucide="file-text" style="width: 48px; height: 48px; margin-bottom: 8px;"></i>
-                <p>Klik tab dokumen di atas untuk melihat berkas unggahan</p>
-              </div>
-            </div>
-          </div>
-
           <!-- Meta data and Verification notes (Right) -->
           <div class="verify-form-panel">
             <h4 class="form-step-title" style="margin-top: 0; display: flex; align-items: center; justify-content: space-between;">
@@ -1110,12 +1085,7 @@
       const btnReject = document.getElementById('btn-reject');
       const notesField = document.getElementById('verification-notes');
       
-      // Tab elements
-      const tabKkBtn = document.getElementById('tab-kk-btn');
-      const tabPpdbBtn = document.getElementById('tab-ppdb-btn');
-      const previewIframe = document.getElementById('doc-preview-iframe');
-      const previewImg = document.getElementById('doc-preview-img');
-      const previewPlaceholder = document.getElementById('doc-preview-placeholder');
+
       
       // Load all records from backend
       async function loadRegistrants() {
@@ -1423,7 +1393,6 @@
         document.body.style.overflow = 'hidden';
         
         // Load default tabs
-        switchDocTab('kk');
         switchAdminTab('pribadi');
       }
       
@@ -1431,13 +1400,6 @@
         reviewModal.classList.remove('active');
         document.body.style.overflow = '';
         currentSelectedRegistrant = null;
-        
-        // Reset previews
-        previewIframe.style.display = 'none';
-        previewImg.style.display = 'none';
-        previewIframe.src = '';
-        previewImg.src = '';
-        previewPlaceholder.style.display = 'block';
       }
       
       closeReviewModalBtn.addEventListener('click', closeReviewModal);
@@ -1446,23 +1408,7 @@
         if (e.target === reviewModal) closeReviewModal();
       });
       
-      // Doc tabs switching
-      function switchDocTab(tabName) {
-        activeTabDoc = tabName;
-        
-        if (tabName === 'kk') {
-          tabKkBtn.classList.add('active');
-          tabPpdbBtn.classList.remove('active');
-          showDocumentPreview(currentSelectedRegistrant.kk_file_path);
-        } else {
-          tabPpdbBtn.classList.add('active');
-          tabKkBtn.classList.remove('active');
-          showDocumentPreview(currentSelectedRegistrant.ppdb_file_path);
-        }
-      }
-      
-      tabKkBtn.addEventListener('click', () => switchDocTab('kk'));
-      tabPpdbBtn.addEventListener('click', () => switchDocTab('ppdb'));
+
       
       // Admin tabs switching
       const adminTabPribadiBtn = document.getElementById('admin-tab-pribadi-btn');
@@ -1501,33 +1447,7 @@
       if (adminTabOrtuBtn) adminTabOrtuBtn.addEventListener('click', () => switchAdminTab('ortu'));
       if (adminTabRegistrasiBtn) adminTabRegistrasiBtn.addEventListener('click', () => switchAdminTab('registrasi'));
       
-      // Show file in frame (handles PDF vs Image rendering)
-      function showDocumentPreview(filePath) {
-        previewIframe.style.display = 'none';
-        previewImg.style.display = 'none';
-        previewPlaceholder.style.display = 'none';
-        
-        if (!filePath) {
-          previewPlaceholder.innerHTML = `
-            <i data-lucide="file-x" style="width: 48px; height: 48px; margin-bottom: 8px; color: var(--admin-text-secondary);"></i>
-            <p>Tidak ada berkas yang diunggah<br><span style="font-size: 11px; opacity: 0.8;">(Persyaratan upload berkas ditiadakan)</span></p>
-          `;
-          previewPlaceholder.style.display = 'block';
-          if (window.lucide) lucide.createIcons();
-          return;
-        }
-        
-        const ext = filePath.split('.').pop().toLowerCase();
-        if (ext === 'pdf') {
-          previewIframe.src = filePath;
-          previewIframe.style.display = 'block';
-        } else if (['jpg', 'jpeg', 'png'].includes(ext)) {
-          previewImg.src = filePath;
-          previewImg.style.display = 'block';
-        } else {
-          previewPlaceholder.style.display = 'block';
-        }
-      }
+
       
 
       
