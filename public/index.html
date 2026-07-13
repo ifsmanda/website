@@ -1372,14 +1372,14 @@
   <div class="info-modal" id="daftar-ulang-modal">
     <div class="info-modal-card daftar-ulang-card" style="max-width: 600px; width: 90%; border-radius: var(--radius-lg); overflow: hidden; padding: 0;">
       
-      <!-- ANNOUNCEMENT CONTENT (Visible) -->
-      <div id="daftar-ulang-announcement-container" style="display: block; width: 100%;">
+      <!-- ANNOUNCEMENT CONTENT (Hidden) -->
+      <div id="daftar-ulang-announcement-container" style="display: none; width: 100%;">
         <div class="info-modal-header" style="padding: 20px 24px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; display: flex; justify-content: space-between; align-items: center; border-bottom: none;">
           <h3 style="color: white; margin: 0; font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
             <i data-lucide="bell" style="color: var(--accent-gold); width: 22px; height: 22px;"></i>
             Pengumuman Daftar Ulang
           </h3>
-          <button class="info-modal-close" id="close-daftar-ulang-modal" style="color: white; background: rgba(255,255,255,0.1); border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border: none; cursor: pointer; transition: all 0.2s;"><i data-lucide="x" style="width: 18px; height: 18px;"></i></button>
+          <button class="info-modal-close" id="close-daftar-ulang-modal-announcement" style="color: white; background: rgba(255,255,255,0.1); border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border: none; cursor: pointer; transition: all 0.2s;"><i data-lucide="x" style="width: 18px; height: 18px;"></i></button>
         </div>
 
         <div class="info-modal-body" style="padding: 24px; display: flex; flex-direction: column; gap: 20px; max-height: 80vh; overflow-y: auto;">
@@ -1423,12 +1423,12 @@
         </div>
       </div>
 
-      <!-- ORIGINAL FORM (Deactivated / Hidden) -->
-      <div id="original-daftar-ulang-form-container" style="display: none;">
+      <!-- ORIGINAL FORM (Activated / Visible) -->
+      <div id="original-daftar-ulang-form-container" style="display: block;">
         
       <div class="info-modal-header">
         <h3>Daftar Ulang Online SPMB 2026</h3>
-        <button class="info-modal-close" id="close-daftar-ulang-modal-hidden"><i data-lucide="x"></i></button>
+        <button class="info-modal-close" id="close-daftar-ulang-modal"><i data-lucide="x"></i></button>
       </div>
 
       <!-- Multi-step Progress Bar -->
