@@ -2215,36 +2215,86 @@
           </p>
 
           <!-- Receipt Card Layout -->
-          <div class="receipt-card" id="print-receipt-area" style="border: 2px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; background: var(--bg-card);">
-            <div class="receipt-header" style="display: flex; align-items: center; gap: 15px; border-bottom: 2px solid var(--border-color); padding-bottom: 15px; margin-bottom: 20px;">
-              <img src="assets/logo_smanda.png" alt="Logo SMAN 2 Bandung" class="receipt-logo" style="width: 50px; height: 50px;">
+          <div class="receipt-card" id="print-receipt-area" style="border: 2px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; background: var(--bg-card); max-width: 480px; margin: 0 auto 16px auto; box-shadow: var(--shadow-md);">
+            <div class="receipt-header" style="background-color: #0a2e73; color: #ffffff; padding: 18px 24px; display: flex; align-items: center; gap: 15px;">
+              <img src="assets/logo_smanda.png" alt="Logo SMAN 2 Bandung" class="receipt-logo" style="width: 46px; height: 46px; object-fit: contain;">
               <div class="receipt-header-text">
-                <h5 style="margin: 0; font-size: 16px; font-weight: 700; color: var(--text-primary);">SMAN 2 BANDUNG</h5>
-                <span style="font-size: 11px; font-weight: 600; color: var(--text-light); letter-spacing: 0.5px;">TANDA BUKTI PRA-DAFTAR ULANG 2026</span>
+                <h5 style="margin: 0; font-size: 18px; font-weight: 800; color: #ffffff; letter-spacing: 0.5px;">SMAN 2 BANDUNG</h5>
+                <span style="font-size: 11px; font-weight: 600; color: rgba(255, 255, 255, 0.85); letter-spacing: 0.5px; text-transform: uppercase;">Bukti Pengisian Data Dapodik</span>
               </div>
             </div>
 
-            <div class="receipt-body">
-              <div class="receipt-info-grid" style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 25px;">
-                <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border-color); padding-bottom: 8px;">
-                  <span class="receipt-label" style="font-size: 13px; color: var(--text-secondary);">Nama Siswa:</span>
-                  <span class="receipt-value" id="receipt-name" style="font-size: 13px; font-weight: 600; color: var(--text-primary); text-align: right;">-</span>
+            <div class="receipt-body" style="padding: 24px; background: var(--bg-card);">
+              <style>
+                .receipt-info-grid {
+                  display: flex;
+                  flex-direction: column;
+                  gap: 14px;
+                  width: 100%;
+                  margin-bottom: 25px;
+                }
+                .receipt-info-row {
+                  display: grid;
+                  grid-template-columns: 140px 1fr;
+                  gap: 12px;
+                  border-bottom: 1px dashed var(--border-color);
+                  padding-bottom: 8px;
+                  align-items: center;
+                }
+                .receipt-label {
+                  font-size: 13px;
+                  color: var(--text-secondary);
+                  font-weight: 500;
+                }
+                .receipt-value {
+                  font-size: 13.5px;
+                  font-weight: 600;
+                  color: var(--text-primary);
+                  text-align: right;
+                  word-break: break-word;
+                }
+                .receipt-value.text-highlight {
+                  color: var(--secondary);
+                  font-weight: 700;
+                }
+                @media (max-width: 576px) {
+                  .receipt-info-row {
+                    grid-template-columns: 1fr;
+                    gap: 4px;
+                    padding-bottom: 10px;
+                  }
+                  .receipt-value {
+                    text-align: left;
+                  }
+                }
+              </style>
+              <div class="receipt-info-grid">
+                <div class="receipt-info-row">
+                  <span class="receipt-label">Nama Siswa:</span>
+                  <span class="receipt-value" id="receipt-name">-</span>
                 </div>
-                <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border-color); padding-bottom: 8px;">
-                  <span class="receipt-label" style="font-size: 13px; color: var(--text-secondary);">NISN:</span>
-                  <span class="receipt-value" id="receipt-nisn" style="font-size: 13px; font-weight: 600; color: var(--text-primary); text-align: right;">-</span>
+                <div class="receipt-info-row">
+                  <span class="receipt-label">NISN:</span>
+                  <span class="receipt-value" id="receipt-nisn">-</span>
                 </div>
-                <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border-color); padding-bottom: 8px;">
-                  <span class="receipt-label" style="font-size: 13px; color: var(--text-secondary);">Nomor Pendaftaran:</span>
-                  <span class="receipt-value text-highlight" id="receipt-reg-number" style="font-size: 13px; font-weight: 700; color: var(--secondary); text-align: right;">-</span>
+                <div class="receipt-info-row">
+                  <span class="receipt-label">Nomor Pendaftaran:</span>
+                  <span class="receipt-value text-highlight" id="receipt-reg-number">-</span>
                 </div>
               </div>
               
               <!-- Titimangsa at bottom right -->
-              <div style="margin-top: 30px; display: flex; flex-direction: column; align-items: flex-end;">
+              <div style="margin-top: 25px; display: flex; flex-direction: column; align-items: flex-end; width: 100%;">
                 <div id="receipt-titimangsa" style="font-size: 13.5px; font-weight: 600; color: var(--text-primary); margin-bottom: 45px;">Bandung, -</div>
-                <div style="font-size: 12.5px; font-weight: 600; color: var(--text-primary);">Panitia SPMB</div>
-                <div style="font-size: 11px; color: var(--text-light);">SMAN 2 Bandung</div>
+                <div style="font-size: 12.5px; font-weight: 700; color: var(--text-primary); text-align: right;">Panitia SPMB</div>
+                <div style="font-size: 11px; color: var(--text-light); text-align: right;">SMAN 2 Bandung</div>
+              </div>
+
+              <!-- Footnote (Catatan Kaki) -->
+              <div style="margin-top: 30px; padding-top: 15px; border-top: 1px solid var(--border-color); width: 100%; text-align: center;">
+                <p style="font-size: 11px; font-style: italic; color: var(--text-light); line-height: 1.5; margin: 0; max-width: 380px; margin-left: auto; margin-right: auto;">
+                  "Saya menyatakan bertanggung jawab penuh atas keabsahan dan kebenaran seluruh data yang telah diinputkan ke dalam sistem."
+                </p>
               </div>
             </div>
           </div>
