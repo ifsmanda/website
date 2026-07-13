@@ -725,6 +725,27 @@ app.post('/api/admin/verify/:nisn', requireDaftarUlang, async (req, res) => {
 });
 
 // ==========================================
+// API: ADMIN - DELETE REGISTRATION (DELETE /api/admin/registrants/:nisn)
+// ==========================================
+app.delete('/api/admin/registrants/:nisn', requireDaftarUlang, async (req, res) => {
+  const { nisn } = req.params;
+
+  try {
+    const { error } = await supabase
+      .from('ws_registrations')
+      .delete()
+      .eq('nisn', nisn);
+
+    if (error) throw error;
+
+    return res.status(200).json({ success: true, message: 'Registrasi berhasil dihapus.' });
+  } catch (err) {
+    console.error('Delete Registration Error:', err.message);
+    return res.status(500).json({ error: 'Gagal menghapus data registrasi.' });
+  }
+});
+
+// ==========================================
 app.get('/api/admin/export', requireDaftarUlang, async (req, res) => {
   try {
     const { data: rows, error: rowsError } = await supabase

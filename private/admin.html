@@ -561,7 +561,7 @@
             <th>Tanggal Daftar</th>
             <th>Status</th>
             <th>Catatan</th>
-            <th>Aksi Verifikasi</th>
+            <th>Aksi</th>
           </tr>
         </thead>
         <tbody id="registrants-tbody">
@@ -1217,8 +1217,8 @@
               ${row.verification_notes || '-'}
             </td>
             <td>
-              <button class="btn btn-primary btn-review-row" data-nisn="${row.nisn}" style="padding: 6px 12px; font-size: 11px;">
-                <i data-lucide="eye" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i> Tinjau
+              <button class="btn btn-danger btn-delete-row" data-nisn="${row.nisn}" style="padding: 6px 12px; font-size: 11px; background-color: #ef4444; border-color: #ef4444; color: white;">
+                <i data-lucide="trash-2" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i> Hapus
               </button>
             </td>
           `;
@@ -1226,13 +1226,43 @@
           tbody.appendChild(tr);
         });
         
-        // Add row review button listeners
-        document.querySelectorAll('.btn-review-row').forEach(btn => {
-          btn.addEventListener('click', (e) => {
+        // Add row delete button listeners
+        document.querySelectorAll('.btn-delete-row').forEach(btn => {
+          btn.addEventListener('click', async (e) => {
             const nisn = btn.getAttribute('data-nisn');
             const student = registrantsList.find(r => r.nisn === nisn);
-            if (student) {
-              openReviewModal(student);
+            if (!student) return;
+
+            const name = student.name;
+            const isConfirmed = confirm(`Apakah Anda yakin ingin menghapus data pendaftaran untuk "${name}" (NISN: ${nisn})? Data yang sudah dihapus tidak dapat dikembalikan.`);
+            
+            if (!isConfirmed) return;
+
+            btn.disabled = true;
+            btn.innerHTML = 'Menghapus...';
+
+            try {
+              const response = await fetch(`/api/admin/registrants/${nisn}`, {
+                method: 'DELETE'
+              });
+
+              const result = await response.json();
+
+              if (!response.ok) {
+                alert(result.error || 'Gagal menghapus data.');
+                btn.disabled = false;
+                btn.innerHTML = '<i data-lucide="trash-2" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i> Hapus';
+                if (window.lucide) lucide.createIcons();
+              } else {
+                alert('Data pendaftaran berhasil dihapus.');
+                loadRegistrants();
+              }
+            } catch (err) {
+              console.error(err);
+              alert('Terjadi kesalahan jaringan dalam menghapus data.');
+              btn.disabled = false;
+              btn.innerHTML = '<i data-lucide="trash-2" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i> Hapus';
+              if (window.lucide) lucide.createIcons();
             }
           });
         });
