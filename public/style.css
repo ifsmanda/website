@@ -2705,7 +2705,7 @@ footer {
   /* Form-group-grid must stack on mobile/tablet */
   .form-group-grid {
     grid-template-columns: 1fr;
-    gap: 0;
+    gap: 12px;
   }
 
   /* Modal screen space optimizations */
@@ -2720,7 +2720,7 @@ footer {
     padding: 14px 16px;
   }
   .info-modal-body {
-    padding: 16px;
+    padding: 16px 16px 80px 16px;
     max-height: calc(94vh - 110px);
   }
 }
